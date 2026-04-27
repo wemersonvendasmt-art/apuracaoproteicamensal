@@ -7,236 +7,108 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f1117;
-      color: #e0e0e0;
-      min-height: 100vh;
-    }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e0e0e0; min-height: 100vh; }
 
-    /* ── HEADER ── */
     header {
       background: linear-gradient(135deg, #1a2a1a 0%, #0f1117 60%, #2a1500 100%);
       border-bottom: 2px solid #E87722;
       padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
     }
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .header-divider {
-      width: 1px;
-      height: 40px;
-      background: #444;
-    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-divider { width: 1px; height: 40px; background: #444; }
     .header-right { text-align: right; }
-    .header-right h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .header-right span {
-      font-size: 12px;
-      color: #aaa;
-      display: block;
-      margin-top: 3px;
-    }
+    .header-right h1 { font-size: 20px; font-weight: 700; color: #fff; }
+    .header-right span { font-size: 12px; color: #aaa; display: block; margin-top: 3px; }
     .logo-proteica {
-      background: #E87722;
-      border-radius: 50px;
-      padding: 7px 18px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #3a1500;
-      letter-spacing: 1px;
+      background: #E87722; border-radius: 50px; padding: 7px 18px;
+      font-size: 14px; font-weight: 800; color: #3a1500; letter-spacing: 1px;
     }
 
-    /* ── FILTRO ── */
     .filtro-bar {
-      background: #161b22;
-      border-bottom: 1px solid #2a2a2a;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      background: #161b22; border-bottom: 1px solid #2a2a2a;
+      padding: 12px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
     }
     .filtro-bar label { font-size: 13px; color: #aaa; }
     .filtro-bar select {
-      background: #1e2530;
-      border: 1px solid #E87722;
-      color: #fff;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      cursor: pointer;
-      outline: none;
+      background: #1e2530; border: 1px solid #E87722; color: #fff;
+      padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; outline: none;
     }
     .filtro-bar select:hover { border-color: #ff9a44; }
     .btn-reset {
-      background: transparent;
-      border: 1px solid #555;
-      color: #aaa;
-      padding: 7px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all .2s;
+      background: transparent; border: 1px solid #555; color: #aaa;
+      padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all .2s;
     }
     .btn-reset:hover { border-color: #E87722; color: #E87722; }
     .badge-filtro {
-      background: #E87722;
-      color: #1a0a00;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 20px;
-      display: none;
+      background: #E87722; color: #1a0a00; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: none;
     }
 
-    /* ── MAIN ── */
     main { padding: 24px; }
 
-    /* ── KPI CARDS ── */
     .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; margin-bottom: 24px;
     }
     .kpi-card {
-      background: #161b22;
-      border: 1px solid #2a2a2a;
-      border-radius: 14px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s, border-color .2s;
+      background: #161b22; border: 1px solid #2a2a2a; border-radius: 14px;
+      padding: 20px; position: relative; overflow: hidden; transition: transform .2s, border-color .2s;
     }
     .kpi-card:hover { transform: translateY(-3px); border-color: #E87722; }
     .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--accent, #E87722);
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--accent, #E87722);
     }
     .kpi-card.green { --accent: #4a8a40; }
     .kpi-card.blue  { --accent: #3b82f6; }
     .kpi-card.red   { --accent: #ef4444; }
-    .kpi-label {
-      font-size: 11px;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
+    .kpi-card.purple{ --accent: #a855f7; }
+    .kpi-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .kpi-value { font-size: 26px; font-weight: 700; color: #fff; }
     .kpi-sub   { font-size: 12px; color: #666; margin-top: 4px; }
     .kpi-icon  { position: absolute; right: 16px; top: 16px; font-size: 28px; opacity: .15; }
 
-    /* ── CHARTS GRID ── */
     .charts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px;
-      margin-bottom: 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px; margin-bottom: 24px;
     }
-    .chart-card {
-      background: #161b22;
-      border: 1px solid #2a2a2a;
-      border-radius: 14px;
-      padding: 20px;
-    }
+    .chart-card { background: #161b22; border: 1px solid #2a2a2a; border-radius: 14px; padding: 20px; }
     .chart-card h3 {
-      font-size: 13px;
-      font-weight: 600;
-      color: #E87722;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 13px; font-weight: 600; color: #E87722; text-transform: uppercase;
+      letter-spacing: .8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
     }
-    .chart-card h3::before {
-      content: '';
-      width: 4px; height: 16px;
-      background: #E87722;
-      border-radius: 2px;
-    }
+    .chart-card h3::before { content: ''; width: 4px; height: 16px; background: #E87722; border-radius: 2px; }
     canvas { max-height: 260px; }
 
-    /* ── TABELA ── */
-    .table-card {
-      background: #161b22;
-      border: 1px solid #2a2a2a;
-      border-radius: 14px;
-      padding: 20px;
-      overflow-x: auto;
-    }
+    .table-card { background: #161b22; border: 1px solid #2a2a2a; border-radius: 14px; padding: 20px; overflow-x: auto; }
     .table-card h3 {
-      font-size: 13px;
-      font-weight: 600;
-      color: #E87722;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 13px; font-weight: 600; color: #E87722; text-transform: uppercase;
+      letter-spacing: .8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
     }
-    .table-card h3::before {
-      content: '';
-      width: 4px; height: 16px;
-      background: #E87722;
-      border-radius: 2px;
-    }
+    .table-card h3::before { content: ''; width: 4px; height: 16px; background: #E87722; border-radius: 2px; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     thead tr { background: #1e2530; }
     thead th {
-      padding: 10px 14px;
-      text-align: left;
-      color: #aaa;
-      font-weight: 600;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      border-bottom: 1px solid #2a2a2a;
+      padding: 10px 14px; text-align: left; color: #aaa; font-weight: 600;
+      font-size: 11px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid #2a2a2a;
     }
     tbody tr { border-bottom: 1px solid #1e2530; transition: background .15s; }
     tbody tr:hover { background: #1e2530; }
     tbody td { padding: 10px 14px; color: #ccc; }
-    .tag {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-    }
+    .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
     .tag-dog { background: #2a4a1a; color: #7ec86e; }
     .tag-cat { background: #2a2a4a; color: #7e8eec; }
     .val-pos { color: #4ade80; font-weight: 600; }
     .val-neg { color: #f87171; font-weight: 600; }
+    .peso-cell { color: #a78bfa; font-weight: 600; font-size: 12px; }
 
-    /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 11px;
-      color: #444;
-      border-top: 1px solid #1e2530;
-      margin-top: 8px;
+      text-align: center; padding: 20px; font-size: 11px; color: #444;
+      border-top: 1px solid #1e2530; margin-top: 8px;
     }
     footer span { color: #E87722; }
 
-    /* ── RESPONSIVO ── */
     @media (max-width: 600px) {
       .header-right h1 { font-size: 15px; }
       .kpi-value { font-size: 20px; }
@@ -246,24 +118,24 @@
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
+<!-- HEADER -->
 <header>
   <div class="header-left">
-
-    <!-- LOGO COAGRO via URL SVG com fallback -->
+    <!-- Logo Coagro via SVG com fallback -->
     <img
       src="https://www.grupocoagro.com/logos/Logo%20Coagro%20branco.svg"
       alt="Coagro"
-      style="height:50px; object-fit:contain; filter: drop-shadow(0 0 6px rgba(232,119,34,.4));"
-      onerror="this.style.display='none'; document.getElementById('fb-coagro').style.display='flex';"
+      style="height:50px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(232,119,34,.4));"
+      onerror="this.outerHTML='<div style=\'background:#2d5a27;border-radius:10px;padding:6px 14px;font-size:14px;font-weight:800;color:#fff;border:1px solid #4a8a40\'>🌿 COAGRO</div>'"
     />
-    <div id="fb-coagro" style="display:none; background:#2d5a27; border-radius:10px; padding:6px 14px; font-size:14px; font-weight:800; color:#fff; border:1px solid #4a8a40;">🌿 COAGRO</div>
-
     <div class="header-divider"></div>
-
-    <!-- LOGO PROTEICA badge -->
-    <div class="logo-proteica">🐾 PROTEICA</div>
-
+    <!-- Logo Proteica — coloque o arquivo na mesma pasta -->
+    <img
+      src="472388672_2823376694511217_1214209567371748515_n.jpg"
+      alt="Proteica Alimentos"
+      style="height:50px; object-fit:contain; filter:drop-shadow(0 0 6px rgba(232,119,34,.4));"
+      onerror="this.outerHTML='<div class=\'logo-proteica\'>🐾 PROTEICA</div>'"
+    />
   </div>
   <div class="header-right">
     <h1>Dashboard de Vendas</h1>
@@ -271,25 +143,25 @@
   </div>
 </header>
 
-<!-- ═══ FILTRO ═══ -->
+<!-- FILTRO -->
 <div class="filtro-bar">
   <label>🔍 Filtrar por Vendedor:</label>
   <select id="filtroVendedor" onchange="aplicarFiltro()">
     <option value="TODOS">Todos os Vendedores</option>
     <option value="EDIVALDO COSTA LIMA">Edivaldo Costa Lima (W|96)</option>
-    <option value="TAMIRES WIVYANE VIEIRA DA SILVA">Tamires Wivyane (W|53)</option>
+    <option value="TAMIRES WIVYANE VIEIRA DA SILVA">Tamires Wivyane Vieira da Silva (W|53)</option>
     <option value="JOSE ORLANO DA SILVA">José Orlano da Silva (W|57)</option>
-    <option value="DJALMA ALEXANDRE DOS SANTOS">Djalma Alexandre (W|63)</option>
-    <option value="CARLOS ANTONIO VASCONCELOS DE OLIVEIRA">Carlos Antonio (W|71)</option>
+    <option value="DJALMA ALEXANDRE DOS SANTOS">Djalma Alexandre dos Santos (W|63)</option>
+    <option value="CARLOS ANTONIO VASCONCELOS DE OLIVEIRA">Carlos Antonio Vasconcelos (W|71)</option>
   </select>
   <button class="btn-reset" onclick="resetFiltro()">✕ Limpar filtro</button>
   <span class="badge-filtro" id="badgeFiltro">Filtrado</span>
 </div>
 
-<!-- ═══ MAIN ═══ -->
+<!-- MAIN -->
 <main>
 
-  <!-- KPI CARDS -->
+  <!-- KPI CARDS — agora com 5 cards incluindo Volume em kg -->
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="kpi-icon">💰</div>
@@ -302,6 +174,12 @@
       <div class="kpi-label">Qtde de Pedidos</div>
       <div class="kpi-value" id="kpiPedidos">—</div>
       <div class="kpi-sub">Transações no mês</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-icon">⚖️</div>
+      <div class="kpi-label">Volume Vendido</div>
+      <div class="kpi-value" id="kpiKg">—</div>
+      <div class="kpi-sub" id="kpiKgSub">—</div>
     </div>
     <div class="kpi-card blue">
       <div class="kpi-icon">🏆</div>
@@ -324,7 +202,7 @@
       <canvas id="chartVendedor"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Mix de Produtos (Qtde)</h3>
+      <h3>Mix de Produtos (Qtde Sacas)</h3>
       <canvas id="chartProdutos"></canvas>
     </div>
     <div class="chart-card">
@@ -337,7 +215,7 @@
     </div>
   </div>
 
-  <!-- TABELA DETALHADA -->
+  <!-- TABELA -->
   <div class="table-card">
     <h3>Detalhamento de Vendas</h3>
     <table>
@@ -348,7 +226,8 @@
           <th>Produto</th>
           <th>Cliente</th>
           <th>Cidade</th>
-          <th>Qtde</th>
+          <th>Sacas</th>
+          <th>Peso Total</th>
           <th>R$ Líquido</th>
           <th>R$ Desconto</th>
           <th>Margem</th>
@@ -365,9 +244,21 @@
 </footer>
 
 <script>
-// ═══════════════════════════
-// DADOS
-// ═══════════════════════════
+// ═══ MAPA DE PESOS POR PRODUTO ═══
+const PESOS = {
+  "PLANETA DOG CARNE AD 25KG":       25,
+  "PLANETA CAT MIX 25KG":            25,
+  "PLANETA DOG FILHOTE 25KG":        25,
+  "PLANETA DOG CARNE ADULTO 15KG":   15,
+  "PLANETA DOG FILHOTE 15KG":        15,
+  "PLANETA CAT MIX 10.1KG":         10.1,
+};
+
+function getPeso(produto) {
+  return PESOS[produto] || 0;
+}
+
+// ═══ DADOS ═══
 const vendas = [
   {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:6,liquido:549.21,desconto:0,cmv:458.28},
   {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:2,liquido:276.28,desconto:0,cmv:220.88},
@@ -446,18 +337,13 @@ const vendas = [
   {data:"31/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"KLEBSON NOBRE DA SILVA LIMA",cidade:"MATA GRANDE",qtde:12,liquido:1148.31,desconto:60.44,cmv:1006.84},
 ];
 
-// ═══════════════════════════
-// UTILITÁRIOS
-// ═══════════════════════════
 let chartVendedorInst, chartProdutosInst, chartSemanalInst, chartClientesInst;
 const CORES = ['#E87722','#4a8a40','#3b82f6','#a855f7','#f43f5e'];
 
 const filtrar = v => v === 'TODOS' ? vendas : vendas.filter(d => d.vendedor === v);
 const fmtBRL  = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+const fmtKg   = v => v.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:1}) + ' kg';
 
-// ═══════════════════════════
-// FILTRO
-// ═══════════════════════════
 function aplicarFiltro() {
   const v = document.getElementById('filtroVendedor').value;
   document.getElementById('badgeFiltro').style.display = v === 'TODOS' ? 'none' : 'inline-block';
@@ -469,26 +355,26 @@ function resetFiltro() {
   renderTudo('TODOS');
 }
 
-// ═══════════════════════════
-// KPIs
-// ═══════════════════════════
+// ── KPIs ──
 function renderKPIs(dados) {
-  const receita = dados.reduce((s,d) => s + d.liquido,  0);
-  const cmv     = dados.reduce((s,d) => s + d.cmv,      0);
-  const desc    = dados.reduce((s,d) => s + d.desconto, 0);
-  const qtde    = dados.reduce((s,d) => s + d.qtde,     0);
-  const margem  = receita > 0 ? ((receita - cmv) / receita * 100).toFixed(1) : 0;
+  const receita  = dados.reduce((s,d) => s + d.liquido,  0);
+  const cmv      = dados.reduce((s,d) => s + d.cmv,      0);
+  const desc     = dados.reduce((s,d) => s + d.desconto, 0);
+  const qtde     = dados.reduce((s,d) => s + d.qtde,     0);
+  const totalKg  = dados.reduce((s,d) => s + (d.qtde * getPeso(d.produto)), 0);
+  const margem   = receita > 0 ? ((receita - cmv) / receita * 100).toFixed(1) : 0;
+
   document.getElementById('kpiReceita').textContent    = fmtBRL(receita);
-  document.getElementById('kpiReceitaSub').textContent = qtde + ' unidades vendidas';
+  document.getElementById('kpiReceitaSub').textContent = qtde + ' sacas vendidas';
   document.getElementById('kpiPedidos').textContent    = dados.length;
+  document.getElementById('kpiKg').textContent         = fmtKg(totalKg);
+  document.getElementById('kpiKgSub').textContent      = qtde + ' sacas · ' + dados.length + ' pedidos';
   document.getElementById('kpiMargem').textContent     = margem + '%';
   document.getElementById('kpiMargemSub').textContent  = 'CMV: ' + fmtBRL(cmv);
   document.getElementById('kpiDesconto').textContent   = fmtBRL(Math.abs(desc));
 }
 
-// ═══════════════════════════
-// GRÁFICO — VENDEDOR
-// ═══════════════════════════
+// ── GRÁFICO VENDEDOR ──
 function renderChartVendedor(dados) {
   const map = {};
   dados.forEach(d => { map[d.vendedor] = (map[d.vendedor]||0) + d.liquido; });
@@ -498,20 +384,11 @@ function renderChartVendedor(dados) {
   chartVendedorInst = new Chart(document.getElementById('chartVendedor'), {
     type: 'bar',
     data: { labels, datasets: [{ label:'R$ Líquido', data: values, backgroundColor: CORES, borderRadius: 8 }] },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color:'#aaa' }, grid: { color:'#222' } },
-        y: { ticks: { color:'#aaa', callback: v => fmtBRL(v) }, grid: { color:'#222' } }
-      },
-      responsive: true
-    }
+    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}} }, responsive:true }
   });
 }
 
-// ═══════════════════════════
-// GRÁFICO — PRODUTOS
-// ═══════════════════════════
+// ── GRÁFICO PRODUTOS ──
 function renderChartProdutos(dados) {
   const map = {};
   dados.forEach(d => {
@@ -521,20 +398,12 @@ function renderChartProdutos(dados) {
   if (chartProdutosInst) chartProdutosInst.destroy();
   chartProdutosInst = new Chart(document.getElementById('chartProdutos'), {
     type: 'doughnut',
-    data: {
-      labels: Object.keys(map),
-      datasets: [{ data: Object.values(map), backgroundColor: CORES, borderWidth: 2, borderColor:'#0f1117' }]
-    },
-    options: {
-      plugins: { legend: { labels: { color:'#ccc', font:{ size:11 } } } },
-      responsive: true
-    }
+    data: { labels: Object.keys(map), datasets: [{ data: Object.values(map), backgroundColor: CORES, borderWidth: 2, borderColor:'#0f1117' }] },
+    options: { plugins:{ legend:{ labels:{ color:'#ccc', font:{size:11} } } }, responsive:true }
   });
 }
 
-// ═══════════════════════════
-// GRÁFICO — SEMANAL
-// ═══════════════════════════
+// ── GRÁFICO SEMANAL ──
 function renderChartSemanal(dados) {
   const semanas = { 'S1 (01-07)':0, 'S2 (08-14)':0, 'S3 (15-21)':0, 'S4 (22-31)':0 };
   dados.forEach(d => {
@@ -549,68 +418,49 @@ function renderChartSemanal(dados) {
     type: 'line',
     data: {
       labels: Object.keys(semanas),
-      datasets: [{
-        label: 'R$ Líquido',
-        data: Object.values(semanas),
-        borderColor: '#E87722',
-        backgroundColor: 'rgba(232,119,34,.15)',
-        fill: true, tension: .4,
-        pointBackgroundColor: '#E87722', pointRadius: 5
-      }]
+      datasets: [{ label:'R$ Líquido', data: Object.values(semanas), borderColor:'#E87722', backgroundColor:'rgba(232,119,34,.15)', fill:true, tension:.4, pointBackgroundColor:'#E87722', pointRadius:5 }]
     },
-    options: {
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color:'#aaa' }, grid: { color:'#222' } },
-        y: { ticks: { color:'#aaa', callback: v => fmtBRL(v) }, grid: { color:'#222' } }
-      },
-      responsive: true
-    }
+    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}} }, responsive:true }
   });
 }
 
-// ═══════════════════════════
-// GRÁFICO — TOP CLIENTES
-// ═══════════════════════════
+// ── GRÁFICO CLIENTES ──
 function renderChartClientes(dados) {
   const map = {};
   dados.forEach(d => { map[d.cliente] = (map[d.cliente]||0) + d.liquido; });
-  const sorted = Object.entries(map).sort((a,b) => b[1]-a[1]).slice(0,5);
+  const sorted = Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,5);
   if (chartClientesInst) chartClientesInst.destroy();
   chartClientesInst = new Chart(document.getElementById('chartClientes'), {
     type: 'bar',
     data: {
       labels: sorted.map(e => e[0].split(' ')[0]),
-      datasets: [{ label:'R$ Líquido', data: sorted.map(e => e[1]), backgroundColor:'#4a8a40', borderRadius:8 }]
+      datasets: [{ label:'R$ Líquido', data: sorted.map(e=>e[1]), backgroundColor:'#4a8a40', borderRadius:8 }]
     },
-    options: {
-      indexAxis: 'y',
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color:'#aaa', callback: v => fmtBRL(v) }, grid: { color:'#222' } },
-        y: { ticks: { color:'#aaa' }, grid: { color:'#222' } }
-      },
-      responsive: true
-    }
+    options: { indexAxis:'y', plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}, y:{ticks:{color:'#aaa'},grid:{color:'#222'}} }, responsive:true }
   });
 }
 
-// ═══════════════════════════
-// TABELA
-// ═══════════════════════════
+// ── TABELA ──
 function renderTabela(dados) {
   const tbody = document.getElementById('tabelaBody');
   tbody.innerHTML = '';
   dados.forEach(d => {
-    const margem = d.liquido > 0 ? ((d.liquido - d.cmv) / d.liquido * 100).toFixed(1) : 0;
+    const margem    = d.liquido > 0 ? ((d.liquido - d.cmv) / d.liquido * 100).toFixed(1) : 0;
+    const pesoUnit  = getPeso(d.produto);
+    const pesoTotal = d.qtde * pesoUnit;
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${d.data}</td>
       <td style="font-size:11px">${d.vendedor.split(' ').slice(0,2).join(' ')}</td>
-      <td><span class="tag tag-${d.tipo}">${d.tipo.toUpperCase()}</span> ${d.produto.replace('PLANETA ','')}</td>
+      <td>
+        <span class="tag tag-${d.tipo}">${d.tipo.toUpperCase()}</span>
+        ${d.produto.replace('PLANETA ','')}
+        <span style="color:#666;font-size:10px;display:block;margin-top:2px">${pesoUnit}kg/saca</span>
+      </td>
       <td style="font-size:11px">${d.cliente}</td>
       <td style="font-size:11px">${d.cidade}</td>
       <td style="text-align:center">${d.qtde}</td>
+      <td class="peso-cell">${fmtKg(pesoTotal)}</td>
       <td class="${d.liquido < 0 ? 'val-neg' : 'val-pos'}">${fmtBRL(d.liquido)}</td>
       <td style="color:#888">${fmtBRL(d.desconto)}</td>
       <td style="color:${margem >= 15 ? '#4ade80' : '#f87171'}">${margem}%</td>
@@ -619,9 +469,6 @@ function renderTabela(dados) {
   });
 }
 
-// ═══════════════════════════
-// RENDER GERAL
-// ═══════════════════════════
 function renderTudo(vendedor) {
   const dados = filtrar(vendedor);
   renderKPIs(dados);
@@ -632,7 +479,6 @@ function renderTudo(vendedor) {
   renderTabela(dados);
 }
 
-// INIT
 Chart.defaults.color       = '#aaa';
 Chart.defaults.borderColor = '#222';
 renderTudo('TODOS');
