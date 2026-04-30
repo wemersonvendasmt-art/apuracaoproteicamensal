@@ -13,118 +13,157 @@
     header{
       background:linear-gradient(135deg,#1a2a1a 0%,#0f1117 60%,#2a1500 100%);
       border-bottom:2px solid #E87722;
-      padding:14px 24px;
+      padding:16px 28px;
       display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px
     }
     .hd-left{display:flex;align-items:center;gap:14px}
-    .hd-div{width:1px;height:44px;background:#333}
-    .logo-img{height:52px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,119,34,.5))}
-    .logo-fb-coagro{background:#2d5a27;border-radius:10px;padding:6px 14px;font-size:13px;font-weight:800;color:#fff;border:1px solid #4a8a40;display:none}
-    .logo-fb-proteica{background:#E87722;border-radius:50px;padding:6px 16px;font-size:13px;font-weight:800;color:#3a1500;display:none}
+    .logo-coagro{
+      background:#2d5a27;border-radius:10px;padding:7px 16px;
+      font-size:14px;font-weight:800;color:#fff;letter-spacing:1px;border:1px solid #4a8a40
+    }
+    .logo-proteica{
+      background:linear-gradient(135deg,#E87722,#c45e10);border-radius:50px;
+      padding:7px 18px;font-size:14px;font-weight:800;color:#fff;letter-spacing:1px;
+      box-shadow:0 0 12px rgba(232,119,34,.4)
+    }
+    .hd-div{width:1px;height:38px;background:#333}
     .hd-right{text-align:right}
     .hd-right h1{font-size:19px;font-weight:700;color:#fff}
-    .hd-right p{font-size:12px;color:#aaa;margin-top:3px}
+    .hd-right span{font-size:12px;color:#aaa;display:block;margin-top:3px}
 
     /* FILTRO */
     .filtro-bar{
-      background:#161b22;border-bottom:1px solid #222;
-      padding:11px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap
+      background:#161b22;border-bottom:1px solid #252525;
+      padding:12px 28px;display:flex;align-items:center;gap:14px;flex-wrap:wrap
     }
     .filtro-bar label{font-size:13px;color:#aaa}
     .filtro-bar select{
       background:#1e2530;border:1px solid #E87722;color:#fff;
       padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;outline:none
     }
+    .filtro-bar select:hover{border-color:#ff9a44}
     .btn-reset{
-      background:transparent;border:1px solid #555;color:#aaa;
+      background:transparent;border:1px solid #444;color:#888;
       padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s
     }
     .btn-reset:hover{border-color:#E87722;color:#E87722}
-    .badge-filtro{
+    .badge-f{
       background:#E87722;color:#1a0a00;font-size:11px;font-weight:700;
       padding:3px 10px;border-radius:20px;display:none
     }
 
     /* MAIN */
-    main{padding:22px}
+    main{padding:24px}
 
     /* SECTION TITLE */
     .sec-title{
       font-size:11px;font-weight:700;color:#E87722;text-transform:uppercase;
-      letter-spacing:1.2px;margin-bottom:14px;
-      display:flex;align-items:center;gap:8px
+      letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:8px
     }
-    .sec-title::before{content:'';width:4px;height:15px;background:#E87722;border-radius:2px}
+    .sec-title::before{content:'';width:4px;height:14px;background:#E87722;border-radius:2px}
 
     /* KPI GRID */
-    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px;margin-bottom:22px}
+    .kpi-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+      gap:14px;margin-bottom:28px
+    }
     .kpi-card{
-      background:#161b22;border:1px solid #2a2a2a;border-radius:14px;
-      padding:18px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s
+      background:#161b22;border:1px solid #252525;border-radius:14px;
+      padding:18px 20px;position:relative;overflow:hidden;
+      transition:transform .2s,border-color .2s
     }
     .kpi-card:hover{transform:translateY(-3px);border-color:#E87722}
-    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,#E87722)}
-    .kpi-card.g{--ac:#4a8a40}.kpi-card.b{--ac:#3b82f6}.kpi-card.r{--ac:#ef4444}.kpi-card.t{--ac:#14b8a6}.kpi-card.y{--ac:#fbbf24}
-    .kpi-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.9px;margin-bottom:7px}
-    .kpi-value{font-size:24px;font-weight:700;color:#fff}
-    .kpi-sub{font-size:11px;color:#666;margin-top:4px}
+    .kpi-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;
+      height:3px;background:var(--ac,#E87722)
+    }
+    .kpi-card.g{--ac:#4a8a40}.kpi-card.b{--ac:#3b82f6}
+    .kpi-card.r{--ac:#ef4444}.kpi-card.t{--ac:#14b8a6}.kpi-card.y{--ac:#eab308}
     .kpi-icon{position:absolute;right:14px;top:14px;font-size:26px;opacity:.12}
+    .kpi-label{font-size:11px;color:#777;text-transform:uppercase;letter-spacing:.9px;margin-bottom:7px}
+    .kpi-value{font-size:24px;font-weight:700;color:#fff}
+    .kpi-sub{font-size:11px;color:#555;margin-top:5px}
 
     /* PREMIAÇÃO CARDS */
-    .prem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
-    .prem-card{
-      background:linear-gradient(135deg,#1e1200,#2a1800);
-      border:1px solid #E87722;border-radius:14px;padding:16px;position:relative;overflow:hidden
+    .prem-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));
+      gap:14px;margin-bottom:28px
     }
-    .prem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E87722,#fbbf24)}
-    .prem-rank{font-size:22px;position:absolute;right:14px;top:12px;opacity:.9}
-    .prem-nome{font-size:11px;font-weight:700;color:#E87722;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-    .prem-kg{font-size:20px;font-weight:700;color:#fff}
-    .prem-val{font-size:15px;font-weight:700;color:#fbbf24;margin-top:3px}
-    .prem-sub{font-size:11px;color:#888;margin-top:2px}
+    .prem-card{
+      background:linear-gradient(135deg,#1c1100,#251800);
+      border:1px solid #E87722;border-radius:14px;padding:18px;
+      position:relative;overflow:hidden
+    }
+    .prem-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;
+      height:3px;background:linear-gradient(90deg,#E87722,#ffd700)
+    }
+    .prem-rank{font-size:22px;position:absolute;right:14px;top:12px;opacity:.25}
+    .prem-nome{font-size:12px;font-weight:700;color:#E87722;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+    .prem-kg{font-size:21px;font-weight:700;color:#fff}
+    .prem-val{font-size:15px;font-weight:700;color:#ffd700;margin-top:3px}
+    .prem-sub{font-size:11px;color:#666;margin-top:3px}
+    .prem-bar-wrap{margin-top:10px;background:#2a1800;border-radius:20px;height:6px;overflow:hidden}
+    .prem-bar{height:6px;border-radius:20px;background:linear-gradient(90deg,#E87722,#ffd700);transition:width .6s}
 
     /* CHARTS */
-    .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;margin-bottom:22px}
-    .chart-card{background:#161b22;border:1px solid #2a2a2a;border-radius:14px;padding:18px}
+    .charts-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+      gap:18px;margin-bottom:24px
+    }
+    .chart-card{
+      background:#161b22;border:1px solid #252525;border-radius:14px;padding:20px
+    }
     .chart-card h3{
       font-size:12px;font-weight:700;color:#E87722;text-transform:uppercase;
       letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px
     }
     .chart-card h3::before{content:'';width:4px;height:14px;background:#E87722;border-radius:2px}
-    canvas{max-height:250px}
+    canvas{max-height:255px}
 
     /* TABELA */
-    .table-card{background:#161b22;border:1px solid #2a2a2a;border-radius:14px;padding:18px;overflow-x:auto}
+    .table-card{
+      background:#161b22;border:1px solid #252525;
+      border-radius:14px;padding:20px;overflow-x:auto
+    }
     .table-card h3{
       font-size:12px;font-weight:700;color:#E87722;text-transform:uppercase;
       letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px
     }
     .table-card h3::before{content:'';width:4px;height:14px;background:#E87722;border-radius:2px}
-    table{width:100%;border-collapse:collapse;font-size:12px}
-    thead tr{background:#1e2530}
+    table{width:100%;border-collapse:collapse;font-size:12.5px}
+    thead tr{background:#1a2030}
     thead th{
-      padding:9px 12px;text-align:left;color:#aaa;font-weight:600;
-      font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #2a2a2a
+      padding:10px 13px;text-align:left;color:#888;
+      font-weight:600;font-size:10.5px;text-transform:uppercase;
+      letter-spacing:.5px;border-bottom:1px solid #252525
     }
-    tbody tr{border-bottom:1px solid #1e2530;transition:background .15s}
-    tbody tr:hover{background:#1e2530}
-    tbody td{padding:9px 12px;color:#ccc}
-    .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700}
-    .tag-dog{background:#2a4a1a;color:#7ec86e}
-    .tag-cat{background:#2a2a4a;color:#7e8eec}
-    .val-pos{color:#4ade80;font-weight:600}
-    .val-neg{color:#f87171;font-weight:600}
-    .kg-val{color:#E87722;font-weight:600}
+    tbody tr{border-bottom:1px solid #1a1f2a;transition:background .15s}
+    tbody tr:hover{background:#1a2030}
+    tbody td{padding:9px 13px;color:#ccc}
+    .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
+    .tag-dog{background:#1e3a12;color:#7ec86e}
+    .tag-cat{background:#1e1e3a;color:#7e8eec}
+    .vp{color:#4ade80;font-weight:600}
+    .vn{color:#f87171;font-weight:600}
+    .kg-c{color:#E87722;font-weight:600}
+    .cod-c{
+      background:#1e2530;border:1px solid #2a3040;
+      border-radius:6px;padding:2px 8px;font-size:10.5px;
+      font-weight:600;color:#94a3b8;letter-spacing:.5px;font-family:monospace
+    }
 
     /* FOOTER */
-    footer{text-align:center;padding:18px;font-size:11px;color:#444;border-top:1px solid #1e2530;margin-top:8px}
+    footer{
+      text-align:center;padding:18px;font-size:11px;color:#3a3a3a;
+      border-top:1px solid #1a1f2a;margin-top:8px
+    }
     footer span{color:#E87722}
 
     @media(max-width:600px){
-      .hd-right h1{font-size:14px}
-      .kpi-value{font-size:19px}
-      main{padding:12px}
-      .logo-img{height:38px}
+      .hd-right h1{font-size:15px}
+      .kpi-value{font-size:20px}
+      main{padding:14px}
     }
   </style>
 </head>
@@ -133,28 +172,20 @@
 <!-- HEADER -->
 <header>
   <div class="hd-left">
-    <!-- Logo Coagro — arquivo local -->
-    <img class="logo-img" src="Logo Coagro.png" alt="Coagro"
-         onerror="this.style.display='none';document.getElementById('fbC').style.display='inline-block'">
-    <span id="fbC" class="logo-fb-coagro">🌿 COAGRO</span>
-
+    <div class="logo-coagro">🌿 COAGRO</div>
     <div class="hd-div"></div>
-
-    <!-- Logo Proteica — arquivo local -->
-    <img class="logo-img" src="472388672_2823376694511217_1214209567371748515_n.jpg" alt="Proteica"
-         onerror="this.style.display='none';document.getElementById('fbP').style.display='inline-block'">
-    <span id="fbP" class="logo-fb-proteica">🐾 PROTEICA</span>
+    <div class="logo-proteica">🐾 PROTEICA</div>
   </div>
   <div class="hd-right">
     <h1>Dashboard de Vendas · Proteica</h1>
-    <p>Março 2026 · Filial 01 · Distribuidora · AL</p>
+    <span>Março 2026 · Filial 01 · Distribuidora · Alagoas</span>
   </div>
 </header>
 
 <!-- FILTRO -->
 <div class="filtro-bar">
   <label>🔍 Vendedor:</label>
-  <select id="selVend" onchange="aplicar()">
+  <select id="sel" onchange="aplicar()">
     <option value="TODOS">Todos os Vendedores</option>
     <option value="EDIVALDO COSTA LIMA">Edivaldo Costa Lima (W|96)</option>
     <option value="TAMIRES WIVYANE VIEIRA DA SILVA">Tamires Wivyane (W|53)</option>
@@ -163,7 +194,7 @@
     <option value="CARLOS ANTONIO VASCONCELOS DE OLIVEIRA">Carlos Antonio (W|71)</option>
   </select>
   <button class="btn-reset" onclick="resetar()">✕ Limpar</button>
-  <span class="badge-filtro" id="badge">Filtrado</span>
+  <span class="badge-f" id="badge">Filtrado</span>
 </div>
 
 <main>
@@ -193,7 +224,7 @@
       <div class="kpi-icon">🎯</div>
       <div class="kpi-label">Total Descontos</div>
       <div class="kpi-value" id="kDesc">—</div>
-      <div class="kpi-sub">Descontos concedidos</div>
+      <div class="kpi-sub">Concedidos no mês</div>
     </div>
     <div class="kpi-card t">
       <div class="kpi-icon">📈</div>
@@ -205,26 +236,26 @@
       <div class="kpi-icon">🏅</div>
       <div class="kpi-label">Premiação Total</div>
       <div class="kpi-value" id="kPrem">—</div>
-      <div class="kpi-sub">R$‌ 100 / 1.000 kg</div>
+      <div class="kpi-sub">R$‌ 100 por 1.000 kg</div>
     </div>
   </div>
 
   <!-- PREMIAÇÃO POR VENDEDOR -->
-  <div class="sec-title">🏅 Premiação por Vendedor · R$‌ 100 a cada 1.000 kg vendidos</div>
+  <div class="sec-title">🏅 Premiação por Vendedor · R$‌ 100 / 1.000 kg (proporcional)</div>
   <div class="prem-grid" id="premGrid"></div>
 
   <!-- GRÁFICOS -->
   <div class="charts-grid">
     <div class="chart-card">
-      <h3>Receita Líquida por Vendedor</h3>
+      <h3>Receita por Vendedor (R$)</h3>
       <canvas id="cVend"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Volume em KG por Vendedor</h3>
+      <h3>Volume por Vendedor (kg)</h3>
       <canvas id="cKgVend"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Mix de Produtos — Volume (kg)</h3>
+      <h3>Mix de Produtos por Peso (kg)</h3>
       <canvas id="cProd"></canvas>
     </div>
     <div class="chart-card">
@@ -232,12 +263,12 @@
       <canvas id="cSem"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Top 5 Clientes — R$ Líquido</h3>
-      <canvas id="cCli"></canvas>
+      <h3>Premiação por Vendedor (R$)</h3>
+      <canvas id="cPremVend"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Premiação por Vendedor (R$)</h3>
-      <canvas id="cPremChart"></canvas>
+      <h3>Evolução Semanal — Volume (kg)</h3>
+      <canvas id="cSemKg"></canvas>
     </div>
   </div>
 
@@ -254,317 +285,367 @@
           <th>Cidade</th>
           <th>Sacas</th>
           <th>Kg/Saca</th>
-          <th>Total KG</th>
+          <th>Total Kg</th>
           <th>R$ Líquido</th>
-          <th>R$ Desc.</th>
+          <th>R$ Desconto</th>
           <th>Margem</th>
         </tr>
       </thead>
       <tbody id="tbody"></tbody>
     </table>
   </div>
-
 </main>
 
 <footer>
-  Dashboard <span>Coagro</span> × <span>Proteica Alimentos</span> · Março 2026 · Premiação: <span>R$‌ 100 / 1.000 kg</span>
+  Dashboard <span>Coagro × Proteica Alimentos</span> · Março 2026 ·
+  Premiação: <span>R$‌ 100 por 1.000 kg vendidos (proporcional)</span>
 </footer>
 
 <script>
-/* ─── PESO DA SACA ─── */
-function pesoSaca(produto){
-  const m = produto.match(/([\d.]+)\s*KG/i);
+/* ══════════════════════════════════
+   EXTRAI PESO DA SACA DO NOME
+══════════════════════════════════ */
+function kgSaca(prod){
+  const m = prod.match(/([\d.]+)\s*KG/i);
   return m ? parseFloat(m[1]) : 0;
 }
 
-/* ─── GERA CÓDIGO DO CLIENTE ─── */
-const _codigoMap = {};
-let _codigoSeq = 1;
-function codigoCli(nome){
-  if(!_codigoMap[nome]) _codigoMap[nome] = 'CLI-' + String(_codigoSeq++).padStart(3,'0');
-  return _codigoMap[nome];
+/* ══════════════════════════════════
+   GERA CÓDIGO DE CLIENTE (3 letras + 3 dígitos)
+══════════════════════════════════ */
+const _codMap = {};
+let   _codSeq = 1;
+function codCliente(nome){
+  if(!_codMap[nome]){
+    const pref = nome.replace(/[^A-Z]/gi,'').substring(0,3).toUpperCase();
+    _codMap[nome] = pref + String(_codSeq++).padStart(3,'0');
+  }
+  return _codMap[nome];
 }
 
-/* ─── DADOS ─── */
-const vendas = [
-  {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:6,liquido:549.21,desconto:0,cmv:458.28},
-  {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:2,liquido:276.28,desconto:0,cmv:220.88},
-  {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:2,liquido:310.00,desconto:8.25,cmv:249.26},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"CICERO BARBOSA DA SILVA",cidade:"PALMEIRA DOS INDIOS",qtde:5,liquido:697.48,desconto:0,cmv:552.82},
-  {data:"04/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"EDIVALDO COSTA LIMA",cidade:"COITE DO NOIA",qtde:2,liquido:183.07,desconto:0,cmv:152.76},
-  {data:"04/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"EDIVALDO COSTA LIMA",cidade:"COITE DO NOIA",qtde:1,liquido:138.14,desconto:0,cmv:110.44},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"JOSE ANTONIO TENORIO",cidade:"QUEBRANGULO",qtde:1,liquido:139.50,desconto:0,cmv:110.56},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"JOSE ANTONIO TENORIO",cidade:"QUEBRANGULO",qtde:2,liquido:130.15,desconto:0,cmv:101.38},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"JOSE JONATAN DE SOUZA NERI",cidade:"CAMPO GRANDE",qtde:5,liquido:450.00,desconto:7.68,cmv:381.19},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"JOSE JONATAN DE SOUZA NERI",cidade:"CAMPO GRANDE",qtde:5,liquido:315.00,desconto:7.22,cmv:252.49},
-  {data:"04/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"MARCONDE TENORIO COSTA",cidade:"CHA PRETA",qtde:2,liquido:184.50,desconto:0.37,cmv:152.89},
-  {data:"04/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"VALMIR DOS SANTOS",cidade:"OLHO D'AGUA GRANDE",qtde:2,liquido:276.28,desconto:0,cmv:220.88},
-  {data:"04/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:2,liquido:184.87,desconto:0,cmv:152.93},
-  {data:"04/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:2,liquido:278.99,desconto:0,cmv:221.13},
-  {data:"05/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"ANTONIO JULIO DE MATOS",cidade:"MINADOR DO NEGRAO",qtde:10,liquido:900.00,desconto:15.35,cmv:762.38},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"JANAINA DO NASCIMENTO",cidade:"FELIZ DESERTO",qtde:3,liquido:273.00,desconto:4.30,cmv:228.99},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"JANAINA DO NASCIMENTO",cidade:"FELIZ DESERTO",qtde:3,liquido:474.00,desconto:-55.51,cmv:336.83},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"JANAINA DO NASCIMENTO",cidade:"FELIZ DESERTO",qtde:3,liquido:192.00,desconto:3.23,cmv:151.77},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA CAT MIX 10.1KG",tipo:"cat",cliente:"JANAINA DO NASCIMENTO",cidade:"FELIZ DESERTO",qtde:1,liquido:67.00,desconto:1.95,cmv:51.62},
-  {data:"05/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"JOAO HENRIQUE LIMA BANDEIRA",cidade:"OLHO D'AGUA DO CASADO",qtde:10,liquido:900.00,desconto:15.35,cmv:762.38},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"LUIZ CARLOS GALINDO BARROS",cidade:"PENEDO",qtde:3,liquido:276.00,desconto:-1.39,cmv:229.27},
-  {data:"05/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG FILHOTE 15KG",tipo:"dog",cliente:"LUIZ CARLOS GALINDO BARROS",cidade:"PENEDO",qtde:3,liquido:297.00,desconto:6.59,cmv:237.72},
-  {data:"05/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"SANDRA REGIA CARDOSO",cidade:"CACIMBINHAS",qtde:5,liquido:456.65,desconto:10.00,cmv:381.81},
-  {data:"05/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"SANDRA REGIA CARDOSO",cidade:"CACIMBINHAS",qtde:5,liquido:806.25,desconto:4.99,cmv:626.04},
-  {data:"05/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:1,liquido:155.00,desconto:4.13,cmv:124.63},
-  {data:"09/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"MARCONDE TENORIO COSTA",cidade:"CHA PRETA",qtde:-1,liquido:-92.50,desconto:0.07,cmv:-76.47},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"COMETA SUPERMERCADO",cidade:"ARAPIRACA",qtde:5,liquido:675.00,desconto:22.48,cmv:550.74},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"COMETA SUPERMERCADO",cidade:"ARAPIRACA",qtde:5,liquido:300.00,desconto:25.38,cmv:251.10},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"JOSE ERIVAN DA SILVA",cidade:"CRAIBAS",qtde:2,liquido:272.00,desconto:6.99,cmv:220.48},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"SUPERMERCADO MIRANDA",cidade:"FEIRA GRANDE",qtde:3,liquido:405.00,desconto:9.43,cmv:330.44},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:5,liquido:450.00,desconto:7.68,cmv:381.19},
-  {data:"10/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:2,liquido:270.00,desconto:6.28,cmv:220.30},
-  {data:"11/03",vendedor:"CARLOS ANTONIO VASCONCELOS DE OLIVEIRA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"ALEX JUNIOR QUINTINO",cidade:"TAQUARANA",qtde:3,liquido:405.00,desconto:17.55,cmv:330.44},
-  {data:"11/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"CICERO BARBOSA DA SILVA",cidade:"PALMEIRA DOS INDIOS",qtde:5,liquido:462.16,desconto:0,cmv:382.32},
-  {data:"12/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"ADJALMAS SATURNINO",cidade:"GIRAU DO PONCIANO",qtde:10,liquido:900.00,desconto:15.35,cmv:762.38},
-  {data:"12/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"ADJALMAS SATURNINO",cidade:"GIRAU DO PONCIANO",qtde:2,liquido:310.00,desconto:8.25,cmv:249.26},
-  {data:"12/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"ANTONIO JULIO DE MATOS",cidade:"MINADOR DO NEGRAO",qtde:10,liquido:900.00,desconto:24.33,cmv:762.38},
-  {data:"12/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"ARTHUR RODRIGUES DE LIMA",cidade:"POCO DAS TRINCHEIRAS",qtde:1,liquido:135.00,desconto:4.50,cmv:110.15},
-  {data:"12/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"BAZE AGROPECUARIA",cidade:"TEOTONIO VILELA",qtde:2,liquido:272.65,desconto:6.35,cmv:220.54},
-  {data:"12/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"BAZE AGROPECUARIA",cidade:"TEOTONIO VILELA",qtde:1,liquido:156.52,desconto:4.17,cmv:124.77},
-  {data:"12/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:6,liquido:540.00,desconto:11.90,cmv:457.43},
-  {data:"12/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:3,liquido:416.46,desconto:0,cmv:331.50},
-  {data:"12/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:1,liquido:159.91,desconto:0,cmv:125.08},
-  {data:"12/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"COMERCIAL SUPER POPULAR",cidade:"TRAIPU",qtde:2,liquido:270.00,desconto:6.28,cmv:220.30},
-  {data:"12/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"R. EMANUEL SILVA DE FARIAS",cidade:"TRAIPU",qtde:3,liquido:405.00,desconto:9.43,cmv:330.44},
-  {data:"12/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"VALMIR DOS SANTOS",cidade:"OLHO D'AGUA GRANDE",qtde:5,liquido:690.71,desconto:0,cmv:552.20},
-  {data:"16/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"JOSE ERIVAN DA SILVA",cidade:"CRAIBAS",qtde:2,liquido:184.87,desconto:0,cmv:152.93},
-  {data:"16/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"JOSE ERIVAN DA SILVA",cidade:"CRAIBAS",qtde:2,liquido:278.99,desconto:0,cmv:221.13},
-  {data:"16/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cliente:"JOSE ERIVAN DA SILVA",cidade:"CRAIBAS",qtde:1,liquido:160.69,desconto:0,cmv:125.16},
-  {data:"16/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"NELSON MACEDO SOBRAL",cidade:"ARAPIRACA",qtde:1,liquido:135.00,desconto:1.79,cmv:110.15},
-  {data:"19/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:4,liquido:364.00,desconto:5.73,cmv:305.32},
-  {data:"19/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:1,liquido:139.50,desconto:0,cmv:110.56},
-  {data:"19/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"HUGO SILVA DE SOUZA",cidade:"SENADOR RUI PALMEIRA",qtde:2,liquido:270.00,desconto:8.99,cmv:220.30},
-  {data:"19/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"VALMIR DOS SANTOS",cidade:"OLHO D'AGUA GRANDE",qtde:5,liquido:457.68,desconto:0,cmv:381.90},
-  {data:"23/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"L P P BRAS",cidade:"CRAIBAS",qtde:2,liquido:276.28,desconto:0,cmv:220.88},
-  {data:"26/03",vendedor:"JOSE ORLANO DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"ADEMAR INACIO MEDEIROS",cidade:"MONTEIROPOLIS",qtde:1,liquido:136.00,desconto:3.50,cmv:117.43},
-  {data:"26/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:4,liquido:376.00,desconto:26.92,cmv:331.10},
-  {data:"26/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"CICERO M DA SILVA",cidade:"MATA GRANDE",qtde:1,liquido:139.50,desconto:0,cmv:117.75},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"COMERCIAL SUPER POPULAR",cidade:"TRAIPU",qtde:1,liquido:99.75,desconto:0,cmv:83.31},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"COMERCIAL SUPER POPULAR",cidade:"TRAIPU",qtde:2,liquido:276.28,desconto:0,cmv:235.25},
-  {data:"26/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"GALTIERY VILAR DA SILVA",cidade:"CANAPI",qtde:10,liquido:940.00,desconto:57.51,cmv:827.75},
-  {data:"26/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG FILHOTE 15KG",tipo:"dog",cliente:"GALTIERY VILAR DA SILVA",cidade:"CANAPI",qtde:2,liquido:196.32,desconto:6.07,cmv:161.26},
-  {data:"26/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"GALTIERY VILAR DA SILVA",cidade:"CANAPI",qtde:2,liquido:125.02,desconto:3.87,cmv:106.76},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"R. EMANUEL SILVA DE FARIAS",cidade:"TRAIPU",qtde:3,liquido:414.43,desconto:0,cmv:352.88},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"RAFAELA SILVA SOARES",cidade:"TRAIPU",qtde:3,liquido:302.19,desconto:0,cmv:250.19},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"RAFAELA SILVA SOARES",cidade:"TRAIPU",qtde:2,liquido:278.99,desconto:0,cmv:235.50},
-  {data:"26/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"SUPERMERCADO MIRANDA",cidade:"FEIRA GRANDE",qtde:3,liquido:414.43,desconto:0,cmv:352.88},
-  {data:"30/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"WELLINGTON BRITO DE SANTANA",cidade:"TRAIPU",qtde:5,liquido:485.00,desconto:13.76,cmv:420.12},
-  {data:"31/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"ADJALMAS SATURNINO",cidade:"GIRAU DO PONCIANO",qtde:10,liquido:1350.00,desconto:31.42,cmv:1173.35},
-  {data:"31/03",vendedor:"TAMIRES WIVYANE VIEIRA DA SILVA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"ARTHUR RODRIGUES DE LIMA",cidade:"POCO DAS TRINCHEIRAS",qtde:1,liquido:139.50,desconto:0,cmv:117.75},
-  {data:"31/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"COMETA SUPERMERCADO",cidade:"ARAPIRACA",qtde:5,liquido:680.00,desconto:10.71,cmv:587.14},
-  {data:"31/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cliente:"COMETA SUPERMERCADO",cidade:"ARAPIRACA",qtde:20,liquido:1200.00,desconto:88.90,cmv:1062.92},
-  {data:"31/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"GONÇALVES FERREIRA DOS SANTOS",cidade:"OLHO D'AGUA GRANDE",qtde:4,liquido:399.00,desconto:0,cmv:337.11},
-  {data:"31/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"GONÇALVES FERREIRA DOS SANTOS",cidade:"OLHO D'AGUA GRANDE",qtde:3,liquido:414.43,desconto:0,cmv:352.88},
-  {data:"31/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"KLEBSON NOBRE DA SILVA LIMA",cidade:"MATA GRANDE",qtde:12,liquido:1148.31,desconto:60.44,cmv:1006.84},
+/* ══════════════════════════════════
+   DADOS
+══════════════════════════════════ */
+const V=[
+  {dt:"02/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"EDILSON DO NASCIMENTO",cid:"LIMOEIRO DE ANADIA",q:6,liq:549.21,desc:0,cmv:458.28},
+  {dt:"02/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"EDILSON DO NASCIMENTO",cid:"LIMOEIRO DE ANADIA",q:2,liq:276.28,desc:0,cmv:220.88},
+  {dt:"02/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"EDILSON DO NASCIMENTO",cid:"LIMOEIRO DE ANADIA",q:2,liq:310.00,desc:8.25,cmv:249.26},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"CICERO BARBOSA DA SILVA",cid:"PALMEIRA DOS INDIOS",q:5,liq:697.48,desc:0,cmv:552.82},
+  {dt:"04/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"EDIVALDO COSTA LIMA",cid:"COITE DO NOIA",q:2,liq:183.07,desc:0,cmv:152.76},
+  {dt:"04/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"EDIVALDO COSTA LIMA",cid:"COITE DO NOIA",q:1,liq:138.14,desc:0,cmv:110.44},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"JOSE ANTONIO TENORIO",cid:"QUEBRANGULO",q:1,liq:139.50,desc:0,cmv:110.56},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"JOSE ANTONIO TENORIO",cid:"QUEBRANGULO",q:2,liq:130.15,desc:0,cmv:101.38},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"JOSE JONATAN DE SOUZA NERI",cid:"CAMPO GRANDE",q:5,liq:450.00,desc:7.68,cmv:381.19},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"JOSE JONATAN DE SOUZA NERI",cid:"CAMPO GRANDE",q:5,liq:315.00,desc:7.22,cmv:252.49},
+  {dt:"04/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"MARCONDE TENORIO COSTA",cid:"CHA PRETA",q:2,liq:184.50,desc:0.37,cmv:152.89},
+  {dt:"04/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"VALMIR DOS SANTOS",cid:"OLHO D'AGUA GRANDE",q:2,liq:276.28,desc:0,cmv:220.88},
+  {dt:"04/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:2,liq:184.87,desc:0,cmv:152.93},
+  {dt:"04/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:2,liq:278.99,desc:0,cmv:221.13},
+  {dt:"05/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"ANTONIO JULIO DE MATOS",cid:"MINADOR DO NEGRAO",q:10,liq:900.00,desc:15.35,cmv:762.38},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"JANAINA DO NASCIMENTO",cid:"FELIZ DESERTO",q:3,liq:273.00,desc:4.30,cmv:228.99},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"JANAINA DO NASCIMENTO",cid:"FELIZ DESERTO",q:3,liq:474.00,desc:-55.51,cmv:336.83},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"JANAINA DO NASCIMENTO",cid:"FELIZ DESERTO",q:3,liq:192.00,desc:3.23,cmv:151.77},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA CAT MIX 10.1KG",tipo:"cat",cli:"JANAINA DO NASCIMENTO",cid:"FELIZ DESERTO",q:1,liq:67.00,desc:1.95,cmv:51.62},
+  {dt:"05/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"JOAO HENRIQUE LIMA BANDEIRA",cid:"OLHO D'AGUA DO CASADO",q:10,liq:900.00,desc:15.35,cmv:762.38},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"LUIZ CARLOS GALINDO BARROS",cid:"PENEDO",q:3,liq:276.00,desc:-1.39,cmv:229.27},
+  {dt:"05/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG FILHOTE 15KG",tipo:"dog",cli:"LUIZ CARLOS GALINDO BARROS",cid:"PENEDO",q:3,liq:297.00,desc:6.59,cmv:237.72},
+  {dt:"05/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"SANDRA REGIA CARDOSO",cid:"CACIMBINHAS",q:5,liq:456.65,desc:10.00,cmv:381.81},
+  {dt:"05/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"SANDRA REGIA CARDOSO",cid:"CACIMBINHAS",q:5,liq:806.25,desc:4.99,cmv:626.04},
+  {dt:"05/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:1,liq:155.00,desc:4.13,cmv:124.63},
+  {dt:"09/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"MARCONDE TENORIO COSTA",cid:"CHA PRETA",q:-1,liq:-92.50,desc:0.07,cmv:-76.47},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"COMETA SUPERMERCADO",cid:"ARAPIRACA",q:5,liq:675.00,desc:22.48,cmv:550.74},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"COMETA SUPERMERCADO",cid:"ARAPIRACA",q:5,liq:300.00,desc:25.38,cmv:251.10},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"JOSE ERIVAN DA SILVA",cid:"CRAIBAS",q:2,liq:272.00,desc:6.99,cmv:220.48},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"SUPERMERCADO MIRANDA",cid:"FEIRA GRANDE",q:3,liq:405.00,desc:9.43,cmv:330.44},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:5,liq:450.00,desc:7.68,cmv:381.19},
+  {dt:"10/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:2,liq:270.00,desc:6.28,cmv:220.30},
+  {dt:"11/03",vend:"CARLOS ANTONIO VASCONCELOS DE OLIVEIRA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"ALEX JUNIOR QUINTINO",cid:"TAQUARANA",q:3,liq:405.00,desc:17.55,cmv:330.44},
+  {dt:"11/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"CICERO BARBOSA DA SILVA",cid:"PALMEIRA DOS INDIOS",q:5,liq:462.16,desc:0,cmv:382.32},
+  {dt:"12/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"ADJALMAS SATURNINO",cid:"GIRAU DO PONCIANO",q:10,liq:900.00,desc:15.35,cmv:762.38},
+  {dt:"12/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"ADJALMAS SATURNINO",cid:"GIRAU DO PONCIANO",q:2,liq:310.00,desc:8.25,cmv:249.26},
+  {dt:"12/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"ANTONIO JULIO DE MATOS",cid:"MINADOR DO NEGRAO",q:10,liq:900.00,desc:24.33,cmv:762.38},
+  {dt:"12/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"ARTHUR RODRIGUES DE LIMA",cid:"POCO DAS TRINCHEIRAS",q:1,liq:135.00,desc:4.50,cmv:110.15},
+  {dt:"12/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"BAZE AGROPECUARIA",cid:"TEOTONIO VILELA",q:2,liq:272.65,desc:6.35,cmv:220.54},
+  {dt:"12/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"BAZE AGROPECUARIA",cid:"TEOTONIO VILELA",q:1,liq:156.52,desc:4.17,cmv:124.77},
+  {dt:"12/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:6,liq:540.00,desc:11.90,cmv:457.43},
+  {dt:"12/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:3,liq:416.46,desc:0,cmv:331.50},
+  {dt:"12/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:1,liq:159.91,desc:0,cmv:125.08},
+  {dt:"12/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"COMERCIAL SUPER POPULAR",cid:"TRAIPU",q:2,liq:270.00,desc:6.28,cmv:220.30},
+  {dt:"12/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"R. EMANUEL SILVA DE FARIAS",cid:"TRAIPU",q:3,liq:405.00,desc:9.43,cmv:330.44},
+  {dt:"12/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"VALMIR DOS SANTOS",cid:"OLHO D'AGUA GRANDE",q:5,liq:690.71,desc:0,cmv:552.20},
+  {dt:"16/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"JOSE ERIVAN DA SILVA",cid:"CRAIBAS",q:2,liq:184.87,desc:0,cmv:152.93},
+  {dt:"16/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"JOSE ERIVAN DA SILVA",cid:"CRAIBAS",q:2,liq:278.99,desc:0,cmv:221.13},
+  {dt:"16/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG FILHOTE 25KG",tipo:"dog",cli:"JOSE ERIVAN DA SILVA",cid:"CRAIBAS",q:1,liq:160.69,desc:0,cmv:125.16},
+  {dt:"16/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"NELSON MACEDO SOBRAL",cid:"ARAPIRACA",q:1,liq:135.00,desc:1.79,cmv:110.15},
+  {dt:"19/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:4,liq:364.00,desc:5.73,cmv:305.32},
+  {dt:"19/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:1,liq:139.50,desc:0,cmv:110.56},
+  {dt:"19/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"HUGO SILVA DE SOUZA",cid:"SENADOR RUI PALMEIRA",q:2,liq:270.00,desc:8.99,cmv:220.30},
+  {dt:"19/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"VALMIR DOS SANTOS",cid:"OLHO D'AGUA GRANDE",q:5,liq:457.68,desc:0,cmv:381.90},
+  {dt:"23/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"L P P BRAS",cid:"CRAIBAS",q:2,liq:276.28,desc:0,cmv:220.88},
+  {dt:"26/03",vend:"JOSE ORLANO DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"ADEMAR INACIO MEDEIROS",cid:"MONTEIROPOLIS",q:1,liq:136.00,desc:3.50,cmv:117.43},
+  {dt:"26/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:4,liq:376.00,desc:26.92,cmv:331.10},
+  {dt:"26/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"CICERO M DA SILVA",cid:"MATA GRANDE",q:1,liq:139.50,desc:0,cmv:117.75},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"COMERCIAL SUPER POPULAR",cid:"TRAIPU",q:1,liq:99.75,desc:0,cmv:83.31},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"COMERCIAL SUPER POPULAR",cid:"TRAIPU",q:2,liq:276.28,desc:0,cmv:235.25},
+  {dt:"26/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"GALTIERY VILAR DA SILVA",cid:"CANAPI",q:10,liq:940.00,desc:57.51,cmv:827.75},
+  {dt:"26/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG FILHOTE 15KG",tipo:"dog",cli:"GALTIERY VILAR DA SILVA",cid:"CANAPI",q:2,liq:196.32,desc:6.07,cmv:161.26},
+  {dt:"26/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"GALTIERY VILAR DA SILVA",cid:"CANAPI",q:2,liq:125.02,desc:3.87,cmv:106.76},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"R. EMANUEL SILVA DE FARIAS",cid:"TRAIPU",q:3,liq:414.43,desc:0,cmv:352.88},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"RAFAELA SILVA SOARES",cid:"TRAIPU",q:3,liq:302.19,desc:0,cmv:250.19},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"RAFAELA SILVA SOARES",cid:"TRAIPU",q:2,liq:278.99,desc:0,cmv:235.50},
+  {dt:"26/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"SUPERMERCADO MIRANDA",cid:"FEIRA GRANDE",q:3,liq:414.43,desc:0,cmv:352.88},
+  {dt:"30/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"WELLINGTON BRITO DE SANTANA",cid:"TRAIPU",q:5,liq:485.00,desc:13.76,cmv:420.12},
+  {dt:"31/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"ADJALMAS SATURNINO",cid:"GIRAU DO PONCIANO",q:10,liq:1350.00,desc:31.42,cmv:1173.35},
+  {dt:"31/03",vend:"TAMIRES WIVYANE VIEIRA DA SILVA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"ARTHUR RODRIGUES DE LIMA",cid:"POCO DAS TRINCHEIRAS",q:1,liq:139.50,desc:0,cmv:117.75},
+  {dt:"31/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"COMETA SUPERMERCADO",cid:"ARAPIRACA",q:5,liq:680.00,desc:10.71,cmv:587.14},
+  {dt:"31/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE ADULTO 15KG",tipo:"dog",cli:"COMETA SUPERMERCADO",cid:"ARAPIRACA",q:20,liq:1200.00,desc:88.90,cmv:1062.92},
+  {dt:"31/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"GONÇALVES FERREIRA DOS SANTOS",cid:"OLHO D'AGUA GRANDE",q:4,liq:399.00,desc:0,cmv:337.11},
+  {dt:"31/03",vend:"EDIVALDO COSTA LIMA",prod:"PLANETA CAT MIX 25KG",tipo:"cat",cli:"GONÇALVES FERREIRA DOS SANTOS",cid:"OLHO D'AGUA GRANDE",q:3,liq:414.43,desc:0,cmv:352.88},
+  {dt:"31/03",vend:"DJALMA ALEXANDRE DOS SANTOS",prod:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cli:"KLEBSON NOBRE DA SILVA LIMA",cid:"MATA GRANDE",q:12,liq:1148.31,desc:60.44,cmv:1006.84},
 ];
 
-/* ─── PRÉ-PROCESSA CÓDIGO DOS CLIENTES ─── */
-vendas.forEach(d => { d.codCli = codigoCli(d.cliente); });
-
-/* ─── HELPERS ─── */
-const NOMES = {
-  'EDIVALDO COSTA LIMA':'Edivaldo',
-  'TAMIRES WIVYANE VIEIRA DA SILVA':'Tamires',
-  'JOSE ORLANO DA SILVA':'Orlano',
-  'DJALMA ALEXANDRE DOS SANTOS':'Djalma',
-  'CARLOS ANTONIO VASCONCELOS DE OLIVEIRA':'Carlos'
+/* ══════════════════════════════════
+   NOMES CURTOS
+══════════════════════════════════ */
+const NC={
+  "EDIVALDO COSTA LIMA":"Edivaldo",
+  "TAMIRES WIVYANE VIEIRA DA SILVA":"Tamires",
+  "JOSE ORLANO DA SILVA":"Orlano",
+  "DJALMA ALEXANDRE DOS SANTOS":"Djalma",
+  "CARLOS ANTONIO VASCONCELOS DE OLIVEIRA":"Carlos"
 };
-const CORES = ['#E87722','#4a8a40','#3b82f6','#a855f7','#f43f5e'];
-const RANKS = ['🥇','🥈','🥉','4º','5º'];
 
-function filtrar(v){ return v==='TODOS' ? vendas : vendas.filter(d=>d.vendedor===v); }
-function fmtBRL(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
-function fmtN(v,d=1){ return v.toLocaleString('pt-BR',{maximumFractionDigits:d,minimumFractionDigits:d}); }
-function calcKg(d){ return pesoSaca(d.produto)*d.qtde; }
+/* ══════════════════════════════════
+   INSTÂNCIAS DE CHARTS
+══════════════════════════════════ */
+let CI={};
+const COR=['#E87722','#4a8a40','#3b82f6','#a855f7','#f43f5e'];
 
-/* ─── INSTÂNCIAS DOS CHARTS ─── */
-let cVI,cKI,cPI,cSI,cCI,cPRI;
+/* ══════════════════════════════════
+   UTILS
+══════════════════════════════════ */
+const fR = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const fN = (v,d=1) => v.toLocaleString('pt-BR',{maximumFractionDigits:d});
+const fil = s => s==='TODOS' ? V : V.filter(d=>d.vend===s);
 
-/* ─── FILTRO ─── */
+/* Premio proporcional: R$‌100 / 1000 kg */
+function premio(kg){ return (kg/1000)*100; }
+
+/* ══════════════════════════════════
+   FILTRO
+══════════════════════════════════ */
 function aplicar(){
-  const v=document.getElementById('selVend').value;
-  document.getElementById('badge').style.display = v==='TODOS'?'none':'inline-block';
+  const v=document.getElementById('sel').value;
+  document.getElementById('badge').style.display=v==='TODOS'?'none':'inline-block';
   render(v);
 }
 function resetar(){
-  document.getElementById('selVend').value='TODOS';
+  document.getElementById('sel').value='TODOS';
   document.getElementById('badge').style.display='none';
   render('TODOS');
 }
 
-/* ─── KPIs ─── */
-function renderKPIs(dados){
-  const rec  = dados.reduce((s,d)=>s+d.liquido,0);
-  const cmv  = dados.reduce((s,d)=>s+d.cmv,0);
-  const desc = dados.reduce((s,d)=>s+d.desconto,0);
-  const sacs = dados.reduce((s,d)=>s+d.qtde,0);
-  const kg   = dados.reduce((s,d)=>s+calcKg(d),0);
-  const marg = rec>0?((rec-cmv)/rec*100):0;
-  const prem = Math.floor(kg/1000)*100;
+/* ══════════════════════════════════
+   KPIs
+══════════════════════════════════ */
+function renderKPIs(D){
+  const rec  = D.reduce((s,d)=>s+d.liq,0);
+  const cmv  = D.reduce((s,d)=>s+d.cmv,0);
+  const desc = D.reduce((s,d)=>s+d.desc,0);
+  const sacs = D.reduce((s,d)=>s+d.q,0);
+  const kg   = D.reduce((s,d)=>s+(kgSaca(d.prod)*d.q),0);
+  const marg = rec>0?((rec-cmv)/rec*100).toFixed(1):0;
+  const prem = premio(kg);
 
-  document.getElementById('kR').textContent   = fmtBRL(rec);
-  document.getElementById('kRs').textContent  = fmtN(sacs,0)+' sacas · '+dados.length+' pedidos';
-  document.getElementById('kKg').textContent  = fmtN(kg,0)+' kg';
-  document.getElementById('kKgs').textContent = fmtN(kg/1000,2)+' toneladas';
-  document.getElementById('kSacas').textContent  = fmtN(sacs,0);
-  document.getElementById('kSacass').textContent = dados.length+' pedidos no mês';
-  document.getElementById('kDesc').textContent = fmtBRL(Math.abs(desc));
-  document.getElementById('kMarg').textContent = fmtN(marg,1)+'%';
-  document.getElementById('kMargsub').textContent = 'CMV: '+fmtBRL(cmv);
-  document.getElementById('kPrem').textContent = fmtBRL(prem);
+  document.getElementById('kR').textContent    = fR(rec);
+  document.getElementById('kRs').textContent   = D.length+' pedidos no mês';
+  document.getElementById('kKg').textContent   = fN(kg)+' kg';
+  document.getElementById('kKgs').textContent  = fN(kg/1000,2)+' toneladas';
+  document.getElementById('kSacas').textContent= sacs+' sacas';
+  document.getElementById('kSacass').textContent= 'Unidades vendidas';
+  document.getElementById('kDesc').textContent = fR(Math.abs(desc));
+  document.getElementById('kMarg').textContent = marg+'%';
+  document.getElementById('kMargsub').textContent='CMV: '+fR(cmv);
+  document.getElementById('kPrem').textContent = fR(prem);
 }
 
-/* ─── PREMIAÇÃO CARDS ─── */
-function renderPremCards(dados){
+/* ══════════════════════════════════
+   PREMIAÇÃO CARDS
+══════════════════════════════════ */
+function renderPremCards(D){
+  // agrupa kg por vendedor
   const mapKg={};
-  dados.forEach(d=>{ mapKg[d.vendedor]=(mapKg[d.vendedor]||0)+calcKg(d); });
+  D.forEach(d=>{mapKg[d.vend]=(mapKg[d.vend]||0)+(kgSaca(d.prod)*d.q);});
   const sorted=Object.entries(mapKg).sort((a,b)=>b[1]-a[1]);
-  const g=document.getElementById('premGrid');
-  g.innerHTML='';
+  const maxKg=sorted[0]?sorted[0][1]:1;
+  const medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+  const grid=document.getElementById('premGrid');
+  grid.innerHTML='';
   sorted.forEach(([vend,kg],i)=>{
-    const prem=Math.floor(kg/1000)*100;
-    const sacs=dados.filter(d=>d.vendedor===vend).reduce((s,d)=>s+d.qtde,0);
+    const sacs=D.filter(d=>d.vend===vend).reduce((s,d)=>s+d.q,0);
+    const pct=(kg/maxKg*100).toFixed(0);
+    const prem=premio(kg);
     const c=document.createElement('div');
     c.className='prem-card';
     c.innerHTML=`
-      <div class="prem-rank">${RANKS[i]||'🏅'}</div>
-      <div class="prem-nome">${NOMES[vend]||vend.split(' ')[0]}</div>
-      <div class="prem-kg">${fmtN(kg,0)} kg</div>
-      <div class="prem-val">${fmtBRL(prem)}</div>
-      <div class="prem-sub">${fmtN(sacs,0)} sacas · R$‌100/1.000kg</div>
+      <div class="prem-rank">${medals[i]||'🏅'}</div>
+      <div class="prem-nome">${medals[i]||''} ${NC[vend]||vend.split(' ')[0]}</div>
+      <div class="prem-kg">${fN(kg)} kg</div>
+      <div class="prem-val">${fR(prem)}</div>
+      <div class="prem-sub">${sacs} sacas · R$‌100/1.000 kg</div>
+      <div class="prem-bar-wrap"><div class="prem-bar" style="width:${pct}%"></div></div>
     `;
-    g.appendChild(c);
+    grid.appendChild(c);
   });
 }
 
-/* ─── CHART RECEITA VENDEDOR ─── */
-function renderCV(dados){
-  const m={};
-  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+d.liquido;});
-  if(cVI) cVI.destroy();
-  cVI=new Chart(document.getElementById('cVend'),{
+/* ══════════════════════════════════
+   GRÁFICO — RECEITA VENDEDOR
+══════════════════════════════════ */
+function renderCVend(D){
+  const m={};D.forEach(d=>{m[d.vend]=(m[d.vend]||0)+d.liq;});
+  const lb=Object.keys(m).map(k=>NC[k]||k.split(' ')[0]);
+  if(CI.vend)CI.vend.destroy();
+  CI.vend=new Chart(document.getElementById('cVend'),{
     type:'bar',
-    data:{labels:Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]),datasets:[{label:'R$',data:Object.values(m),backgroundColor:CORES,borderRadius:8}]},
-    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
+    data:{labels:lb,datasets:[{label:'R$ Líquido',data:Object.values(m),backgroundColor:COR,borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fR(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ─── CHART KG VENDEDOR ─── */
-function renderCKg(dados){
-  const m={};
-  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+calcKg(d);});
-  if(cKI) cKI.destroy();
-  cKI=new Chart(document.getElementById('cKgVend'),{
+/* ══════════════════════════════════
+   GRÁFICO — VOLUME KG VENDEDOR
+══════════════════════════════════ */
+function renderCKgVend(D){
+  const m={};D.forEach(d=>{m[d.vend]=(m[d.vend]||0)+(kgSaca(d.prod)*d.q);});
+  const lb=Object.keys(m).map(k=>NC[k]||k.split(' ')[0]);
+  if(CI.kgv)CI.kgv.destroy();
+  CI.kgv=new Chart(document.getElementById('cKgVend'),{
     type:'bar',
-    data:{labels:Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]),datasets:[{label:'kg',data:Object.values(m),backgroundColor:['#14b8a6','#E87722','#3b82f6','#a855f7','#4a8a40'],borderRadius:8}]},
-    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtN(v,0)+' kg'},grid:{color:'#222'}}},responsive:true}
+    data:{labels:lb,datasets:[{label:'kg',data:Object.values(m),backgroundColor:['#14b8a6','#E87722','#3b82f6','#a855f7','#4a8a40'],borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fN(v)+' kg'},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ─── CHART MIX PRODUTO ─── */
-function renderCP(dados){
+/* ══════════════════════════════════
+   GRÁFICO — MIX PRODUTOS KG
+══════════════════════════════════ */
+function renderCProd(D){
   const m={};
-  dados.forEach(d=>{
-    const k=d.produto.replace('PLANETA ','');
-    m[k]=(m[k]||0)+calcKg(d);
+  D.forEach(d=>{
+    const k=d.prod.replace('PLANETA ','');
+    m[k]=(m[k]||0)+(kgSaca(d.prod)*d.q);
   });
-  if(cPI) cPI.destroy();
-  cPI=new Chart(document.getElementById('cProd'),{
+  if(CI.prod)CI.prod.destroy();
+  CI.prod=new Chart(document.getElementById('cProd'),{
     type:'doughnut',
-    data:{labels:Object.keys(m),datasets:[{data:Object.values(m),backgroundColor:CORES,borderWidth:2,borderColor:'#0f1117'}]},
+    data:{labels:Object.keys(m),datasets:[{data:Object.values(m),backgroundColor:COR,borderWidth:2,borderColor:'#0f1117'}]},
     options:{plugins:{legend:{labels:{color:'#ccc',font:{size:11}}}},responsive:true}
   });
 }
 
-/* ─── CHART SEMANAL ─── */
-function renderCS(dados){
-  const s={'S1\n01-07':0,'S2\n08-14':0,'S3\n15-21':0,'S4\n22-31':0};
-  dados.forEach(d=>{
-    const dia=parseInt(d.data.split('/')[0]);
-    if(dia<=7) s['S1\n01-07']+=d.liquido;
-    else if(dia<=14) s['S2\n08-14']+=d.liquido;
-    else if(dia<=21) s['S3\n15-21']+=d.liquido;
-    else s['S4\n22-31']+=d.liquido;
+/* ══════════════════════════════════
+   GRÁFICO — SEMANAL R$
+══════════════════════════════════ */
+function renderCSem(D){
+  const s={'S1 (01-07)':0,'S2 (08-14)':0,'S3 (15-21)':0,'S4 (22-31)':0};
+  D.forEach(d=>{
+    const dia=parseInt(d.dt.split('/')[0]);
+    if(dia<=7)s['S1 (01-07)']+=d.liq;
+    else if(dia<=14)s['S2 (08-14)']+=d.liq;
+    else if(dia<=21)s['S3 (15-21)']+=d.liq;
+    else s['S4 (22-31)']+=d.liq;
   });
-  if(cSI) cSI.destroy();
-  cSI=new Chart(document.getElementById('cSem'),{
+  if(CI.sem)CI.sem.destroy();
+  CI.sem=new Chart(document.getElementById('cSem'),{
     type:'line',
     data:{labels:Object.keys(s),datasets:[{label:'R$',data:Object.values(s),borderColor:'#E87722',backgroundColor:'rgba(232,119,34,.15)',fill:true,tension:.4,pointBackgroundColor:'#E87722',pointRadius:5}]},
-    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fR(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ─── CHART TOP CLIENTES ─── */
-function renderCC(dados){
-  const m={};
-  dados.forEach(d=>{m[d.codCli]=(m[d.codCli]||0)+d.liquido;});
-  const sorted=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  if(cCI) cCI.destroy();
-  cCI=new Chart(document.getElementById('cCli'),{
+/* ══════════════════════════════════
+   GRÁFICO — PREMIAÇÃO VENDEDOR
+══════════════════════════════════ */
+function renderCPremVend(D){
+  const m={};D.forEach(d=>{m[d.vend]=(m[d.vend]||0)+(kgSaca(d.prod)*d.q);});
+  const lb=Object.keys(m).map(k=>NC[k]||k.split(' ')[0]);
+  const prems=Object.values(m).map(kg=>parseFloat(premio(kg).toFixed(2)));
+  if(CI.pv)CI.pv.destroy();
+  CI.pv=new Chart(document.getElementById('cPremVend'),{
     type:'bar',
-    data:{labels:sorted.map(e=>e[0]),datasets:[{label:'R$',data:sorted.map(e=>e[1]),backgroundColor:'#4a8a40',borderRadius:8}]},
-    options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}},y:{ticks:{color:'#aaa'},grid:{color:'#222'}}},responsive:true}
+    data:{labels:lb,datasets:[{label:'Premiação R$',data:prems,backgroundColor:'#eab308',borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fR(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ─── CHART PREMIAÇÃO ─── */
-function renderCPrem(dados){
-  const m={};
-  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+calcKg(d);});
-  const labels=Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]);
-  const vals=Object.values(m).map(kg=>Math.floor(kg/1000)*100);
-  if(cPRI) cPRI.destroy();
-  cPRI=new Chart(document.getElementById('cPremChart'),{
-    type:'bar',
-    data:{labels,datasets:[{label:'Premiação R$',data:vals,backgroundColor:'#fbbf24',borderRadius:8}]},
-    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
+/* ══════════════════════════════════
+   GRÁFICO — SEMANAL KG
+══════════════════════════════════ */
+function renderCSemKg(D){
+  const s={'S1 (01-07)':0,'S2 (08-14)':0,'S3 (15-21)':0,'S4 (22-31)':0};
+  D.forEach(d=>{
+    const dia=parseInt(d.dt.split('/')[0]);
+    const kg=kgSaca(d.prod)*d.q;
+    if(dia<=7)s['S1 (01-07)']+=kg;
+    else if(dia<=14)s['S2 (08-14)']+=kg;
+    else if(dia<=21)s['S3 (15-21)']+=kg;
+    else s['S4 (22-31)']+=kg;
+  });
+  if(CI.semkg)CI.semkg.destroy();
+  CI.semkg=new Chart(document.getElementById('cSemKg'),{
+    type:'line',
+    data:{labels:Object.keys(s),datasets:[{label:'kg',data:Object.values(s),borderColor:'#14b8a6',backgroundColor:'rgba(20,184,166,.15)',fill:true,tension:.4,pointBackgroundColor:'#14b8a6',pointRadius:5}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fN(v)+' kg'},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ─── TABELA ─── */
-function renderTab(dados){
-  const tbody=document.getElementById('tbody');
-  tbody.innerHTML='';
-  dados.forEach(d=>{
-    const ps=pesoSaca(d.produto);
-    const kg=ps*d.qtde;
-    const mg=d.liquido>0?((d.liquido-d.cmv)/d.liquido*100):0;
+/* ══════════════════════════════════
+   TABELA
+══════════════════════════════════ */
+function renderTabela(D){
+  const tb=document.getElementById('tbody');
+  tb.innerHTML='';
+  D.forEach(d=>{
+    const ps=kgSaca(d.prod);
+    const tkg=ps*d.q;
+    const marg=d.liq>0?((d.liq-d.cmv)/d.liq*100).toFixed(1):0;
+    const cod=codCliente(d.cli);
     const tr=document.createElement('tr');
     tr.innerHTML=`
-      <td>${d.data}</td>
-      <td style="font-size:11px">${NOMES[d.vendedor]||d.vendedor.split(' ')[0]}</td>
-      <td><span class="tag tag-${d.tipo}">${d.tipo.toUpperCase()}</span> ${d.produto.replace('PLANETA ','')}</td>
-      <td style="font-weight:600;color:#E87722">${d.codCli}</td>
-      <td style="font-size:11px">${d.cidade}</td>
-      <td style="text-align:center;font-weight:600">${d.qtde}</td>
-      <td class="kg-val" style="text-align:center">${ps} kg</td>
-      <td class="kg-val" style="text-align:center">${fmtN(kg,1)} kg</td>
-      <td class="${d.liquido<0?'val-neg':'val-pos'}">${fmtBRL(d.liquido)}</td>
-      <td style="color:#888">${fmtBRL(d.desconto)}</td>
-      <td style="color:${mg>=15?'#4ade80':'#f87171'}">${fmtN(mg,1)}%</td>
+      <td>${d.dt}</td>
+      <td style="font-size:11px">${NC[d.vend]||d.vend.split(' ')[0]}</td>
+      <td>
+        <span class="tag tag-${d.tipo}">${d.tipo.toUpperCase()}</span>
+        <span style="font-size:11.5px"> ${d.prod.replace('PLANETA ','')}</span>
+      </td>
+      <td><span class="cod-c">${cod}</span></td>
+      <td style="font-size:11px">${d.cid}</td>
+      <td style="text-align:center;font-weight:600">${d.q}</td>
+      <td class="kg-c" style="text-align:center">${ps} kg</td>
+      <td class="kg-c" style="text-align:center">${fN(tkg)} kg</td>
+      <td class="${d.liq<0?'vn':'vp'}">${fR(d.liq)}</td>
+      <td style="color:#666">${fR(d.desc)}</td>
+      <td style="color:${parseFloat(marg)>=15?'#4ade80':'#f87171'}">${marg}%</td>
     `;
-    tbody.appendChild(tr);
+    tb.appendChild(tr);
   });
 }
 
-/* ─── RENDER GERAL ─── */
-function render(v){
-  const d=filtrar(v);
-  renderKPIs(d);
-  renderPremCards(d);
-  renderCV(d);
-  renderCKg(d);
-  renderCP(d);
-  renderCS(d);
-  renderCC(d);
-  renderCPrem(d);
-  renderTab(d);
+/* ══════════════════════════════════
+   RENDER GERAL
+══════════════════════════════════ */
+function render(sel){
+  const D=fil(sel);
+  renderKPIs(D);
+  renderPremCards(D);
+  renderCVend(D);
+  renderCKgVend(D);
+  renderCProd(D);
+  renderCSem(D);
+  renderCPremVend(D);
+  renderCSemKg(D);
+  renderTabela(D);
 }
 
 Chart.defaults.color='#aaa';
