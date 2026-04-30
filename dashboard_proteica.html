@@ -1,223 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Proteica | Coagro</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #0f1117; color: #e0e0e0; min-height: 100vh; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',sans-serif;background:#0f1117;color:#e0e0e0;min-height:100vh}
 
-    /* ── HEADER ── */
-    header {
-      background: linear-gradient(135deg, #1a2a1a 0%, #0f1117 60%, #2a1500 100%);
-      border-bottom: 2px solid #E87722;
-      padding: 16px 24px;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    /* HEADER */
+    header{
+      background:linear-gradient(135deg,#1a2a1a 0%,#0f1117 60%,#2a1500 100%);
+      border-bottom:2px solid #E87722;
+      padding:14px 24px;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px
     }
-    .header-left { display: flex; align-items: center; gap: 14px; }
-    .header-divider { width: 1px; height: 40px; background: #444; }
-    .logo-coagro-img {
-      height: 50px; object-fit: contain;
-      filter: drop-shadow(0 0 6px rgba(232,119,34,.5));
-    }
-    .logo-fallback-coagro {
-      background: #2d5a27; border-radius: 10px; padding: 6px 14px;
-      font-size: 14px; font-weight: 800; color: #fff; border: 1px solid #4a8a40;
-    }
-    .logo-proteica-badge {
-      background: linear-gradient(135deg,#E87722,#c45e10);
-      border-radius: 50px; padding: 7px 18px;
-      font-size: 14px; font-weight: 800; color: #fff; letter-spacing: 1px;
-      box-shadow: 0 0 12px rgba(232,119,34,.4);
-    }
-    .header-right { text-align: right; }
-    .header-right h1 { font-size: 20px; font-weight: 700; color: #fff; }
-    .header-right span { font-size: 12px; color: #aaa; display: block; margin-top: 3px; }
+    .hd-left{display:flex;align-items:center;gap:14px}
+    .hd-div{width:1px;height:44px;background:#333}
+    .logo-img{height:52px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(232,119,34,.5))}
+    .logo-fb-coagro{background:#2d5a27;border-radius:10px;padding:6px 14px;font-size:13px;font-weight:800;color:#fff;border:1px solid #4a8a40;display:none}
+    .logo-fb-proteica{background:#E87722;border-radius:50px;padding:6px 16px;font-size:13px;font-weight:800;color:#3a1500;display:none}
+    .hd-right{text-align:right}
+    .hd-right h1{font-size:19px;font-weight:700;color:#fff}
+    .hd-right p{font-size:12px;color:#aaa;margin-top:3px}
 
-    /* ── FILTRO ── */
-    .filtro-bar {
-      background: #161b22; border-bottom: 1px solid #2a2a2a;
-      padding: 12px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    /* FILTRO */
+    .filtro-bar{
+      background:#161b22;border-bottom:1px solid #222;
+      padding:11px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap
     }
-    .filtro-bar label { font-size: 13px; color: #aaa; }
-    .filtro-bar select {
-      background: #1e2530; border: 1px solid #E87722; color: #fff;
-      padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; outline: none;
+    .filtro-bar label{font-size:13px;color:#aaa}
+    .filtro-bar select{
+      background:#1e2530;border:1px solid #E87722;color:#fff;
+      padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;outline:none
     }
-    .filtro-bar select:hover { border-color: #ff9a44; }
-    .btn-reset {
-      background: transparent; border: 1px solid #555; color: #aaa;
-      padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all .2s;
+    .btn-reset{
+      background:transparent;border:1px solid #555;color:#aaa;
+      padding:7px 14px;border-radius:8px;font-size:13px;cursor:pointer;transition:all .2s
     }
-    .btn-reset:hover { border-color: #E87722; color: #E87722; }
-    .badge-filtro {
-      background: #E87722; color: #1a0a00; font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: 20px; display: none;
+    .btn-reset:hover{border-color:#E87722;color:#E87722}
+    .badge-filtro{
+      background:#E87722;color:#1a0a00;font-size:11px;font-weight:700;
+      padding:3px 10px;border-radius:20px;display:none
     }
 
-    /* ── MAIN ── */
-    main { padding: 24px; }
+    /* MAIN */
+    main{padding:22px}
 
-    /* ── KPI CARDS ── */
-    .kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 16px; margin-bottom: 24px;
+    /* SECTION TITLE */
+    .sec-title{
+      font-size:11px;font-weight:700;color:#E87722;text-transform:uppercase;
+      letter-spacing:1.2px;margin-bottom:14px;
+      display:flex;align-items:center;gap:8px
     }
-    .kpi-card {
-      background: #161b22; border: 1px solid #2a2a2a; border-radius: 14px;
-      padding: 20px; position: relative; overflow: hidden;
-      transition: transform .2s, border-color .2s;
-    }
-    .kpi-card:hover { transform: translateY(-3px); border-color: #E87722; }
-    .kpi-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; background: var(--accent, #E87722);
-    }
-    .kpi-card.green { --accent: #4a8a40; }
-    .kpi-card.blue  { --accent: #3b82f6; }
-    .kpi-card.red   { --accent: #ef4444; }
-    .kpi-card.purple{ --accent: #a855f7; }
-    .kpi-card.teal  { --accent: #14b8a6; }
-    .kpi-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .kpi-value { font-size: 24px; font-weight: 700; color: #fff; }
-    .kpi-sub   { font-size: 12px; color: #666; margin-top: 4px; }
-    .kpi-icon  { position: absolute; right: 16px; top: 16px; font-size: 26px; opacity: .12; }
+    .sec-title::before{content:'';width:4px;height:15px;background:#E87722;border-radius:2px}
 
-    /* ── PREMIAÇÃO CARD ── */
-    .premiacao-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px; margin-bottom: 24px;
+    /* KPI GRID */
+    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px;margin-bottom:22px}
+    .kpi-card{
+      background:#161b22;border:1px solid #2a2a2a;border-radius:14px;
+      padding:18px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s
     }
-    .premiacao-card {
-      background: linear-gradient(135deg, #1e1200, #2a1800);
-      border: 1px solid #E87722; border-radius: 14px; padding: 18px;
-      position: relative; overflow: hidden;
-    }
-    .premiacao-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; background: linear-gradient(90deg,#E87722,#ffd700);
-    }
-    .premiacao-nome { font-size: 12px; font-weight: 700; color: #E87722; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
-    .premiacao-kg   { font-size: 22px; font-weight: 700; color: #fff; }
-    .premiacao-val  { font-size: 16px; font-weight: 700; color: #ffd700; margin-top: 4px; }
-    .premiacao-sub  { font-size: 11px; color: #888; margin-top: 2px; }
-    .premiacao-icon { position: absolute; right: 14px; top: 14px; font-size: 24px; opacity: .15; }
+    .kpi-card:hover{transform:translateY(-3px);border-color:#E87722}
+    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,#E87722)}
+    .kpi-card.g{--ac:#4a8a40}.kpi-card.b{--ac:#3b82f6}.kpi-card.r{--ac:#ef4444}.kpi-card.t{--ac:#14b8a6}.kpi-card.y{--ac:#fbbf24}
+    .kpi-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.9px;margin-bottom:7px}
+    .kpi-value{font-size:24px;font-weight:700;color:#fff}
+    .kpi-sub{font-size:11px;color:#666;margin-top:4px}
+    .kpi-icon{position:absolute;right:14px;top:14px;font-size:26px;opacity:.12}
 
-    /* ── SECTION TITLE ── */
-    .section-title {
-      font-size: 12px; font-weight: 700; color: #E87722; text-transform: uppercase;
-      letter-spacing: 1px; margin-bottom: 14px; padding-left: 4px;
-      display: flex; align-items: center; gap: 8px;
+    /* PREMIAÇÃO CARDS */
+    .prem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
+    .prem-card{
+      background:linear-gradient(135deg,#1e1200,#2a1800);
+      border:1px solid #E87722;border-radius:14px;padding:16px;position:relative;overflow:hidden
     }
-    .section-title::before {
-      content: ''; width: 4px; height: 16px; background: #E87722; border-radius: 2px;
-    }
+    .prem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#E87722,#fbbf24)}
+    .prem-rank{font-size:22px;position:absolute;right:14px;top:12px;opacity:.9}
+    .prem-nome{font-size:11px;font-weight:700;color:#E87722;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+    .prem-kg{font-size:20px;font-weight:700;color:#fff}
+    .prem-val{font-size:15px;font-weight:700;color:#fbbf24;margin-top:3px}
+    .prem-sub{font-size:11px;color:#888;margin-top:2px}
 
-    /* ── CHARTS GRID ── */
-    .charts-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px; margin-bottom: 24px;
+    /* CHARTS */
+    .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;margin-bottom:22px}
+    .chart-card{background:#161b22;border:1px solid #2a2a2a;border-radius:14px;padding:18px}
+    .chart-card h3{
+      font-size:12px;font-weight:700;color:#E87722;text-transform:uppercase;
+      letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px
     }
-    .chart-card {
-      background: #161b22; border: 1px solid #2a2a2a; border-radius: 14px; padding: 20px;
-    }
-    .chart-card h3 {
-      font-size: 13px; font-weight: 600; color: #E87722; text-transform: uppercase;
-      letter-spacing: .8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-    }
-    .chart-card h3::before {
-      content: ''; width: 4px; height: 16px; background: #E87722; border-radius: 2px;
-    }
-    canvas { max-height: 260px; }
+    .chart-card h3::before{content:'';width:4px;height:14px;background:#E87722;border-radius:2px}
+    canvas{max-height:250px}
 
-    /* ── TABELA ── */
-    .table-card {
-      background: #161b22; border: 1px solid #2a2a2a;
-      border-radius: 14px; padding: 20px; overflow-x: auto;
+    /* TABELA */
+    .table-card{background:#161b22;border:1px solid #2a2a2a;border-radius:14px;padding:18px;overflow-x:auto}
+    .table-card h3{
+      font-size:12px;font-weight:700;color:#E87722;text-transform:uppercase;
+      letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px
     }
-    .table-card h3 {
-      font-size: 13px; font-weight: 600; color: #E87722; text-transform: uppercase;
-      letter-spacing: .8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    .table-card h3::before{content:'';width:4px;height:14px;background:#E87722;border-radius:2px}
+    table{width:100%;border-collapse:collapse;font-size:12px}
+    thead tr{background:#1e2530}
+    thead th{
+      padding:9px 12px;text-align:left;color:#aaa;font-weight:600;
+      font-size:11px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #2a2a2a
     }
-    .table-card h3::before {
-      content: ''; width: 4px; height: 16px; background: #E87722; border-radius: 2px;
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead tr { background: #1e2530; }
-    thead th {
-      padding: 10px 14px; text-align: left; color: #aaa;
-      font-weight: 600; font-size: 11px; text-transform: uppercase;
-      letter-spacing: .5px; border-bottom: 1px solid #2a2a2a;
-    }
-    tbody tr { border-bottom: 1px solid #1e2530; transition: background .15s; }
-    tbody tr:hover { background: #1e2530; }
-    tbody td { padding: 10px 14px; color: #ccc; }
-    .tag {
-      display: inline-block; padding: 2px 10px; border-radius: 20px;
-      font-size: 11px; font-weight: 600;
-    }
-    .tag-dog { background: #2a4a1a; color: #7ec86e; }
-    .tag-cat { background: #2a2a4a; color: #7e8eec; }
-    .val-pos { color: #4ade80; font-weight: 600; }
-    .val-neg { color: #f87171; font-weight: 600; }
-    .kg-cell { color: #E87722; font-weight: 600; font-size: 12px; }
+    tbody tr{border-bottom:1px solid #1e2530;transition:background .15s}
+    tbody tr:hover{background:#1e2530}
+    tbody td{padding:9px 12px;color:#ccc}
+    .tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700}
+    .tag-dog{background:#2a4a1a;color:#7ec86e}
+    .tag-cat{background:#2a2a4a;color:#7e8eec}
+    .val-pos{color:#4ade80;font-weight:600}
+    .val-neg{color:#f87171;font-weight:600}
+    .kg-val{color:#E87722;font-weight:600}
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center; padding: 20px; font-size: 11px; color: #444;
-      border-top: 1px solid #1e2530; margin-top: 8px;
-    }
-    footer span { color: #E87722; }
+    /* FOOTER */
+    footer{text-align:center;padding:18px;font-size:11px;color:#444;border-top:1px solid #1e2530;margin-top:8px}
+    footer span{color:#E87722}
 
-    /* ── RESPONSIVO ── */
-    @media (max-width: 600px) {
-      .header-right h1 { font-size: 15px; }
-      .kpi-value { font-size: 20px; }
-      main { padding: 14px; }
-      .logo-coagro-img { height: 36px; }
+    @media(max-width:600px){
+      .hd-right h1{font-size:14px}
+      .kpi-value{font-size:19px}
+      main{padding:12px}
+      .logo-img{height:38px}
     }
   </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
+<!-- HEADER -->
 <header>
-  <div class="header-left">
+  <div class="hd-left">
+    <!-- Logo Coagro — arquivo local -->
+    <img class="logo-img" src="Logo Coagro.png" alt="Coagro"
+         onerror="this.style.display='none';document.getElementById('fbC').style.display='inline-block'">
+    <span id="fbC" class="logo-fb-coagro">🌿 COAGRO</span>
 
-    <!-- LOGO COAGRO — coloque "Logo Coagro.png" na mesma pasta -->
-    <img class="logo-coagro-img"
-         src="Logo Coagro.png"
-         alt="Coagro"
-         onerror="this.style.display='none';document.getElementById('fb-coagro').style.display='inline-block';">
-    <div id="fb-coagro" style="display:none">
-      <img src="https://www.grupocoagro.com/logos/Logo%20Coagro%20branco.svg"
-           class="logo-coagro-img" alt="Coagro"
-           onerror="this.style.display='none';document.getElementById('fb-coagro2').style.display='inline-block';">
-      <span id="fb-coagro2" class="logo-fallback-coagro" style="display:none">🌿 COAGRO</span>
-    </div>
+    <div class="hd-div"></div>
 
-    <div class="header-divider"></div>
-
-    <!-- LOGO PROTEICA — coloque "472388672_...jpg" na mesma pasta -->
-    <img src="472388672_2823376694511217_1214209567371748515_n.jpg"
-         alt="Proteica Alimentos"
-         style="height:50px;object-fit:contain;filter:drop-shadow(0 0 6px rgba(232,119,34,.5));"
-         onerror="this.style.display='none';document.getElementById('fb-proteica').style.display='inline-block';">
-    <span id="fb-proteica" class="logo-proteica-badge" style="display:none">🐾 PROTEICA</span>
-
+    <!-- Logo Proteica — arquivo local -->
+    <img class="logo-img" src="472388672_2823376694511217_1214209567371748515_n.jpg" alt="Proteica"
+         onerror="this.style.display='none';document.getElementById('fbP').style.display='inline-block'">
+    <span id="fbP" class="logo-fb-proteica">🐾 PROTEICA</span>
   </div>
-  <div class="header-right">
+  <div class="hd-right">
     <h1>Dashboard de Vendas · Proteica</h1>
-    <span>Período: Março 2026 · Filial: 01-Distribuidora · AL</span>
+    <p>Março 2026 · Filial 01 · Distribuidora · AL</p>
   </div>
 </header>
 
-<!-- ═══ FILTRO ═══ -->
+<!-- FILTRO -->
 <div class="filtro-bar">
-  <label>🔍 Filtrar por Vendedor:</label>
-  <select id="filtroVendedor" onchange="aplicarFiltro()">
+  <label>🔍 Vendedor:</label>
+  <select id="selVend" onchange="aplicar()">
     <option value="TODOS">Todos os Vendedores</option>
     <option value="EDIVALDO COSTA LIMA">Edivaldo Costa Lima (W|96)</option>
     <option value="TAMIRES WIVYANE VIEIRA DA SILVA">Tamires Wivyane (W|53)</option>
@@ -225,87 +162,86 @@
     <option value="DJALMA ALEXANDRE DOS SANTOS">Djalma Alexandre (W|63)</option>
     <option value="CARLOS ANTONIO VASCONCELOS DE OLIVEIRA">Carlos Antonio (W|71)</option>
   </select>
-  <button class="btn-reset" onclick="resetFiltro()">✕ Limpar filtro</button>
-  <span class="badge-filtro" id="badgeFiltro">Filtrado</span>
+  <button class="btn-reset" onclick="resetar()">✕ Limpar</button>
+  <span class="badge-filtro" id="badge">Filtrado</span>
 </div>
 
-<!-- ═══ MAIN ═══ -->
 <main>
 
-  <!-- KPI CARDS -->
-  <div class="section-title">📊 Indicadores Gerais</div>
+  <!-- KPIs -->
+  <div class="sec-title">📊 Indicadores do Período</div>
   <div class="kpi-grid">
     <div class="kpi-card">
       <div class="kpi-icon">💰</div>
-      <div class="kpi-label">Receita Líquida Total</div>
-      <div class="kpi-value" id="kpiReceita">—</div>
-      <div class="kpi-sub" id="kpiReceitaSub">—</div>
+      <div class="kpi-label">Receita Líquida</div>
+      <div class="kpi-value" id="kR">—</div>
+      <div class="kpi-sub" id="kRs">—</div>
     </div>
-    <div class="kpi-card green">
+    <div class="kpi-card g">
+      <div class="kpi-icon">⚖️</div>
+      <div class="kpi-label">Volume Total</div>
+      <div class="kpi-value" id="kKg">—</div>
+      <div class="kpi-sub" id="kKgs">—</div>
+    </div>
+    <div class="kpi-card b">
       <div class="kpi-icon">📦</div>
-      <div class="kpi-label">Volume Total (Kg)</div>
-      <div class="kpi-value" id="kpiKg">—</div>
-      <div class="kpi-sub" id="kpiKgSub">—</div>
+      <div class="kpi-label">Total de Sacas</div>
+      <div class="kpi-value" id="kSacas">—</div>
+      <div class="kpi-sub" id="kSacass">—</div>
     </div>
-    <div class="kpi-card blue">
-      <div class="kpi-icon">🏆</div>
-      <div class="kpi-label">Margem Bruta</div>
-      <div class="kpi-value" id="kpiMargem">—</div>
-      <div class="kpi-sub" id="kpiMargemSub">Liq. − CMV</div>
-    </div>
-    <div class="kpi-card red">
+    <div class="kpi-card r">
       <div class="kpi-icon">🎯</div>
       <div class="kpi-label">Total Descontos</div>
-      <div class="kpi-value" id="kpiDesconto">—</div>
+      <div class="kpi-value" id="kDesc">—</div>
       <div class="kpi-sub">Descontos concedidos</div>
     </div>
-    <div class="kpi-card purple">
-      <div class="kpi-icon">🧾</div>
-      <div class="kpi-label">Qtde de Pedidos</div>
-      <div class="kpi-value" id="kpiPedidos">—</div>
-      <div class="kpi-sub">Transações no mês</div>
+    <div class="kpi-card t">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-label">Margem Bruta</div>
+      <div class="kpi-value" id="kMarg">—</div>
+      <div class="kpi-sub" id="kMargsub">—</div>
     </div>
-    <div class="kpi-card teal">
+    <div class="kpi-card y">
       <div class="kpi-icon">🏅</div>
       <div class="kpi-label">Premiação Total</div>
-      <div class="kpi-value" id="kpiPremiacao">—</div>
-      <div class="kpi-sub">R$‌ 100 por 100 kg</div>
+      <div class="kpi-value" id="kPrem">—</div>
+      <div class="kpi-sub">R$‌ 100 / 1.000 kg</div>
     </div>
   </div>
 
   <!-- PREMIAÇÃO POR VENDEDOR -->
-  <div class="section-title">🏅 Premiação por Vendedor · R$‌ 100 a cada 100 kg vendidos</div>
-  <div class="premiacao-grid" id="premiacaoGrid"></div>
+  <div class="sec-title">🏅 Premiação por Vendedor · R$‌ 100 a cada 1.000 kg vendidos</div>
+  <div class="prem-grid" id="premGrid"></div>
 
-  <!-- CHARTS -->
+  <!-- GRÁFICOS -->
   <div class="charts-grid">
     <div class="chart-card">
-      <h3>Receita por Vendedor (R$)</h3>
-      <canvas id="chartVendedor"></canvas>
+      <h3>Receita Líquida por Vendedor</h3>
+      <canvas id="cVend"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Volume por Vendedor (kg)</h3>
-      <canvas id="chartKgVendedor"></canvas>
+      <h3>Volume em KG por Vendedor</h3>
+      <canvas id="cKgVend"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Mix de Produtos (kg)</h3>
-      <canvas id="chartProdutos"></canvas>
+      <h3>Mix de Produtos — Volume (kg)</h3>
+      <canvas id="cProd"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Evolução Semanal (R$ Líquido)</h3>
-      <canvas id="chartSemanal"></canvas>
+      <h3>Evolução Semanal — R$ Líquido</h3>
+      <canvas id="cSem"></canvas>
     </div>
     <div class="chart-card">
-      <h3>Top 5 Clientes (R$ Líquido)</h3>
-      <canvas id="chartClientes"></canvas>
+      <h3>Top 5 Clientes — R$ Líquido</h3>
+      <canvas id="cCli"></canvas>
     </div>
     <div class="chart-card">
       <h3>Premiação por Vendedor (R$)</h3>
-      <canvas id="chartPremiacao"></canvas>
+      <canvas id="cPremChart"></canvas>
     </div>
   </div>
 
-  <!-- TABELA DETALHADA -->
+  <!-- TABELA -->
   <div class="table-card">
     <h3>Detalhamento de Vendas</h3>
     <table>
@@ -314,39 +250,42 @@
           <th>Data</th>
           <th>Vendedor</th>
           <th>Produto</th>
-          <th>Cliente</th>
+          <th>Cód. Cliente</th>
           <th>Cidade</th>
           <th>Sacas</th>
           <th>Kg/Saca</th>
-          <th>Total Kg</th>
+          <th>Total KG</th>
           <th>R$ Líquido</th>
-          <th>R$ Desconto</th>
+          <th>R$ Desc.</th>
           <th>Margem</th>
         </tr>
       </thead>
-      <tbody id="tabelaBody"></tbody>
+      <tbody id="tbody"></tbody>
     </table>
   </div>
 
 </main>
 
 <footer>
-  Dashboard gerado para <span>Coagro</span> · Parceria <span>Proteica Alimentos</span> · Março 2026
-  · Premiação: <span>R$‌ 100 / 100 kg vendidos</span>
+  Dashboard <span>Coagro</span> × <span>Proteica Alimentos</span> · Março 2026 · Premiação: <span>R$‌ 100 / 1.000 kg</span>
 </footer>
 
 <script>
-/* ═══════════════════════════════════════
-   EXTRAI PESO DA SACA A PARTIR DO NOME
-═══════════════════════════════════════ */
-function extrairPeso(produto) {
+/* ─── PESO DA SACA ─── */
+function pesoSaca(produto){
   const m = produto.match(/([\d.]+)\s*KG/i);
   return m ? parseFloat(m[1]) : 0;
 }
 
-/* ═══════════════════════════════════════
-   DADOS
-═══════════════════════════════════════ */
+/* ─── GERA CÓDIGO DO CLIENTE ─── */
+const _codigoMap = {};
+let _codigoSeq = 1;
+function codigoCli(nome){
+  if(!_codigoMap[nome]) _codigoMap[nome] = 'CLI-' + String(_codigoSeq++).padStart(3,'0');
+  return _codigoMap[nome];
+}
+
+/* ─── DADOS ─── */
 const vendas = [
   {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:6,liquido:549.21,desconto:0,cmv:458.28},
   {data:"02/03",vendedor:"EDIVALDO COSTA LIMA",produto:"PLANETA CAT MIX 25KG",tipo:"cat",cliente:"EDILSON DO NASCIMENTO",cidade:"LIMOEIRO DE ANADIA",qtde:2,liquido:276.28,desconto:0,cmv:220.88},
@@ -425,245 +364,212 @@ const vendas = [
   {data:"31/03",vendedor:"DJALMA ALEXANDRE DOS SANTOS",produto:"PLANETA DOG CARNE AD 25KG",tipo:"dog",cliente:"KLEBSON NOBRE DA SILVA LIMA",cidade:"MATA GRANDE",qtde:12,liquido:1148.31,desconto:60.44,cmv:1006.84},
 ];
 
-/* ═══════════════════════════════════════
-   UTILITÁRIOS
-═══════════════════════════════════════ */
-let chartVendedorInst, chartKgVendedorInst, chartProdutosInst,
-    chartSemanalInst, chartClientesInst, chartPremiacaoInst;
+/* ─── PRÉ-PROCESSA CÓDIGO DOS CLIENTES ─── */
+vendas.forEach(d => { d.codCli = codigoCli(d.cliente); });
 
-const CORES  = ['#E87722','#4a8a40','#3b82f6','#a855f7','#f43f5e'];
-const NOMES_CURTOS = {
-  'EDIVALDO COSTA LIMA'                    : 'Edivaldo',
-  'TAMIRES WIVYANE VIEIRA DA SILVA'        : 'Tamires',
-  'JOSE ORLANO DA SILVA'                   : 'Orlano',
-  'DJALMA ALEXANDRE DOS SANTOS'            : 'Djalma',
-  'CARLOS ANTONIO VASCONCELOS DE OLIVEIRA': 'Carlos'
+/* ─── HELPERS ─── */
+const NOMES = {
+  'EDIVALDO COSTA LIMA':'Edivaldo',
+  'TAMIRES WIVYANE VIEIRA DA SILVA':'Tamires',
+  'JOSE ORLANO DA SILVA':'Orlano',
+  'DJALMA ALEXANDRE DOS SANTOS':'Djalma',
+  'CARLOS ANTONIO VASCONCELOS DE OLIVEIRA':'Carlos'
 };
+const CORES = ['#E87722','#4a8a40','#3b82f6','#a855f7','#f43f5e'];
+const RANKS = ['🥇','🥈','🥉','4º','5º'];
 
-const filtrar = v => v === 'TODOS' ? vendas : vendas.filter(d => d.vendedor === v);
-const fmtBRL  = v => v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
-const fmtNum  = v => v.toLocaleString('pt-BR', {maximumFractionDigits:1});
+function filtrar(v){ return v==='TODOS' ? vendas : vendas.filter(d=>d.vendedor===v); }
+function fmtBRL(v){ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}); }
+function fmtN(v,d=1){ return v.toLocaleString('pt-BR',{maximumFractionDigits:d,minimumFractionDigits:d}); }
+function calcKg(d){ return pesoSaca(d.produto)*d.qtde; }
 
-/* Calcula kg total de uma linha */
-function calcKg(d) {
-  const peso = extrairPeso(d.produto);
-  return peso * d.qtde; // pode ser negativo em devoluções
+/* ─── INSTÂNCIAS DOS CHARTS ─── */
+let cVI,cKI,cPI,cSI,cCI,cPRI;
+
+/* ─── FILTRO ─── */
+function aplicar(){
+  const v=document.getElementById('selVend').value;
+  document.getElementById('badge').style.display = v==='TODOS'?'none':'inline-block';
+  render(v);
+}
+function resetar(){
+  document.getElementById('selVend').value='TODOS';
+  document.getElementById('badge').style.display='none';
+  render('TODOS');
 }
 
-/* ═══════════════════════════════════════
-   FILTRO
-═══════════════════════════════════════ */
-function aplicarFiltro() {
-  const v = document.getElementById('filtroVendedor').value;
-  document.getElementById('badgeFiltro').style.display = v === 'TODOS' ? 'none' : 'inline-block';
-  renderTudo(v);
-}
-function resetFiltro() {
-  document.getElementById('filtroVendedor').value = 'TODOS';
-  document.getElementById('badgeFiltro').style.display = 'none';
-  renderTudo('TODOS');
-}
+/* ─── KPIs ─── */
+function renderKPIs(dados){
+  const rec  = dados.reduce((s,d)=>s+d.liquido,0);
+  const cmv  = dados.reduce((s,d)=>s+d.cmv,0);
+  const desc = dados.reduce((s,d)=>s+d.desconto,0);
+  const sacs = dados.reduce((s,d)=>s+d.qtde,0);
+  const kg   = dados.reduce((s,d)=>s+calcKg(d),0);
+  const marg = rec>0?((rec-cmv)/rec*100):0;
+  const prem = Math.floor(kg/1000)*100;
 
-/* ═══════════════════════════════════════
-   KPIs
-═══════════════════════════════════════ */
-function renderKPIs(dados) {
-  const receita   = dados.reduce((s,d) => s + d.liquido,  0);
-  const cmv       = dados.reduce((s,d) => s + d.cmv,      0);
-  const desc      = dados.reduce((s,d) => s + d.desconto, 0);
-  const totalKg   = dados.reduce((s,d) => s + calcKg(d),  0);
-  const totalSacas= dados.reduce((s,d) => s + d.qtde,     0);
-  const margem    = receita > 0 ? ((receita - cmv) / receita * 100).toFixed(1) : 0;
-  const premiacao = Math.floor(totalKg / 100) * 100;
-
-  document.getElementById('kpiReceita').textContent    = fmtBRL(receita);
-  document.getElementById('kpiReceitaSub').textContent = totalSacas + ' sacas vendidas';
-  document.getElementById('kpiKg').textContent         = fmtNum(totalKg) + ' kg';
-  document.getElementById('kpiKgSub').textContent      = totalSacas + ' sacas · ' + fmtNum(totalKg/1000) + ' toneladas';
-  document.getElementById('kpiPedidos').textContent    = dados.length;
-  document.getElementById('kpiMargem').textContent     = margem + '%';
-  document.getElementById('kpiMargemSub').textContent  = 'CMV: ' + fmtBRL(cmv);
-  document.getElementById('kpiDesconto').textContent   = fmtBRL(Math.abs(desc));
-  document.getElementById('kpiPremiacao').textContent  = fmtBRL(premiacao);
+  document.getElementById('kR').textContent   = fmtBRL(rec);
+  document.getElementById('kRs').textContent  = fmtN(sacs,0)+' sacas · '+dados.length+' pedidos';
+  document.getElementById('kKg').textContent  = fmtN(kg,0)+' kg';
+  document.getElementById('kKgs').textContent = fmtN(kg/1000,2)+' toneladas';
+  document.getElementById('kSacas').textContent  = fmtN(sacs,0);
+  document.getElementById('kSacass').textContent = dados.length+' pedidos no mês';
+  document.getElementById('kDesc').textContent = fmtBRL(Math.abs(desc));
+  document.getElementById('kMarg').textContent = fmtN(marg,1)+'%';
+  document.getElementById('kMargsub').textContent = 'CMV: '+fmtBRL(cmv);
+  document.getElementById('kPrem').textContent = fmtBRL(prem);
 }
 
-/* ═══════════════════════════════════════
-   PREMIAÇÃO POR VENDEDOR
-═══════════════════════════════════════ */
-function renderPremiacao(dados) {
-  // agrupa kg por vendedor
-  const mapKg = {};
-  dados.forEach(d => {
-    mapKg[d.vendedor] = (mapKg[d.vendedor] || 0) + calcKg(d);
-  });
-
-  const grid = document.getElementById('premiacaoGrid');
-  grid.innerHTML = '';
-
-  const sorted = Object.entries(mapKg).sort((a,b) => b[1]-a[1]);
-  sorted.forEach(([vend, kg], i) => {
-    const premio = Math.floor(kg / 100) * 100;
-    const nome   = NOMES_CURTOS[vend] || vend.split(' ')[0];
-    const sacas  = dados.filter(d => d.vendedor === vend).reduce((s,d)=>s+d.qtde,0);
-    const card   = document.createElement('div');
-    card.className = 'premiacao-card';
-    card.innerHTML = `
-      <div class="premiacao-icon">${i===0?'🥇':i===1?'🥈':i===2?'🥉':'🏅'}</div>
-      <div class="premiacao-nome">${i===0?'🥇 ':i===1?'🥈 ':i===2?'🥉 ':''}${nome}</div>
-      <div class="premiacao-kg">${fmtNum(kg)} kg</div>
-      <div class="premiacao-val">${fmtBRL(premio)} de premiação</div>
-      <div class="premiacao-sub">${sacas} sacas · R$‌100 / 100 kg</div>
+/* ─── PREMIAÇÃO CARDS ─── */
+function renderPremCards(dados){
+  const mapKg={};
+  dados.forEach(d=>{ mapKg[d.vendedor]=(mapKg[d.vendedor]||0)+calcKg(d); });
+  const sorted=Object.entries(mapKg).sort((a,b)=>b[1]-a[1]);
+  const g=document.getElementById('premGrid');
+  g.innerHTML='';
+  sorted.forEach(([vend,kg],i)=>{
+    const prem=Math.floor(kg/1000)*100;
+    const sacs=dados.filter(d=>d.vendedor===vend).reduce((s,d)=>s+d.qtde,0);
+    const c=document.createElement('div');
+    c.className='prem-card';
+    c.innerHTML=`
+      <div class="prem-rank">${RANKS[i]||'🏅'}</div>
+      <div class="prem-nome">${NOMES[vend]||vend.split(' ')[0]}</div>
+      <div class="prem-kg">${fmtN(kg,0)} kg</div>
+      <div class="prem-val">${fmtBRL(prem)}</div>
+      <div class="prem-sub">${fmtN(sacs,0)} sacas · R$‌100/1.000kg</div>
     `;
-    grid.appendChild(card);
+    g.appendChild(c);
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — RECEITA POR VENDEDOR
-═══════════════════════════════════════ */
-function renderChartVendedor(dados) {
-  const map = {};
-  dados.forEach(d => { map[d.vendedor] = (map[d.vendedor]||0) + d.liquido; });
-  const labels = Object.keys(map).map(k => NOMES_CURTOS[k] || k.split(' ')[0]);
-  if (chartVendedorInst) chartVendedorInst.destroy();
-  chartVendedorInst = new Chart(document.getElementById('chartVendedor'), {
-    type: 'bar',
-    data: { labels, datasets: [{ label:'R$ Líquido', data: Object.values(map), backgroundColor: CORES, borderRadius: 8 }] },
-    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}} }, responsive:true }
+/* ─── CHART RECEITA VENDEDOR ─── */
+function renderCV(dados){
+  const m={};
+  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+d.liquido;});
+  if(cVI) cVI.destroy();
+  cVI=new Chart(document.getElementById('cVend'),{
+    type:'bar',
+    data:{labels:Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]),datasets:[{label:'R$',data:Object.values(m),backgroundColor:CORES,borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — VOLUME KG POR VENDEDOR
-═══════════════════════════════════════ */
-function renderChartKgVendedor(dados) {
-  const map = {};
-  dados.forEach(d => { map[d.vendedor] = (map[d.vendedor]||0) + calcKg(d); });
-  const labels = Object.keys(map).map(k => NOMES_CURTOS[k] || k.split(' ')[0]);
-  if (chartKgVendedorInst) chartKgVendedorInst.destroy();
-  chartKgVendedorInst = new Chart(document.getElementById('chartKgVendedor'), {
-    type: 'bar',
-    data: { labels, datasets: [{ label:'Kg', data: Object.values(map), backgroundColor: ['#14b8a6','#E87722','#3b82f6','#a855f7','#4a8a40'], borderRadius: 8 }] },
-    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtNum(v)+' kg'},grid:{color:'#222'}} }, responsive:true }
+/* ─── CHART KG VENDEDOR ─── */
+function renderCKg(dados){
+  const m={};
+  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+calcKg(d);});
+  if(cKI) cKI.destroy();
+  cKI=new Chart(document.getElementById('cKgVend'),{
+    type:'bar',
+    data:{labels:Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]),datasets:[{label:'kg',data:Object.values(m),backgroundColor:['#14b8a6','#E87722','#3b82f6','#a855f7','#4a8a40'],borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtN(v,0)+' kg'},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — MIX PRODUTOS (kg)
-═══════════════════════════════════════ */
-function renderChartProdutos(dados) {
-  const map = {};
-  dados.forEach(d => {
-    const k = d.produto.replace('PLANETA ','');
-    map[k] = (map[k]||0) + calcKg(d);
+/* ─── CHART MIX PRODUTO ─── */
+function renderCP(dados){
+  const m={};
+  dados.forEach(d=>{
+    const k=d.produto.replace('PLANETA ','');
+    m[k]=(m[k]||0)+calcKg(d);
   });
-  if (chartProdutosInst) chartProdutosInst.destroy();
-  chartProdutosInst = new Chart(document.getElementById('chartProdutos'), {
-    type: 'doughnut',
-    data: { labels: Object.keys(map), datasets: [{ data: Object.values(map), backgroundColor: CORES, borderWidth: 2, borderColor:'#0f1117' }] },
-    options: { plugins:{ legend:{ labels:{ color:'#ccc', font:{size:11} } } }, responsive:true }
+  if(cPI) cPI.destroy();
+  cPI=new Chart(document.getElementById('cProd'),{
+    type:'doughnut',
+    data:{labels:Object.keys(m),datasets:[{data:Object.values(m),backgroundColor:CORES,borderWidth:2,borderColor:'#0f1117'}]},
+    options:{plugins:{legend:{labels:{color:'#ccc',font:{size:11}}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — SEMANAL
-═══════════════════════════════════════ */
-function renderChartSemanal(dados) {
-  const semanas = { 'S1 (01-07)':0, 'S2 (08-14)':0, 'S3 (15-21)':0, 'S4 (22-31)':0 };
-  dados.forEach(d => {
-    const dia = parseInt(d.data.split('/')[0]);
-    if      (dia <=  7) semanas['S1 (01-07)'] += d.liquido;
-    else if (dia <= 14) semanas['S2 (08-14)'] += d.liquido;
-    else if (dia <= 21) semanas['S3 (15-21)'] += d.liquido;
-    else                semanas['S4 (22-31)'] += d.liquido;
+/* ─── CHART SEMANAL ─── */
+function renderCS(dados){
+  const s={'S1\n01-07':0,'S2\n08-14':0,'S3\n15-21':0,'S4\n22-31':0};
+  dados.forEach(d=>{
+    const dia=parseInt(d.data.split('/')[0]);
+    if(dia<=7) s['S1\n01-07']+=d.liquido;
+    else if(dia<=14) s['S2\n08-14']+=d.liquido;
+    else if(dia<=21) s['S3\n15-21']+=d.liquido;
+    else s['S4\n22-31']+=d.liquido;
   });
-  if (chartSemanalInst) chartSemanalInst.destroy();
-  chartSemanalInst = new Chart(document.getElementById('chartSemanal'), {
-    type: 'line',
-    data: { labels: Object.keys(semanas), datasets: [{ label:'R$ Líquido', data: Object.values(semanas), borderColor:'#E87722', backgroundColor:'rgba(232,119,34,.15)', fill:true, tension:.4, pointBackgroundColor:'#E87722', pointRadius:5 }] },
-    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}} }, responsive:true }
+  if(cSI) cSI.destroy();
+  cSI=new Chart(document.getElementById('cSem'),{
+    type:'line',
+    data:{labels:Object.keys(s),datasets:[{label:'R$',data:Object.values(s),borderColor:'#E87722',backgroundColor:'rgba(232,119,34,.15)',fill:true,tension:.4,pointBackgroundColor:'#E87722',pointRadius:5}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — TOP 5 CLIENTES
-═══════════════════════════════════════ */
-function renderChartClientes(dados) {
-  const map = {};
-  dados.forEach(d => { map[d.cliente] = (map[d.cliente]||0) + d.liquido; });
-  const sorted = Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  if (chartClientesInst) chartClientesInst.destroy();
-  chartClientesInst = new Chart(document.getElementById('chartClientes'), {
-    type: 'bar',
-    data: { labels: sorted.map(e=>e[0].split(' ')[0]), datasets: [{ label:'R$ Líquido', data: sorted.map(e=>e[1]), backgroundColor:'#4a8a40', borderRadius:8 }] },
-    options: { indexAxis:'y', plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}, y:{ticks:{color:'#aaa'},grid:{color:'#222'}} }, responsive:true }
+/* ─── CHART TOP CLIENTES ─── */
+function renderCC(dados){
+  const m={};
+  dados.forEach(d=>{m[d.codCli]=(m[d.codCli]||0)+d.liquido;});
+  const sorted=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  if(cCI) cCI.destroy();
+  cCI=new Chart(document.getElementById('cCli'),{
+    type:'bar',
+    data:{labels:sorted.map(e=>e[0]),datasets:[{label:'R$',data:sorted.map(e=>e[1]),backgroundColor:'#4a8a40',borderRadius:8}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}},y:{ticks:{color:'#aaa'},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   GRÁFICO — PREMIAÇÃO POR VENDEDOR
-═══════════════════════════════════════ */
-function renderChartPremiacao(dados) {
-  const mapKg = {};
-  dados.forEach(d => { mapKg[d.vendedor] = (mapKg[d.vendedor]||0) + calcKg(d); });
-  const labels  = Object.keys(mapKg).map(k => NOMES_CURTOS[k] || k.split(' ')[0]);
-  const premios = Object.values(mapKg).map(kg => Math.floor(kg/100)*100);
-  if (chartPremiacaoInst) chartPremiacaoInst.destroy();
-  chartPremiacaoInst = new Chart(document.getElementById('chartPremiacao'), {
-    type: 'bar',
-    data: { labels, datasets: [{ label:'Premiação R$', data: premios, backgroundColor:'#ffd700', borderRadius:8 }] },
-    options: { plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'#aaa'},grid:{color:'#222'}}, y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}} }, responsive:true }
+/* ─── CHART PREMIAÇÃO ─── */
+function renderCPrem(dados){
+  const m={};
+  dados.forEach(d=>{m[d.vendedor]=(m[d.vendedor]||0)+calcKg(d);});
+  const labels=Object.keys(m).map(k=>NOMES[k]||k.split(' ')[0]);
+  const vals=Object.values(m).map(kg=>Math.floor(kg/1000)*100);
+  if(cPRI) cPRI.destroy();
+  cPRI=new Chart(document.getElementById('cPremChart'),{
+    type:'bar',
+    data:{labels,datasets:[{label:'Premiação R$',data:vals,backgroundColor:'#fbbf24',borderRadius:8}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#aaa'},grid:{color:'#222'}},y:{ticks:{color:'#aaa',callback:v=>fmtBRL(v)},grid:{color:'#222'}}},responsive:true}
   });
 }
 
-/* ═══════════════════════════════════════
-   TABELA
-═══════════════════════════════════════ */
-function renderTabela(dados) {
-  const tbody = document.getElementById('tabelaBody');
-  tbody.innerHTML = '';
-  dados.forEach(d => {
-    const peso   = extrairPeso(d.produto);
-    const totalKg= peso * d.qtde;
-    const margem = d.liquido > 0 ? ((d.liquido - d.cmv)/d.liquido*100).toFixed(1) : 0;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+/* ─── TABELA ─── */
+function renderTab(dados){
+  const tbody=document.getElementById('tbody');
+  tbody.innerHTML='';
+  dados.forEach(d=>{
+    const ps=pesoSaca(d.produto);
+    const kg=ps*d.qtde;
+    const mg=d.liquido>0?((d.liquido-d.cmv)/d.liquido*100):0;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
       <td>${d.data}</td>
-      <td style="font-size:11px">${NOMES_CURTOS[d.vendedor] || d.vendedor.split(' ')[0]}</td>
+      <td style="font-size:11px">${NOMES[d.vendedor]||d.vendedor.split(' ')[0]}</td>
       <td><span class="tag tag-${d.tipo}">${d.tipo.toUpperCase()}</span> ${d.produto.replace('PLANETA ','')}</td>
-      <td style="font-size:11px">${d.cliente}</td>
+      <td style="font-weight:600;color:#E87722">${d.codCli}</td>
       <td style="font-size:11px">${d.cidade}</td>
       <td style="text-align:center;font-weight:600">${d.qtde}</td>
-      <td class="kg-cell" style="text-align:center">${peso} kg</td>
-      <td class="kg-cell" style="text-align:center">${fmtNum(totalKg)} kg</td>
+      <td class="kg-val" style="text-align:center">${ps} kg</td>
+      <td class="kg-val" style="text-align:center">${fmtN(kg,1)} kg</td>
       <td class="${d.liquido<0?'val-neg':'val-pos'}">${fmtBRL(d.liquido)}</td>
       <td style="color:#888">${fmtBRL(d.desconto)}</td>
-      <td style="color:${margem>=15?'#4ade80':'#f87171'}">${margem}%</td>
+      <td style="color:${mg>=15?'#4ade80':'#f87171'}">${fmtN(mg,1)}%</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-/* ═══════════════════════════════════════
-   RENDER GERAL
-═══════════════════════════════════════ */
-function renderTudo(vendedor) {
-  const dados = filtrar(vendedor);
-  renderKPIs(dados);
-  renderPremiacao(dados);
-  renderChartVendedor(dados);
-  renderChartKgVendedor(dados);
-  renderChartProdutos(dados);
-  renderChartSemanal(dados);
-  renderChartClientes(dados);
-  renderChartPremiacao(dados);
-  renderTabela(dados);
+/* ─── RENDER GERAL ─── */
+function render(v){
+  const d=filtrar(v);
+  renderKPIs(d);
+  renderPremCards(d);
+  renderCV(d);
+  renderCKg(d);
+  renderCP(d);
+  renderCS(d);
+  renderCC(d);
+  renderCPrem(d);
+  renderTab(d);
 }
 
-/* ── INIT ── */
-Chart.defaults.color       = '#aaa';
-Chart.defaults.borderColor = '#222';
-renderTudo('TODOS');
+Chart.defaults.color='#aaa';
+Chart.defaults.borderColor='#222';
+render('TODOS');
 </script>
 </body>
 </html>
