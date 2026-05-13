@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>COAGRO | Dashboard Proteica – Abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --proteica-orange: #F2771A;
+    --proteica-red:    #9C2318;
+    --proteica-brown:  #442A1E;
+    --coagro-green:    #004B3C;
+    --coagro-gold:     #FFB800;
+    --coagro-blue:     #001C71;
+    --bg:              #f8f4f0;
+    --text:            #213547;
+    --white:           #ffffff;
+    --shadow: 0 10px 30px -10px rgba(0,77,64,0.15);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 3px solid var(--proteica-orange);
+    box-shadow: var(--shadow);
+  }
+  .header-inner {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--proteica-red);
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    padding: 8px 16px; border-radius: 8px;
+    letter-spacing: 1px;
+  }
+  .logo-badge span { color: var(--proteica-orange); }
+  .header-title { font-size: 14px; color: var(--proteica-brown); font-weight: 500; }
+  .header-title strong { display: block; font-size: 17px; color: var(--proteica-red); }
+  .header-meta {
+    font-size: 12px; color: #888;
+    text-align: right; line-height: 1.6;
+  }
+  .header-meta strong { color: var(--proteica-orange); font-size: 13px; }
+
+  /* ── MAIN ── */
+  main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── PESQUISA ── */
+  .search-bar {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 18px 24px;
+    box-shadow: var(--shadow);
+    display: flex; gap: 12px; flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 32px;
+    animation: fadeInUp 0.5s ease-out;
+  }
+  .search-bar label { font-size: 13px; font-weight: 600; color: var(--proteica-brown); white-space: nowrap; }
+  .search-bar input, .search-bar select {
+    border: 1.5px solid #e0d4cc;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: #fdf8f5;
+    outline: none;
+    transition: border-color 0.3s cubic-bezier(0.4,0,0.2,1);
+    flex: 1; min-width: 160px;
+  }
+  .search-bar input:focus, .search-bar select:focus { border-color: var(--proteica-orange); }
+  .btn-clear {
+    background: var(--proteica-red); color: var(--white);
+    border: none; border-radius: 8px;
+    padding: 9px 20px; cursor: pointer;
+    font-size: 13px; font-weight: 600;
+    transition: background 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .btn-clear:hover { background: var(--proteica-brown); }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .kpi-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 22px 20px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--proteica-orange);
+    animation: fadeInUp 0.5s ease-out;
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .kpi-card:hover { transform: translateY(-4px); }
+  .kpi-card.red   { border-left-color: var(--proteica-red); }
+  .kpi-card.brown { border-left-color: var(--proteica-brown); }
+  .kpi-card.green { border-left-color: var(--coagro-green); }
+  .kpi-card.blue  { border-left-color: var(--coagro-blue); }
+  .kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #999; margin-bottom: 8px; }
+  .kpi-value { font-size: 28px; font-weight: 700; color: var(--proteica-red); line-height: 1; }
+  .kpi-value.orange { color: var(--proteica-orange); }
+  .kpi-value.brown  { color: var(--proteica-brown); }
+  .kpi-value.green  { color: var(--coagro-green); }
+  .kpi-value.blue   { color: var(--coagro-blue); }
+  .kpi-sub { font-size: 11px; color: #aaa; margin-top: 5px; }
+
+  /* ── SEÇÃO VENDEDOR ── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--proteica-brown);
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--proteica-orange);
+  }
+
+  /* ── VENDEDOR CARD ── */
+  .vendor-block {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease-out;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .vendor-block.hidden { display: none; }
+  .vendor-header {
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .vendor-header:hover { filter: brightness(0.95); }
+  .vend-djalma  .vendor-header { background: linear-gradient(135deg, #F2771A, #9C2318); }
+  .vend-tamires .vendor-header { background: linear-gradient(135deg, #9C2318, #442A1E); }
+  .vend-edivaldo .vendor-header { background: linear-gradient(135deg, #004B3C, #00796B); }
+  .vend-orlano  .vendor-header { background: linear-gradient(135deg, #001C71, #4897D0); }
+  .vendor-name { font-size: 16px; font-weight: 700; color: var(--white); }
+  .vendor-code { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+  .vendor-kpis { display: flex; gap: 20px; align-items: center; }
+  .vkpi { text-align: right; }
+  .vkpi-label { font-size: 10px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.6px; }
+  .vkpi-val   { font-size: 16px; font-weight: 700; color: var(--white); }
+  .vkpi-val.gold { color: var(--coagro-gold); }
+  .toggle-icon { font-size: 20px; color: rgba(255,255,255,0.8); margin-left: 16px; transition: transform 0.3s; }
+  .vendor-block.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+  /* ── TABELA INTERNA ── */
+  .vendor-body { padding: 0 24px 20px; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px; margin-top: 16px;
+  }
+  thead th {
+    background: var(--proteica-brown);
+    color: var(--white);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  thead th:not(:first-child) { text-align: right; }
+  tbody tr { border-bottom: 1px solid #f0e8e0; transition: background 0.2s; }
+  tbody tr:hover { background: #fdf5ef; }
+  tbody td { padding: 10px 14px; color: var(--text); }
+  tbody td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  .product-name { font-weight: 500; }
+  .prod-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    padding: 2px 7px; border-radius: 20px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .badge-25 { background: #fff0e0; color: var(--proteica-orange); }
+  .badge-15 { background: #ffe8e0; color: var(--proteica-red); }
+  .badge-10 { background: #f0e8ff; color: #6a1b9a; }
+  tfoot td {
+    padding: 12px 14px;
+    font-weight: 700; font-size: 13px;
+    background: #fdf0e6;
+    border-top: 2px solid var(--proteica-orange);
+  }
+  tfoot td:not(:first-child) { text-align: right; }
+  .comissao-cell { color: var(--proteica-red); font-weight: 700; }
+
+  /* ── TABELA RESUMO ── */
+  .resumo-table-wrap {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 32px;
+    animation: fadeInUp 0.5s ease-out;
+  }
+  .resumo-header {
+    background: var(--proteica-red);
+    padding: 16px 24px;
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+  }
+  .resumo-header span { color: var(--coagro-gold); }
+  .resumo-table-wrap table { margin-top: 0; }
+  .resumo-table-wrap thead th { background: var(--proteica-brown); }
+  .resumo-table-wrap tfoot td { background: var(--proteica-red); color: var(--white); border-top: none; }
+  .resumo-table-wrap tfoot .comissao-cell { color: var(--coagro-gold); }
+
+  /* ── RODAPÉ ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #aaa;
+    border-top: 1px solid #e8ddd5;
+    margin-top: 40px;
+  }
+  footer strong { color: var(--proteica-orange); }
+
+  /* ── ANIMAÇÃO ── */
+  @keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVO ── */
+  @media (max-width: 768px) {
+    .vendor-kpis { gap: 10px; }
+    .vkpi-val { font-size: 13px; }
+    .kpi-value { font-size: 22px; }
+    .header-meta { display: none; }
+    table { font-size: 12px; }
+    thead th, tbody td, tfoot td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">PRO<span>TEICA</span></div>
+      <div>
+        <div class="header-title">
+          <strong>Dashboard de Apuração de Vendas</strong>
+          Grupo COAGRO · Filial 01-Distribuidora
+        </div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <strong>Abril 2026</strong><br>
+      Alagoas · Sergipe · Bahia<br>
+      Comissão: R$‌ 100,00 / 1.000 ton
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- BARRA DE PESQUISA -->
+  <div class="search-bar">
+    <label>🔍 Filtrar:</label>
+    <input type="text" id="searchVendedor" placeholder="Buscar vendedor..." oninput="filtrar()" />
+    <select id="filterProduto" onchange="filtrar()">
+      <option value="">Todos os produtos</option>
+      <option value="PLANETA DOG CARNE AD 25KG">Planeta Dog Carne AD 25KG</option>
+      <option value="PLANETA CAT MIX 25KG">Planeta Cat Mix 25KG</option>
+      <option value="PLANETA DOG FILHOTE 25KG">Planeta Dog Filhote 25KG</option>
+      <option value="PLANETA DOG CARNE ADULTO 15KG">Planeta Dog Carne Adulto 15KG</option>
+      <option value="PLANETA DOG FILHOTE 15KG">Planeta Dog Filhote 15KG</option>
+      <option value="PLANETA CAT MIX 10.1KG">Planeta Cat Mix 10.1KG</option>
+    </select>
+    <button class="btn-clear" onclick="limpar()">✕ Limpar</button>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Total de Sacos</div>
+      <div class="kpi-value orange">309</div>
+      <div class="kpi-sub">unidades vendidas</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Total em KG</div>
+      <div class="kpi-value">7.360,7 kg</div>
+      <div class="kpi-sub">peso total distribuído</div>
+    </div>
+    <div class="kpi-card brown">
+      <div class="kpi-label">Total em Toneladas</div>
+      <div class="kpi-value brown">7,361 ton</div>
+      <div class="kpi-sub">volume do período</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">R$ Líquido Total</div>
+      <div class="kpi-value green">R$‌ 33.270,89</div>
+      <div class="kpi-sub">faturamento líquido</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">Comissão Total</div>
+      <div class="kpi-value blue">R$‌ 736,07</div>
+      <div class="kpi-sub">a pagar aos vendedores</div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO DETALHE POR VENDEDOR -->
+  <div class="section-title">📦 Detalhe por Vendedor</div>
+
+  <!-- DJALMA -->
+  <div class="vendor-block vend-djalma" id="block-djalma" data-vendedor="DJALMA ALEXANDRE DOS SANTOS">
+    <div class="vendor-header" onclick="toggleBlock('block-djalma')">
+      <div>
+        <div class="vendor-name">Djalma Alexandre dos Santos</div>
+        <div class="vendor-code">Código: W|63 · Alagoas</div>
+      </div>
+      <div class="vendor-kpis">
+        <div class="vkpi">
+          <div class="vkpi-label">Total KG</div>
+          <div class="vkpi-val">1.100 kg</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Toneladas</div>
+          <div class="vkpi-val">1,100 ton</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Comissão</div>
+          <div class="vkpi-val gold">R$‌ 110,00</div>
+        </div>
+        <div class="toggle-icon">▾</div>
+      </div>
+    </div>
+    <div class="vendor-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd Sacos</th>
+            <th>KG / Saco</th>
+            <th>Total KG</th>
+            <th>Total Toneladas</th>
+            <th>R$ Líquido</th>
+            <th>Comissão (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="product-name">Planeta Dog Carne AD <span class="prod-badge badge-25">25KG</span></td>
+            <td>23</td><td>25</td><td>575</td><td>0,575</td><td>R$‌ 2.357,90</td><td class="comissao-cell">R$‌ 57,50</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Cat Mix <span class="prod-badge badge-25">25KG</span></td>
+            <td>14</td><td>25</td><td>350</td><td>0,350</td><td>R$‌ 1.757,56</td><td class="comissao-cell">R$‌ 35,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Filhote <span class="prod-badge badge-25">25KG</span></td>
+            <td>4</td><td>25</td><td>100</td><td>0,100</td><td>R$‌ 784,30</td><td class="comissao-cell">R$‌ 10,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Carne Adulto <span class="prod-badge badge-15">15KG</span></td>
+            <td>5</td><td>15</td><td>75</td><td>0,075</td><td>R$‌ 325,38</td><td class="comissao-cell">R$‌ 7,50</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>SUBTOTAL DJALMA</td><td>46</td><td>–</td><td>1.100</td><td>1,100</td><td>R$‌ 5.225,14</td><td class="comissao-cell">R$‌ 110,00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAMIRES -->
+  <div class="vendor-block vend-tamires" id="block-tamires" data-vendedor="TAMIRES WIVYANE VIEIRA DA SILVA">
+    <div class="vendor-header" onclick="toggleBlock('block-tamires')">
+      <div>
+        <div class="vendor-name">Tamires Wivyane Vieira da Silva</div>
+        <div class="vendor-code">Código: W|53 · Alagoas</div>
+      </div>
+      <div class="vendor-kpis">
+        <div class="vkpi">
+          <div class="vkpi-label">Total KG</div>
+          <div class="vkpi-val">3.320 kg</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Toneladas</div>
+          <div class="vkpi-val">3,320 ton</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Comissão</div>
+          <div class="vkpi-val gold">R$‌ 332,00</div>
+        </div>
+        <div class="toggle-icon">▾</div>
+      </div>
+    </div>
+    <div class="vendor-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd Sacos</th>
+            <th>KG / Saco</th>
+            <th>Total KG</th>
+            <th>Total Toneladas</th>
+            <th>R$ Líquido</th>
+            <th>Comissão (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="product-name">Planeta Dog Carne AD <span class="prod-badge badge-25">25KG</span></td>
+            <td>111</td><td>25</td><td>2.775</td><td>2,775</td><td>R$‌ 11.078,65</td><td class="comissao-cell">R$‌ 277,50</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Cat Mix <span class="prod-badge badge-25">25KG</span></td>
+            <td>20</td><td>25</td><td>500</td><td>0,500</td><td>R$‌ 2.585,40</td><td class="comissao-cell">R$‌ 50,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Carne Adulto <span class="prod-badge badge-15">15KG</span></td>
+            <td>3</td><td>15</td><td>45</td><td>0,045</td><td>R$‌ 201,00</td><td class="comissao-cell">R$‌ 4,50</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>SUBTOTAL TAMIRES</td><td>134</td><td>–</td><td>3.320</td><td>3,320</td><td>R$‌ 13.865,05</td><td class="comissao-cell">R$‌ 332,00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- EDIVALDO -->
+  <div class="vendor-block vend-edivaldo" id="block-edivaldo" data-vendedor="EDIVALDO COSTA LIMA">
+    <div class="vendor-header" onclick="toggleBlock('block-edivaldo')">
+      <div>
+        <div class="vendor-name">Edivaldo Costa Lima</div>
+        <div class="vendor-code">Código: W|96 · Alagoas</div>
+      </div>
+      <div class="vendor-kpis">
+        <div class="vkpi">
+          <div class="vkpi-label">Total KG</div>
+          <div class="vkpi-val">2.295,7 kg</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Toneladas</div>
+          <div class="vkpi-val">2,296 ton</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Comissão</div>
+          <div class="vkpi-val gold">R$‌ 229,57</div>
+        </div>
+        <div class="toggle-icon">▾</div>
+      </div>
+    </div>
+    <div class="vendor-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd Sacos</th>
+            <th>KG / Saco</th>
+            <th>Total KG</th>
+            <th>Total Toneladas</th>
+            <th>R$ Líquido</th>
+            <th>Comissão (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="product-name">Planeta Dog Carne AD <span class="prod-badge badge-25">25KG</span></td>
+            <td>44</td><td>25</td><td>1.100</td><td>1,100</td><td>R$‌ 4.485,95</td><td class="comissao-cell">R$‌ 110,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Cat Mix <span class="prod-badge badge-25">25KG</span></td>
+            <td>34</td><td>25</td><td>850</td><td>0,850</td><td>R$‌ 4.870,63</td><td class="comissao-cell">R$‌ 85,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Filhote <span class="prod-badge badge-25">25KG</span></td>
+            <td>2</td><td>25</td><td>50</td><td>0,050</td><td>R$‌ 341,47</td><td class="comissao-cell">R$‌ 5,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Carne Adulto <span class="prod-badge badge-15">15KG</span></td>
+            <td>15</td><td>15</td><td>225</td><td>0,225</td><td>R$‌ 1.005,00</td><td class="comissao-cell">R$‌ 22,50</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Cat Mix <span class="prod-badge badge-10">10,1KG</span></td>
+            <td>7</td><td>10,1</td><td>70,7</td><td>0,071</td><td>R$‌ 490,00</td><td class="comissao-cell">R$‌ 7,07</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>SUBTOTAL EDIVALDO</td><td>102</td><td>–</td><td>2.295,7</td><td>2,296</td><td>R$‌ 11.193,05</td><td class="comissao-cell">R$‌ 229,57</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- JOSE ORLANO -->
+  <div class="vendor-block vend-orlano" id="block-orlano" data-vendedor="JOSE ORLANO DA SILVA">
+    <div class="vendor-header" onclick="toggleBlock('block-orlano')">
+      <div>
+        <div class="vendor-name">José Orlano da Silva</div>
+        <div class="vendor-code">Código: W|57 · Alagoas</div>
+      </div>
+      <div class="vendor-kpis">
+        <div class="vkpi">
+          <div class="vkpi-label">Total KG</div>
+          <div class="vkpi-val">645 kg</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Toneladas</div>
+          <div class="vkpi-val">0,645 ton</div>
+        </div>
+        <div class="vkpi">
+          <div class="vkpi-label">Comissão</div>
+          <div class="vkpi-val gold">R$‌ 64,50</div>
+        </div>
+        <div class="toggle-icon">▾</div>
+      </div>
+    </div>
+    <div class="vendor-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Qtd Sacos</th>
+            <th>KG / Saco</th>
+            <th>Total KG</th>
+            <th>Total Toneladas</th>
+            <th>R$ Líquido</th>
+            <th>Comissão (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="product-name">Planeta Dog Carne AD <span class="prod-badge badge-25">25KG</span></td>
+            <td>19</td><td>25</td><td>475</td><td>0,475</td><td>R$‌ 1.912,65</td><td class="comissao-cell">R$‌ 47,50</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Cat Mix <span class="prod-badge badge-25">25KG</span></td>
+            <td>3</td><td>25</td><td>75</td><td>0,075</td><td>R$‌ 422,50</td><td class="comissao-cell">R$‌ 7,50</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Filhote <span class="prod-badge badge-25">25KG</span></td>
+            <td>2</td><td>25</td><td>50</td><td>0,050</td><td>R$‌ 330,00</td><td class="comissao-cell">R$‌ 5,00</td>
+          </tr>
+          <tr>
+            <td class="product-name">Planeta Dog Filhote <span class="prod-badge badge-15">15KG</span></td>
+            <td>3</td><td>15</td><td>45</td><td>0,045</td><td>R$‌ 322,50</td><td class="comissao-cell">R$‌ 4,50</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>SUBTOTAL JOSE ORLANO</td><td>27</td><td>–</td><td>645</td><td>0,645</td><td>R$‌ 2.987,65</td><td class="comissao-cell">R$‌ 64,50</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- TABELA RESUMO COMISSÕES -->
+  <div class="resumo-table-wrap" id="resumo-section">
+    <div class="resumo-header">📊 Resumo de <span>Comissões</span> — Abril 2026</div>
+    <div style="padding: 0 24px 20px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Vendedor</th>
+            <th>Cód.</th>
+            <th>Total Sacos</th>
+            <th>Total KG</th>
+            <th>Total Toneladas</th>
+            <th>R$ Líquido</th>
+            <th>Comissão (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:600;">Djalma Alexandre dos Santos</td>
+            <td>W|63</td><td>46</td><td>1.100</td><td>1,100</td><td>R$‌ 5.225,14</td><td class="comissao-cell">R$‌ 110,00</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Tamires Wivyane Vieira da Silva</td>
+            <td>W|53</td><td>134</td><td>3.320</td><td>3,320</td><td>R$‌ 13.865,05</td><td class="comissao-cell">R$‌ 332,00</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Edivaldo Costa Lima</td>
+            <td>W|96</td><td>102</td><td>2.295,7</td><td>2,296</td><td>R$‌ 11.193,05</td><td class="comissao-cell">R$‌ 229,57</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">José Orlano da Silva</td>
+            <td>W|57</td><td>27</td><td>645</td><td>0,645</td><td>R$‌ 2.987,65</td><td class="comissao-cell">R$‌ 64,50</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">TOTAL GERAL</td>
+            <td>309</td>
+            <td>7.360,7</td>
+            <td>7,361</td>
+            <td>R$‌ 33.270,89</td>
+            <td class="comissao-cell">R$‌ 736,07</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div style="margin-top:12px; font-size:11px; color:#aaa; text-align:right;">
+        ⚙️ Regra de comissão: R$‌ 100,00 a cada 1.000 toneladas vendidas &nbsp;|&nbsp; Equivalente a R$‌ 0,10 por KG
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Dashboard gerado por <strong>COAGRO Supply Chain</strong> · Proteica Abril 2026 · Alagoas, Sergipe e Bahia
+</footer>
+
+<script>
+  function toggleBlock(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('collapsed');
+  }
+
+  function filtrar() {
+    const termVend = document.getElementById('searchVendedor').value.toLowerCase().trim();
+    const termProd = document.getElementById('filterProduto').value.toUpperCase();
+    const blocks   = document.querySelectorAll('.vendor-block');
+
+    blocks.forEach(block => {
+      const nome = block.dataset.vendedor.toLowerCase();
+      const matchVend = nome.includes(termVend);
+      let matchProd = true;
+
+      if (termProd) {
+        const rows = block.querySelectorAll('tbody tr');
+        let found = false;
+        rows.forEach(row => {
+          const prod = row.querySelector('.product-name')?.textContent.toUpperCase() || '';
+          if (prod.includes(termProd)) found = true;
+        });
+        matchProd = found;
+      }
+
+      block.classList.toggle('hidden', !(matchVend && matchProd));
+    });
+  }
+
+  function limpar() {
+    document.getElementById('searchVendedor').value = '';
+    document.getElementById('filterProduto').value  = '';
+    filtrar();
+  }
+</script>
+</body>
+</html>
