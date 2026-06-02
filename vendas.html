@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>COAGRO | Dashboard + Promoções</title>
+  <title>COAGRO - Promocoes e Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="https://www.grupocoagro.com/logos/Logo%20Coagro%20branco.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,16 +13,17 @@
     :root {
       --coagro-green: #004B3C;
       --coagro-light-green: #00796B;
+      --coagro-gold: #FFB800;
       --proteica-orange: #F2771A;
       --proteica-red: #9C2318;
       --proteica-brown: #442A1E;
-      --proteica-gold: #FFB800;
       --bg-light: #f8f4f0;
       --text-dark: #213547;
       --white: #ffffff;
-      --shadow: 0 10px 30px -10px rgba(156, 35, 24, 0.15);
+      --shadow: 0 10px 30px -10px rgba(0,75,60,0.15);
     }
 
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg-light);
@@ -29,13 +31,13 @@
       min-height: 100vh;
     }
 
-    /* ── AVISO INTERNO ── */
+    /* ─── AVISO INTERNO ─── */
     .aviso-interno {
       background: #7f1d1d;
       color: #fff;
       text-align: center;
       padding: 10px 16px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.3px;
       line-height: 1.5;
@@ -47,12 +49,12 @@
       padding: 2px 10px;
       border-radius: 4px;
       margin-right: 6px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    /* ── HEADER ── */
+    /* ─── HEADER ─── */
     header {
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(12px);
@@ -70,16 +72,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 28px;
-      flex-wrap: wrap;
-      gap: 16px;
     }
 
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
+    .logo-area { display: flex; align-items: center; gap: 16px; }
     .logo-badge {
       background: linear-gradient(135deg, var(--proteica-red), var(--proteica-brown));
       color: var(--white);
@@ -91,15 +86,13 @@
       letter-spacing: 1px;
       box-shadow: 0 4px 12px rgba(156, 35, 24, 0.2);
     }
-
-    .logo-badge span { color: var(--proteica-gold); }
+    .logo-badge span { color: var(--coagro-gold); }
 
     .header-title {
       font-size: 14px;
       color: var(--proteica-brown);
       font-weight: 600;
     }
-
     .header-title strong {
       display: block;
       font-size: 18px;
@@ -107,64 +100,94 @@
       margin-top: 2px;
     }
 
-    /* ── TABS ── */
-    .tabs-nav {
-      display: flex;
-      gap: 8px;
+    /* ─── TABS ─── */
+    .tabs-container {
+      background: var(--white);
       border-bottom: 2px solid #e0d4cc;
       padding: 0 28px;
       max-width: 1400px;
       margin: 0 auto;
-      overflow-x: auto;
-      scrollbar-width: none;
+      display: flex;
+      gap: 0;
     }
 
-    .tabs-nav::-webkit-scrollbar { display: none; }
-
     .tab-btn {
-      padding: 14px 20px;
+      padding: 16px 24px;
       border: none;
       background: transparent;
+      color: var(--text-dark);
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #999;
       cursor: pointer;
       border-bottom: 3px solid transparent;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      white-space: nowrap;
-      -webkit-tap-highlight-color: transparent;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .tab-btn:hover { color: var(--proteica-orange); }
-
     .tab-btn.active {
-      color: var(--proteica-red);
-      border-bottom-color: var(--proteica-red);
+      color: var(--proteica-orange);
+      border-bottom-color: var(--proteica-orange);
     }
 
-    /* ── MAIN ── */
-    main {
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ─── BANNER PROMO ─── */
+    .promo-banner {
+      background: linear-gradient(135deg, var(--coagro-gold) 0%, #e6a200 100%);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+    }
+    .promo-banner-inner {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 36px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-
-    .tab-content {
-      display: none;
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--coagro-green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--coagro-gold); animation: pulse 1.4s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
 
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.3s ease-out;
+    .countdown-row { display: flex; align-items: center; gap: 8px; }
+    .cd-label { font-size: 0.8rem; font-weight: 700; color: var(--coagro-green); }
+    .cd-box {
+      background: var(--coagro-green);
+      color: #fff;
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      min-width: 46px;
+      text-align: center;
+      line-height: 1.2;
     }
+    .cd-box small { display: block; font-size: 0.52rem; font-weight: 500; opacity: .8; text-transform: uppercase; }
+    .cd-sep { font-size: 1.3rem; font-weight: 800; color: var(--coagro-green); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    /* ─── MAIN ─── */
+    main { max-width: 1400px; margin: 0 auto; padding: 24px 28px; }
 
-    /* ── SEARCH BAR ── */
+    /* ─── SEARCH BAR ─── */
     .search-bar {
       background: var(--white);
       border-radius: 14px;
@@ -175,7 +198,6 @@
       flex-wrap: wrap;
       align-items: center;
       margin-bottom: 36px;
-      animation: slideDown 0.5s ease-out;
     }
 
     .search-bar label {
@@ -195,7 +217,7 @@
       color: var(--text-dark);
       background: #fdf8f5;
       outline: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       flex: 1;
       min-width: 160px;
     }
@@ -215,7 +237,7 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
       box-shadow: 0 2px 8px rgba(156, 35, 24, 0.15);
     }
 
@@ -224,7 +246,138 @@
       transform: translateY(-2px);
     }
 
-    /* ── KPI CARDS ── */
+    /* ─── CATEGORIAS ─── */
+    .cats-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cats-scroll::-webkit-scrollbar { display: none; }
+
+    .cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 50px;
+      border: 2px solid #e5e7eb;
+      background: #fff;
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--coagro-green);
+      color: #fff;
+      border-color: var(--coagro-green);
+      box-shadow: 0 4px 14px rgba(0,75,60,.22);
+    }
+
+    /* ─── GRID PROMO ─── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) { .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+    /* ─── CARD PROMO ─── */
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0,75,60,.07);
+      transition: transform .25s, box-shadow .25s;
+      animation: fadeUp .35s ease-out both;
+    }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px -8px rgba(0,75,60,.2); }
+
+    .card-strip { height: 5px; background: var(--coagro-green); }
+    .card-body { padding: 14px 14px 10px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.67rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 3px 9px;
+      border-radius: 50px;
+      background: #fef9ee;
+      color: #b45309;
+      border: 1px solid #fcd34d;
+      width: fit-content;
+    }
+
+    .card-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .card-code { font-size: 0.7rem; color: #9ca3af; }
+
+    /* DE / POR */
+    .card-prices { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
+    .price-de {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+    .price-de-label { font-size: 0.68rem; color: #9ca3af; margin-right: 4px; }
+
+    .price-por-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .price-por-label { font-size: 0.72rem; color: var(--coagro-green); font-weight: 700; }
+    .price-por {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--coagro-green);
+      line-height: 1;
+    }
+
+    .card-footer { padding: 0 14px 14px; }
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px;
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-wa:hover { background: #1da851; transform: scale(0.98); }
+
+    /* ─── DASHBOARD PROTEICA ─── */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -239,13 +392,17 @@
       box-shadow: var(--shadow);
       border-top: 5px solid var(--proteica-orange);
       animation: fadeInUp 0.5s ease-out;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
     }
 
     .kpi-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 15px 40px rgba(156, 35, 24, 0.15);
     }
+
+    .kpi-card.red { border-top-color: var(--proteica-red); }
+    .kpi-card.brown { border-top-color: var(--proteica-brown); }
+    .kpi-card.gold { border-top-color: var(--coagro-gold); }
 
     .kpi-label {
       font-size: 11px;
@@ -263,67 +420,17 @@
       line-height: 1;
     }
 
+    .kpi-value.orange { color: var(--proteica-orange); }
+    .kpi-value.brown { color: var(--proteica-brown); }
+    .kpi-value.gold { color: var(--coagro-gold); }
+
     .kpi-sub {
       font-size: 11px;
       color: #aaa;
       margin-top: 8px;
     }
 
-    /* ── PROMO BANNER ── */
-    .promo-banner {
-      background: linear-gradient(135deg, var(--proteica-gold) 0%, #e6a200 100%);
-      padding: 14px 20px;
-      border-radius: 14px;
-      margin-bottom: 24px;
-    }
-
-    .promo-banner-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: var(--coagro-green);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.82rem;
-      padding: 6px 16px;
-      border-radius: 50px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--proteica-gold); animation: blink 1.4s infinite; }
-    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
-
-    .countdown-row { display: flex; align-items: center; gap: 8px; }
-    .cd-label { font-size: 0.8rem; font-weight: 700; color: var(--coagro-green); }
-    .cd-box {
-      background: var(--coagro-green);
-      color: #fff;
-      border-radius: 8px;
-      padding: 5px 11px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      min-width: 46px;
-      text-align: center;
-      line-height: 1.2;
-    }
-    .cd-box small { display: block; font-size: 0.52rem; font-weight: 500; opacity: .8; text-transform: uppercase; }
-    .cd-sep { font-size: 1.3rem; font-weight: 800; color: var(--coagro-green); }
-
-    .banner-ativa { background: linear-gradient(135deg, #15803d 0%, #166534 100%) !important; }
-    .banner-ativa .cd-label, .banner-ativa .cd-sep { color: #bbf7d0 !important; }
-    .banner-ativa .status-badge { background: #fff; color: #15803d; }
-    .banner-ativa .dot { background: #15803d; }
-
-    /* ── SECTION TITLE ── */
+    /* ─── SECTION TITLE ─── */
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: 24px;
@@ -331,10 +438,9 @@
       margin-bottom: 24px;
       padding-bottom: 12px;
       border-bottom: 3px solid var(--proteica-orange);
-      animation: slideDown 0.5s ease-out;
     }
 
-    /* ── VENDOR CARD ── */
+    /* ─── VENDOR CARD ─── */
     .vendor-block {
       background: var(--white);
       border-radius: 14px;
@@ -342,10 +448,11 @@
       margin-bottom: 28px;
       overflow: hidden;
       animation: fadeInUp 0.5s ease-out;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
     }
 
     .vendor-block.hidden { display: none; }
+    .vendor-block.collapsed .vendor-body { display: none; }
 
     .vendor-header {
       padding: 18px 24px;
@@ -383,10 +490,7 @@
       align-items: center;
     }
 
-    .vkpi {
-      text-align: right;
-    }
-
+    .vkpi { text-align: right; }
     .vkpi-label {
       font-size: 10px;
       color: rgba(255, 255, 255, 0.75);
@@ -402,7 +506,7 @@
       margin-top: 4px;
     }
 
-    .vkpi-val.gold { color: var(--proteica-gold); }
+    .vkpi-val.gold { color: var(--coagro-gold); }
 
     .toggle-icon {
       font-size: 22px;
@@ -413,9 +517,8 @@
 
     .vendor-block.collapsed .toggle-icon { transform: rotate(-90deg); }
 
-    .vendor-body {
-      padding: 0 24px 24px;
-    }
+    /* ─── VENDOR BODY ─── */
+    .vendor-body { padding: 0 24px 24px; }
 
     table {
       width: 100%;
@@ -468,119 +571,37 @@
 
     tfoot td:not(:first-child) { text-align: right; }
 
-    /* ── PROMO GRID ── */
-    .promo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 16px;
-    }
-
-    @media (max-width: 500px) { .promo-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-    @media (max-width: 340px) { .promo-grid { grid-template-columns: 1fr; } }
-
-    /* ── PROMO CARD ── */
-    .promo-card {
+    /* ─── RESUMO TABLE ─── */
+    .resumo-wrap {
       background: var(--white);
       border-radius: 14px;
       box-shadow: var(--shadow);
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(0,75,60,.07);
-      transition: transform .25s, box-shadow .25s;
-      animation: fadeUp .35s ease-out both;
+      margin-top: 40px;
+      animation: fadeInUp 0.5s ease-out;
     }
 
-    .promo-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px -8px rgba(0,75,60,.2); }
-
-    .promo-strip { height: 5px; background: var(--coagro-green); }
-    .cat-pet .promo-strip { background: #4a148c; }
-    .cat-casa .promo-strip { background: #001C71; }
-    .cat-maquinas .promo-strip { background: #92400e; }
-
-    .promo-body { padding: 14px 14px 10px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
-
-    .promo-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.67rem;
+    .resumo-header {
+      background: linear-gradient(135deg, var(--proteica-red), var(--proteica-brown));
+      padding: 18px 24px;
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      padding: 3px 9px;
-      border-radius: 50px;
-      background: #fef9ee;
-      color: #b45309;
-      border: 1px solid #fcd34d;
-      width: fit-content;
     }
 
-    .promo-badge.active { background: #dcfce7; color: #15803d; border-color: #86efac; }
+    .resumo-header span { color: var(--coagro-gold); }
 
-    .promo-name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      line-height: 1.4;
-      flex: 1;
-    }
-
-    .promo-code { font-size: 0.7rem; color: #9ca3af; }
-
-    .promo-prices { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
-    .price-de {
-      font-size: 0.78rem;
-      color: #9ca3af;
-      text-decoration: line-through;
-      font-weight: 500;
-    }
-    .price-de-label { font-size: 0.68rem; color: #9ca3af; margin-right: 4px; }
-    .price-por-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .price-por-label { font-size: 0.72rem; color: var(--coagro-green); font-weight: 700; }
-    .price-por {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: var(--coagro-green);
-      line-height: 1;
-    }
-    .cat-pet .price-por { color: #4a148c; }
-    .cat-pet .price-por-label { color: #4a148c; }
-    .cat-casa .price-por { color: #001C71; }
-    .cat-casa .price-por-label { color: #001C71; }
-    .cat-maquinas .price-por { color: #92400e; }
-    .cat-maquinas .price-por-label { color: #92400e; }
-
-    .promo-footer { padding: 0 14px 14px; }
-    .btn-wa {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 11px;
-      background: #25D366;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.84rem;
+    .resumo-wrap table { margin-top: 0; }
+    .resumo-wrap thead th { background: var(--proteica-brown); }
+    .resumo-wrap tfoot td {
+      background: var(--proteica-red);
+      color: var(--white);
+      border-top: none;
       font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background .2s, transform .15s;
-      -webkit-tap-highlight-color: transparent;
     }
-    .btn-wa:hover, .btn-wa:active { background: #1da851; transform: scale(0.98); }
-    .cat-maquinas .btn-wa { background: #92400e; }
-    .cat-maquinas .btn-wa:hover { background: #78350f; }
 
-    .empty { text-align: center; padding: 60px 20px; color: #9ca3af; grid-column: 1/-1; }
-    .empty p { font-size: 1rem; font-weight: 500; margin-top: 12px; }
-
-    .results-info { font-size: 0.82rem; color: #9ca3af; margin-bottom: 14px; font-weight: 500; }
-
-    /* ── FOOTER ── */
+    /* ─── FOOTER ─── */
     footer {
       text-align: center;
       padding: 28px;
@@ -592,18 +613,11 @@
 
     footer strong { color: var(--proteica-orange); }
 
-    @keyframes slideDown {
-      0% { opacity: 0; transform: translateY(-10px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       .header-inner { flex-direction: column; gap: 12px; text-align: center; }
+      .tabs-container { padding: 0 16px; }
+      .tab-btn { padding: 12px 16px; font-size: 12px; }
       .vendor-kpis { gap: 12px; flex-wrap: wrap; }
       .vkpi-val { font-size: 14px; }
       .kpi-value { font-size: 24px; }
@@ -629,8 +643,8 @@
       <div class="logo-badge">PRO<span>TEICA</span></div>
       <div>
         <div class="header-title">
-          <strong>Dashboard + Promocoes</strong>
-          COAGRO Distribuidora
+          <strong>COAGRO Distribuidora</strong>
+          Alagoas · Sergipe · Bahia
         </div>
       </div>
     </div>
@@ -638,698 +652,2740 @@
 </header>
 
 <!-- TABS -->
-<div class="tabs-nav">
-  <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard Maio 2026</button>
-  <button class="tab-btn" onclick="switchTab('promocoes')">🔥 Promocoes 15-16 Maio</button>
+<div class="tabs-container">
+  <button class="tab-btn active" onclick="switchTab('promocoes')">📦 Promocoes</button>
+  <button class="tab-btn" onclick="switchTab('dashboard')">📊 Dashboard Proteica Maio</button>
 </div>
 
-<!-- MAIN -->
-<main>
+<!-- ═══════════════════════════════════════════
+     TAB 1: PROMOÇÕES
+     ═══════════════════════════════════════════ -->
+<div id="promocoes" class="tab-content active">
 
-  <!-- ════════════════════════════════════════ -->
-  <!-- TAB 1: DASHBOARD -->
-  <!-- ════════════════════════════════════════ -->
-  <div id="dashboard" class="tab-content active">
+  <!-- BANNER CONTADOR -->
+  <div class="promo-banner" id="promoBanner">
+    <div class="promo-banner-inner">
+      <div class="status-badge" id="statusBadge">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">PROMOCAO ATIVA</span>
+      </div>
+      <div class="countdown-row" id="cdRow">
+        <span class="cd-label" id="cdLabel">Comeca em:</span>
+        <div class="cd-box" id="cdD">0<small>dias</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box" id="cdH">00<small>hrs</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box" id="cdM">00<small>min</small></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box" id="cdS">00<small>seg</small></div>
+      </div>
+    </div>
+  </div>
 
-    <!-- SEARCH BAR -->
+  <main>
     <div class="search-bar">
       <label>🔍 Filtrar:</label>
-      <input type="text" id="searchVendedor" placeholder="Buscar vendedor..." oninput="filtrarDashboard()" />
-      <select id="filterProduto" onchange="filtrarDashboard()">
-        <option value="">Todos os produtos</option>
-        <option value="Planeta Dog Carne AD 25KG">Planeta Dog Carne AD 25KG</option>
-        <option value="Planeta Cat Mix 25KG">Planeta Cat Mix 25KG</option>
+      <input type="text" id="searchInput" placeholder="Pesquisar produto..." autocomplete="off" />
+    </div>
+
+    <div class="cats-scroll">
+      <button class="cat-btn active" data-cat="all" onclick="filterCat(this)">🏪 Todos</button>
+      <button class="cat-btn" data-cat="agro" onclick="filterCat(this)">🌾 Agro Sementes</button>
+      <button class="cat-btn" data-cat="medicamentos" onclick="filterCat(this)">💊 Medicamentos</button>
+      <button class="cat-btn" data-cat="pet" onclick="filterCat(this)">🐾 PET</button>
+      <button class="cat-btn" data-cat="casa" onclick="filterCat(this)">🏡 Casa e Jardim</button>
+      <button class="cat-btn" data-cat="maquinas" onclick="filterCat(this)">⚙️ Maquinas</button>
+    </div>
+
+    <div style="font-size: 0.82rem; color: #6b7280; font-weight: 500; margin-bottom: 14px;" id="resultsInfo">Ent</div>
+    endi! Vou criar<div class um arquivo="products HTML com-grid": id="grid"></div>
+  </main>
+
+1. **Dashboar
+
+</div>
+
+<!-- d m═══════════════════════════ês════════════════
+     TAB 2: DASHBOARD PROTEICA a mês** (ab
+     ═══════════════as════════════════════════════ -->
+<div id="dashboard" para class="tab-content">
+
+  <main> Abril
+
+    <!-- SEARCH e BAR -->
+    <div class="search-bar">
+       Maio<label>🔍 Filt)
+2. **Catrar:</label>
+      <input type="text" id="searchVendedorálogo de" placeholder="Buscar vendedor..." o Proninput="filtmorarDções** (ash()"com />
+       "<select id="filterDeP Rroduto"$ onchange="filtrarDash()XX">
+        <option value="">Todos por os R$X produtos</option>
+        <option value="YPlaneta Dog") Carne AD
+3. **T 25uKdo integG">Planeta Dog Carne AD 25KG</option>rado e responsivo**
+
+Deixa eu mon
+        <option value="Planetatar isso Cat Mix  ag25ora:KG">Planeta Cat Mix 25KG</option>
         <option value="Planeta Dog Filhote 25KG">Planeta Dog Filhote 25KG</option>
         <option value="Planeta Dog Carne Adulto 15KG">Planeta Dog Carne Adulto 15KG</option>
       </select>
-      <button class="btn-clear" onclick="limparDashboard()">✕ Limpar Filtros</button>
-    </div>
+      <button class="btn-clear" onclick="limparDash()">✕ LimparEnt Filtros</button>
+    </div>endi! Vou criar
 
     <!-- KPI CARDS -->
-    <div class="kpi-grid">
+    <div um arquivo class="kpi-gri HTML com:d">
       <div class="kpi-card">
-        <div class="kpi-label">Total de Sacos</div>
-        <div class="kpi-value" style="color: var(--proteica-orange);">332</div>
-        <div class="kpi-sub">unidades distribuidas</div>
+        <div
+
+1. **Dashboar class="kpi-labeld m">Totalês de Sa a mês** (cos</div>
+        <divAbril class="kpi-value orange">332 +</div>
+         Maio com<div class="kpi-sub ab">unidades distribuas)
+2. **Catídas</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Total em KG</div>
-        <div class="kpi-value">8.075 kg</div>
-        <div class="kpi-sub">peso total</div>
+      <div class="kpi-card reálogo ded">
+        <div class="k Propi-label">Totalmo emções** integrado ( KcomG "</div>
+        <div classDe="kpi-value"> R8$‌.075XX kg</div>
+        <div class="kpi-sub">peso por R$X total</div>
+      </divY")>
+      <div class="k
+3. **Menspi-card brownagem">
+        <div class="k Whpi-label">TotalatsApp sem em Toneladas</div>
+         caract<div class="kpi-value browneres especiais**">8,
+4. **Contador075  ton</div>
+        <div class15/05 a 16="kpi-sub">volume /05**do período</div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Total em Toneladas</div>
-        <div class="kpi-value" style="color: var(--proteica-brown);">8,075 ton</div>
-        <div class="kpi-sub">volume do periodo</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Comissao Total</div>
-        <div class="kpi-value" style="color: var(--proteica-gold);">R$‌ 807,50</div>
-        <div class="kpi-sub">a distribuir</div>
+5. **Av
+      <div class="kpi-card goliso internod">
+        <div class="kpi-label">Com destacissão Totala</div>
+        <div classdo no topo**
+
+Aqui está o arquivo="kpi-value gold">R compl$‌ 807eto e,50</div>
+        <div class func="kpi-sub">a distribuionalir:
+
+```html
+<!DOCTYPE html>
+<html lang="pt-</div>
       </div>
     </div>
 
-    <!-- DETALHE POR VENDEDOR -->
-    <div class="section-title">📦 Detalhe por Vendedor</div>
+    <!--BR">
+<head>
+   DETALHE P<meta charset="UTF-8" />
+  <meta name="viewportOR VEND" content="width=device-widthEDOR -->
+    <div class="section, initial-scale=1.0-title">,📦 maximum-scale=1.0, Detalhe por Ven user-scalable=no" />dedor</div>
 
-    <!-- DJALMA -->
-    <div class="vendor-block vend-djalma" id="block-djalma" data-vendedor="DJALMA ALEXANDRE DOS SANTOS">
-      <div class="vendor-header" onclick="toggleBlock('block-djalma')">
-        <div>
-          <div class="vendor-name">Djalma Alexandre dos Santos</div>
-          <div class="vendor-code">Codigo: W|63 · Alagoas</div>
+    <!-- D
+  <meta name="appleJAL-mobile-web-app-capableMA -->
+    <div class="vendor" content="yes" />
+  <title-block> vCOAGRO -en Dashboard Proted-djalma"ica id="block &-djalma" data Promoc-vendedor="oesDJALMA</title>
+  <link ALEXANDRE href DOS="https://fonts.googleapis.com SANTOS">
+      <div class/css2?family=Inter="vendor-header:wght@300;400;"500;600;700&family onclick=Pla="toggleyfair+Display:wght@Block700('&display=swap" rel="stylesheetblock-djalma')">
+        " />
+  <style><div>
+    *, *::before, *::after {
+          <div class="vendor- boxname">-sizing: border-box; marginDjalma Alexandre dos Santos</div: 0; padding: 0>
+          <div class="vendor; }
+    :-code">root {Código
+      --proteica-orange: W: #F|632 771· AA;
+      --proteica-lagoasred: #9</div>
+        </div>C2318;
+      --proteica-brown: #442A1E;
+      --proteica-gold: #FFB800
+        <div class="vendor-kp;
+      --cois">
+          <div class="vkpi">
+            <div class="vkagro-green: #004pi-label">Sacos</div>
+            <div class="vkpi-val">66B3C</div>
+          </div>;
+      --bg
+          <div class="vk-light: #fpi">
+            <div class="8f4vkpi-label">Kf0;
+      --textG</div>
+            <div-dark class="vkpi-val">: #2131547;
+      --white.650</div>
+          </div>: #ffffff
+          <div class="vk;
+      --shadowpi">
+            <div class=":vkpi-label">Toneladas</div>
+             0 10<div class="vkpi-valpx 30px -">110,px rgba(15665, 35</div>
+          </div>
+          <div class="vk, 24pi">
+            <div class=", 0.15vkpi-label">Com);
+    issão</div>
+            }
+
+    html<div class="vkpi-val { scroll-behavior: smooth; - gold">R$‌ 165webkit-text-size-adjust:,00 100%; }
+    body {</div>
+          </div>
+      font-family: '
+          Inter', sans-serif;
+      <div class="toggle-iconbackground:"> var(--bg-light);
+      color: var(--text-▾dark);
+      min-height: 100vh;</div>
         </div>
-        <div class="vendor-kpis">
-          <div class="vkpi">
-            <div class="vkpi-label">Sacos</div>
-            <div class="vkpi-val">66</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">KG</div>
-            <div class="vkpi-val">1.650</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Toneladas</div>
-            <div class="vkpi-val">1,65</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Comissao</div>
-            <div class="vkpi-val gold">R$‌ 165,00</div>
-          </div>
-          <div class="toggle-icon">▾</div>
-        </div>
+      -
       </div>
-      <div class="vendor-body">
-        <table>
+      webkit-font<div class="vendor-body-smoothing: antialiased;">
+        <table
+    >
           <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Sacos</th>
-              <th>KG/Saco</th>
-              <th>Total KG</th>
-              <th>Toneladas</th>
-              <th>Comissao (R$)</th>
+            }
+
+    /* <tr>
+              <th>──Produto</th>
+              <th>Sa AVcos</th>
+              <thISO INTERNO >KG/──S */
+    .aviso-internoaco</th>
+              <th {
+      backgroun>Totald: # K7G</th>
+              <thf>Toneladas</th>1d1d;
+      color
+              <th>Comissão (: #R$)</th>
             </tr>
           </thead>
-          <tbody>
+          fff;
+      padding: 11<tbody>px 20px;
+      text
             <tr>
-              <td class="product-name">Planeta Dog Carne AD 25KG</td>
-              <td>44</td>
-              <td>25</td>
-              <td>1.100</td>
-              <td>1,10</td>
-              <td>110,00</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Cat Mix 25KG</td>
+              -align: center;
+      font<td class-size: 0="product.75-name">Planeta Dog Crem;
+      fontarne AD 25KG</tPerd>
+              <td>-weight: 700;
+      line44-height: 1.5</td>
+              <td>feito! Vou criar o25;
+      border-bottom **: 3Dashboard m</td>
+              <td>1ês a mês** com abas para **.100Abril**</td>
+              <td> e **Maio** (1,10Prote</td>
+              <td>ica).110 Aqui está o,00</td>
+             HTML</tr>
+            <tr> compl
+              <td class="product-nameeto:
+
+```html
+<!DOCTYPE html>
+<html lang="pt">Planeta Cat Mix 25K-BR">
+<head>G</td>
+              <t
+  d>11</td>
+              <td><meta charset="UTF-8"25</td>
+              <t />
+  <meta name="viewportd>275</td>
+              <td>0,275" content="width=device-width</td>
+              <td>, initial-scale=1.027" />
+  <title>CO,50</td>
+            AG</tr>
+            <tr>RO
+              <td class="product-name Dashboard |">Planeta Dog Filhote 25KG</td>
               <td>11</td>
-              <td>25</td>
-              <td>275</td>
-              <td>0,275</td>
-              <td>27,50</td>
+              <td>25</tpx solid #d>
+              <td>275dc Prote2626;
+      letter</td>
+              <td>0ica-spacing: 0.3 Abrilpx,275</td>
+               &;
+     Maio }2026
+    .aviso-interno span</title>
+  <link<td>27,50</td> {
+      display href="https://fonts
             </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Filhote 25KG</td>
-              <td>11</td>
-              <td>25</td>
-              <td>275</td>
-              <td>0,275</td>
-              <td>27,50</td>
+          : inline.googleapis.com/css2?</tbody>
+          family=Inter<tfoot>
+            <tr:wght@300;400;>
+              <td>-block;
+      background: #500;600;700&familydc2626;
+      padding=PlaSUBTyfair+Display:wght@: 2px 10700OTAL</td>
+              <tpx;
+      border-radius:&display=swap" rel="stylesheetd>66 4px;
+      margin-"</td>
+              <td>right: 6px;
+      font />
+  <style>
+    –-size: 0.68rem;
+      text</td>
+              <td>-transform: uppercase;
+      letter*, *::before, *::after1.650</td>
+              -spacing: 1 {
+      box-sizing: borderpx;
+    }<td>1-box;
+      
+
+    /* ── HEADERmargin: 0;
+      padding, ── */
+    header: 0;
+    } {
+      background: rgba65</td>
+              <t
+
+    :(255, 255, 255d>165,00</td>, 0.98root {
+      --prote
             </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>66</td>
-              <td>–</td>
-              <td>1.650</td>
-              <td>1,65</td>
-              <td>165,00</td>
-            </tr>
-          </tfoot>
-        </table>
+          );
+      backdropica-orange: #F2771-filter: blur(12</tfoot>
+        </tablepx);
+      position>
       </div>
-    </div>
+    A;
+      --prote: sticky</div>
 
-    <!-- TAMIRES -->
-    <div class="vendor-block vend-tamires" id="block-tamires" data-vendedor="TAMIRES WIVYANE VIEIRA DA SILVA">
-      <div class="vendor-header" onclick="toggleBlock('block-tamires')">
-        <div>
-          <div class="vendor-name">Tamires Wivyane Vieira da Silva</div>
-          <div class="vendor-code">Codigo: W|53 · Alagoas</div>
-        </div>
-        <div class="vendor-kpis">
-          <div class="vkpi">
-            <div class="vkpi-label">Sacos</div>
-            <div class="vkpi-val">125</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">KG</div>
-            <div class="vkpi-val">3.125</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Toneladas</div>
-            <div class="vkpi-val">3,125</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Comissao</div>
-            <div class="vkpi-val gold">R$‌ 312,50</div>
-          </div>
-          <div class="toggle-icon">▾</div>
-        </div>
-      </div>
-      <div class="vendor-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Sacos</th>
-              <th>KG/Saco</th>
-              <th>Total KG</th>
-              <th>Toneladas</th>
-              <th>Comissao (R$)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="product-name">Planeta Dog Carne AD 25KG</td>
-              <td>117</td>
-              <td>25</td>
-              <td>2.925</td>
-              <td>2,925</td>
-              <td>292,50</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Cat Mix 25KG</td>
-              <td>7</td>
-              <td>25</td>
-              <td>175</td>
-              <td>0,175</td>
-              <td>17,50</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Filhote 25KG</td>
-              <td>1</td>
-              <td>25</td>
-              <td>25</td>
-              <td>0,025</td>
-              <td>2,50</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>125</td>
-              <td>–</td>
-              <td>3.125</td>
-              <td>3,125</td>
-              <td>312,50</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- EDIVALDO -->
-    <div class="vendor-block vend-edivaldo" id="block-edivaldo" data-vendedor="EDIVALDO COSTA LIMA">
-      <div class="vendor-header" onclick="toggleBlock('block-edivaldo')">
-        <div>
-          <div class="vendor-name">Edivaldo Costa Lima</div>
-          <div class="vendor-code">Codigo: W|96 · Alagoas</div>
-        </div>
-        <div class="vendor-kpis">
-          <div class="vkpi">
-            <div class="vkpi-label">Sacos</div>
-            <div class="vkpi-val">109</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">KG</div>
-            <div class="vkpi-val">2.625</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Toneladas</div>
-            <div class="vkpi-val">2,625</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Comissao</div>
-            <div class="vkpi-val gold">R$‌ 262,50</div>
-          </div>
-          <div class="toggle-icon">▾</div>
-        </div>
-      </div>
-      <div class="vendor-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Sacos</th>
-              <th>KG/Saco</th>
-              <th>Total KG</th>
-              <th>Toneladas</th>
-              <th>Comissao (R$)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="product-name">Planeta Dog Carne AD 25KG</td>
-              <td>35</td>
-              <td>25</td>
-              <td>875</td>
-              <td>0,875</td>
-              <td>87,50</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Cat Mix 25KG</td>
-              <td>60</td>
-              <td>25</td>
-              <td>1.500</td>
-              <td>1,50</td>
-              <td>150,00</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Filhote 25KG</td>
-              <td>4</td>
-              <td>25</td>
-              <td>100</td>
-              <td>0,10</td>
-              <td>10,00</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Carne Adulto 15KG</td>
-              <td>10</td>
-              <td>15</td>
-              <td>150</td>
-              <td>0,15</td>
-              <td>15,00</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>109</td>
-              <td>–</td>
-              <td>2.625</td>
-              <td>2,625</td>
-              <td>262,50</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- JOSÉ ORLANO -->
-    <div class="vendor-block vend-orlano" id="block-orlano" data-vendedor="JOSÉ ORLANO DA SILVA">
-      <div class="vendor-header" onclick="toggleBlock('block-orlano')">
-        <div>
-          <div class="vendor-name">Jose Orlano da Silva</div>
-          <div class="vendor-code">Codigo: W|57 · Alagoas</div>
-        </div>
-        <div class="vendor-kpis">
-          <div class="vkpi">
-            <div class="vkpi-label">Sacos</div>
-            <div class="vkpi-val">30</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">KG</div>
-            <div class="vkpi-val">650</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Toneladas</div>
-            <div class="vkpi-val">0,65</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Comissao</div>
-            <div class="vkpi-val gold">R$‌ 65,00</div>
-          </div>
-          <div class="toggle-icon">▾</div>
-        </div>
-      </div>
-      <div class="vendor-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Sacos</th>
-              <th>KG/Saco</th>
-              <th>Total KG</th>
-              <th>Toneladas</th>
-              <th>Comissao (R$)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="product-name">Planeta Dog Carne AD 25KG</td>
-              <td>18</td>
-              <td>25</td>
-              <td>450</td>
-              <td>0,45</td>
-              <td>45,00</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Cat Mix 25KG</td>
-              <td>2</td>
-              <td>25</td>
-              <td>50</td>
-              <td>0,05</td>
-              <td>5,00</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Carne Adulto 15KG</td>
-              <td>10</td>
-              <td>15</td>
-              <td>150</td>
-              <td>0,15</td>
-              <td>15,00</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>30</td>
-              <td>–</td>
-              <td>650</td>
-              <td>0,65</td>
-              <td>65,00</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- EMANOEL -->
-    <div class="vendor-block vend-emanoel" id="block-emanoel" data-vendedor="EMANOEL MARQUES GOMES">
-      <div class="vendor-header" onclick="toggleBlock('block-emanoel')">
-        <div>
-          <div class="vendor-name">Emanoel Marques Gomes</div>
-          <div class="vendor-code">Codigo: W|6 · Alagoas</div>
-        </div>
-        <div class="vendor-kpis">
-          <div class="vkpi">
-            <div class="vkpi-label">Sacos</div>
-            <div class="vkpi-val">2</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">KG</div>
-            <div class="vkpi-val">50</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Toneladas</div>
-            <div class="vkpi-val">0,05</div>
-          </div>
-          <div class="vkpi">
-            <div class="vkpi-label">Comissao</div>
-            <div class="vkpi-val gold">R$‌ 5,00</div>
-          </div>
-          <div class="toggle-icon">▾</div>
-        </div>
-      </div>
-      <div class="vendor-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Produto</th>
-              <th>Sacos</th>
-              <th>KG/Saco</th>
-              <th>Total KG</th>
-              <th>Toneladas</th>
-              <th>Comissao (R$)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="product-name">Planeta Dog Carne AD 25KG</td>
-              <td>1</td>
-              <td>25</td>
-              <td>25</td>
-              <td>0,025</td>
-              <td>2,50</td>
-            </tr>
-            <tr>
-              <td class="product-name">Planeta Dog Filhote 25KG</td>
-              <td>1</td>
-              <td>25</td>
-              <td>25</td>
-              <td>0,025</td>
-              <td>2,50</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>SUBTOTAL</td>
-              <td>2</td>
-              <td>–</td>
-              <td>50</td>
-              <td>0,05</td>
-              <td>5,00</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ════════════════════════════════════════ -->
-  <!-- TAB 2: PROMOCOES -->
-  <!-- ════════════════════════════════════════ -->
-  <div id="promocoes" class="tab-content">
-
-    <!-- BANNER PROMO -->
-    <div class="promo-banner" id="promoBanner">
-      <div class="promo-banner-inner">
-        <div class="status-badge" id="statusBadge">
-          <span class="dot" id="statusDot"></span>
-          <span id="statusText">PROMOCAO ATIVA</span>
-        </div>
-        <div class="countdown-row" id="cdRow">
-          <span class="cd-label" id="cdLabel">Comeca em:</span>
-          <div class="cd-box" id="cdD">0<small>dias</small></div>
-          <span class="cd-sep">:</span>
-          <div class="cd-box" id="cdH">00<small>hrs</small></div>
-          <span class="cd-sep">:</span>
-          <div class="cd-box" id="cdM">00<small>min</small></div>
-          <span class="cd-sep">:</span>
-          <div class="cd-box" id="cdS">00<small>seg</small></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEARCH -->
-    <div class="search-bar" style="margin-bottom: 24px;">
-      <label>🔍 Pesquisar:</label>
-      <input type="search" id="searchPromo" placeholder="Buscar produto..." autocomplete="off" oninput="renderPromo()" />
-    </div>
-
-    <div class="results-info" id="resultsInfo"></div>
-    <div class="promo-grid" id="promoGrid"></div>
-
-  </div>
-
-</main>
-
-<footer>
-  Dashboard COAGRO · Proteica · Maio 2026 · Alagoas, Sergipe e Bahia
-</footer>
-
-<script>
-// ═══════════════════════════════════════════
-//  DADOS DE PRODUTOS PARA PROMO
-// ═══════════════════════════════════════════
-const produtos = [
-  {id:'0018610',nome:'Origens Class AD Cao Frango 15kg',precoDe:'R$‌ 169,90',preco:'R$‌ 146,90',cat:'pet'},
-  {id:'0018775',nome:'Origens Class AD Cao Frango 20kg',precoDe:'R$‌ 204,90',preco:'R$‌ 179,90',cat:'pet'},
-  {id:'0017687',nome:'Planeta Dog Carne AD 25kg Proteica',precoDe:'R$‌ 124,90',preco:'R$‌ 105,90',cat:'pet'},
-  {id:'0018832',nome:'Saborosso Carne Caes AD 15kg',precoDe:'R$‌ 82,90',preco:'R$‌ 69,90',cat:'pet'},
-  {id:'0006699',nome:'Racao GP Menu Gatos Cast Frango Arroz 10kg',precoDe:'R$‌ 229,90',preco:'R$‌ 199,90',cat:'pet'},
-  {id:'0018200',nome:'Q Clor Hiper Acao 10kg',precoDe:'R$‌ 299,90',preco:'R$‌ 259,90',cat:'casa'},
-  {id:'0000701',nome:'HTH Cloro Aditivado 10 em 1 10kg Arch',precoDe:'R$‌ 339,90',preco:'R$‌ 295,90',cat:'casa'},
-  {id:'0019801',nome:'Garrafa Termica Use Preta 1L MOR',precoDe:'R$‌ 29,90',preco:'R$‌ 24,50',cat:'casa'},
-  {id:'0005314',nome:'Piscina REF-001002 1000lt MOR',precoDe:'R$‌ 189,90',preco:'R$‌ 159,90',cat:'casa'},
-  {id:'0018370',nome:'Motosserra BM 330 Elite Branco',precoDe:'R$‌ 2.599,00',preco:'R$‌ 2.259,00',cat:'maquinas'},
-  {id:'0018372',nome:'Motosserra BM 270 Elite Branco',precoDe:'R$‌ 1.949,00',preco:'R$‌ 1.690,00',cat:'maquinas'},
-  {id:'0000946',nome:'Triturador Mono 2HP IP00 60Hz 220V GTI',precoDe:'R$‌ 1.799,00',preco:'R$‌ 1.559,00',cat:'maquinas'},
-];
-
-// ═══════════════════════════════════════════
-//  FUNCOES DE ABAS
-// ═══════════════════════════════════════════
-function switchTab(tabName) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(tabName).classList.add('active');
-  event.target.classList.add('active');
-  if (tabName === 'promocoes') {
-    updateTimer();
-    renderPromo();
-  }
-}
-
-// ═══════════════════════════════════════════
-//  CONTADOR PROMO — 15/05 a 16/05
-// ═══════════════════════════════════════════
-function updateTimer() {
-  const now    = new Date();
-  const ano    = now.getFullYear();
-  const inicio = new Date(ano, 4, 15, 0, 0, 0);
-  const fim    = new Date(ano, 4, 16, 23, 59, 59);
-
-  const banner  = document.getElementById('promoBanner');
-  const stText  = document.getElementById('statusText');
-  const cdRow   = document.getElementById('cdRow');
-  const cdLabel = document.getElementById('cdLabel');
-
-  if (now > fim) {
-    banner.style.background = '#374151';
-    document.getElementById('statusDot').style.animation = 'none';
-    document.getElementById('statusDot').style.background = '#9ca3af';
-    stText.textContent = 'PROMOCAO ENCERRADA';
-    cdRow.style.display = 'none';
-    return;
-  }
-
-  if (now >= inicio && now <= fim) {
-    banner.classList.add('banner-ativa');
-    stText.textContent = 'PROMOCAO ATIVA AGORA!';
-    cdLabel.textContent = 'Encerra em:';
-    const diff = fim - now;
-    setCD(diff);
-    return;
-  }
-
-  cdLabel.textContent = 'Comeca em:';
-  stText.textContent = 'PROMOCAO EM BREVE';
-  const diff = inicio - now;
-  setCD(diff);
-}
-
-function setCD(diff) {
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cdD').innerHTML = d + '<small>dias</small>';
-  document.getElementById('cdH').innerHTML = String(h).padStart(2,'0') + '<small>hrs</small>';
-  document.getElementById('cdM').innerHTML = String(m).padStart(2,'0') + '<small>min</small>';
-  document.getElementById('cdS').innerHTML = String(s).padStart(2,'0') + '<small>seg</small>';
-}
-
-setInterval(updateTimer, 1000);
-
-// ═══════════════════════════════════════════
-//  MENSAGEM WHATSAPP — SEM CARACTERES ESPECIAIS
-// ═══════════════════════════════════════════
-function waMsg(p) {
-  const now = new Date();
-  const ano = now.getFullYear();
-  const ativa = now >= new Date(ano,4,15,0,0,0) && now <= new Date(ano,4,16,23,59,59);
-  const status = ativa
-    ? 'PROMOCAO ATIVA AGORA!'
-    : 'Promocao valida de 15/05 a 16/05!';
-
-  const msg =
-    status + '\n\n' +
-    'Olhe so que condicao especial da COAGRO neste produto!\n\n' +
-    p.nome + '\n' +
-    'De: ' + p.precoDe + '\n' +
-    'Por: ' + p.preco + '\n\n' +
-    'Fale comigo agora e aproveite este precinho especial que so quem tem e COAGRO!\n' +
-    'Alagoas - Sergipe - Bahia';
-
-  return encodeURIComponent(msg);
-}
-
-// ═══════════════════════════════════════════
-//  RENDER PROMO
-// ═══════════════════════════════════════════
-function renderPromo() {
-  const grid = document.getElementById('promoGrid');
-  const info = document.getElementById('resultsInfo');
-  const search = document.getElementById('searchPromo').value.toLowerCase().trim();
-  const now = new Date();
-  const ano = now.getFullYear();
-  const ativa = now >= new Date(ano,4,15,0,0,0) && now <= new Date(ano,4,16,23,59,59);
-
-  const filtered = produtos.filter(p =>
-    p.nome.toLowerCase().includes(search) || p.id.toLowerCase().includes(search)
-  );
-
-  info.textContent = filtered.length > 0
-    ? `${filtered.length} produto${filtered.length > 1 ? 's' : ''} encontrado${filtered.length > 1 ? 's' : ''}`
-    : '';
-
-  if (!filtered.length) {
-    grid.innerHTML = `<div class="empty"><p>Nenhum produto encontrado</p></div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map((p, i) => {
-    const badgeCls = ativa ? 'active' : '';
-    const badgeTxt = ativa ? 'Promocao Ativa' : 'Promocao 15-16/05';
-    const delay = Math.min(i * 0.04, 0.5);
-
-    return `<div class="promo-card cat-${p.cat}" style="animation-delay:${delay}s">
-      <div class="promo-strip"></div>
-      <div class="promo-body">
-        <span class="promo-badge ${badgeCls}">${badgeTxt}</span>
-        <div class="promo-code">Cod. ${p.id}</div>
-        <div class="promo-name">${p.nome}</div>
-        <div class="promo-prices">
-          <div class="price-de"><span class="price-de-label">De</span>${p.precoDe}</div>
-          <div class="price-por-row">
-            <span class="price-por-label">Por</span>
-            <span class="price-por">${p.preco}</span>
-          </div>
-        </div>
-      </div>
-      <div class="promo-footer">
-        <a class="btn-wa" href="https://wa.me/?text=${waMsg(p)}" target="_blank" rel="noopener">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-          </svg>
-          Compartilhar no WhatsApp
-        </a>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════
-//  FUNCOES DASHBOARD
-// ═══════════════════════════════════════════
-function toggleBlock(id) {
-  document.getElementById(id).classList.toggle('collapsed');
-}
-
-function filtrarDashboard() {
-  const termVend = document.getElementById('searchVendedor').value.toLowerCase().trim();
-  const termProd = document.getElementById('filterProduto').value.toUpperCase();
-  const blocks = document.querySelectorAll('.vendor-block');
-
-  blocks.forEach(block => {
-    const nome = block.dataset.vendedor.toLowerCase();
-    const matchVend = nome.includes(termVend);
-    let matchProd = true;
-
-    if (termProd) {
-      const rows = block.querySelectorAll('tbody tr');
-      let found = false;
-      rows.forEach(row => {
-        const prod = row.querySelector('.product-name')?.textContent.toUpperCase() || '';
-        if (prod.includes(termProd)) found = true;
-      });
-      matchProd = found;
+    <!-- TAMica-red: #9C2;
+      top: 0;
+      z-index: 100IRES318;
+      --proteica-;
+      border-bottom: 4 -->
+    <div class="vendorbrown: #442A1E;px solid var(--proteica--block vend-tamires"orange);
+       id="block-tamires" data
+      --proteica-gold:box #FFB800;
+      ---shadow: var(--shadow);-vendedor="TAMIRESbg
     }
 
-    block.classList.toggle('hidden', !(matchVend && matchProd));
+    .header-inner W-light {
+      max-width: IV: #f1400px;
+      margin: 0 auto;
+      display8f4Y: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28ANEpx;
+      gap: 20 VIf0;
+      --textpx;
+      EIRA DA-darkflex SILVA">
+      <div class: #213-wrap: wrap;
+    }="vendor-header" onclick="toggle547;
+      --white
+
+    .logo-Block('block-tamires')">: #ffffff;
+      --shadowarea
+        <div>
+          : { 0 10<div class="vendor-name"> displaypx 30px -: flex; align-items: center10Tamires Wivyane; gap: 16px rgba(156 Vieira da Silva</div>px; }
+    .logo-, 35badge
+          <div class="vendor-code {, 24">Código: W|53
+      background: linear, 0.15-gradient(135deg, var( · Alagoas</div--proteica-re>
+        </div>
+        );
+    d), var(--proteica-brown));
+      color: var<div class="vendor-kp}
+
+    body {
+      font(--white);
+      font-family: 'Inter', sans-familyis">
+          <div class=": 'Playfair Displayvkpi">
+            <div', serif;
+      font-size-serif;
+      background:: 24 class="vkpi-label"> var(--bg-light);Sacos</div>
+            px;
+      font
+      color: var(--text--weight: 700;
+      dark);
+      min<div class="vkpi-paddingval">125: 10</div>
+          </div>px 18-height: 100vh;px;
+      border-radius:
+    
+          <div class="vk 10}
+
+    /*pi">
+            <div class="px;
+      letter -spacing: 1px;vkpi-label">KG──
+      box HEADER ──-shadow: </div>
+            <div class="vkpi-val">3 */
+    header0 4px 12 {
+      background: rgba.125px rgba(156(255, 255, 255, 35, 24, 0.2);
+    }
+    .logo-badge span, 0.98</div>
+          </div> { color
+          <div class="vk);
+      backdrop-filter: blurpi">
+            <div class=": var(--prote(12vkpi-label">Tonica-goleladas</div>
+            px);
+      position<div class="vkpi-val">3,: sticky;
+      top: 125</div>
+          </div0;
+      z-index:d); }
+
+    .header>
+          <div class="v-title 100;
+      border {
+      font-sizekpi">
+            <div class-bottom: 4: 14="vkpi-label">px solid var(--proteica-px;
+      color: var(--proteComissão</div>
+            orange);
+      ica-brownbox<div class="vkpi-);
+      font-weight: -shadow: var(--shadow);val gold">R$‌ 312600
+    }
+
+    .header-,50</div>
+          ;
+    inner</div>
+          <div class=" {
+      max-width: toggle-icon">▾</div}1400
+    .header-title>
+        </div>
+      px;
+      margin: 0</div>
+      <div class strong auto;
+      display="vendor-body">
+         {: flex;
+      align<table>
+          <thead>
+      display
+            <tr>
+              <th: block;
+      font-items: center;
+      justify>Produto</th>
+              -size: 18-content: space-between;<th>Sacos</thpx;
+      color: var(
+      padding: 16>
+              <th>KG--proteica-repx 28/Saco</th>d);
+      margin-toppx;
+    
+              <th>Total KG: 2}
+
+    .logo-px;
+    }
+
+    .</th>
+              <th>areaToneladas</th>
+              header-tabs {
+      display: flex;<th>Comissão ( {
+      display: flex;R$)</th>
+            
+      align-items: center;
+      gap: 10</tr>
+          </thead>
+      gap: 16px;
+      margin-left
+          <tbody>
+            <trpx;
+    }
+
+    .: auto;
+    >
+              <td class="product}
+    .tab-name">Planeta Dog C-btnarne AD 25KG</t {
+      padding: 8pxd>
+              <td>117 18logo-</td>
+              <td>badgepx;
+      border {
+      background: linear25</td>
+              <t-gradient(135deg, var(: d>2--proteica-re2px solid #d), var(--proteica-brown.925</td>
+              e));
+      color: var<td>2,(--white);
+      font0-family925: 'Playfair Display</td>
+              <td>', serif;
+      font-size292: 24px;
+      font,50</td>
+            d4-weight: 700;
+      cc</tr>
+            <tr>padding;
+      background: var(--white);
+      color: var(--: 10px 18text-dark);
+      border-radius: 8px;
+      border-radius:px;
+      font 10
+              <td class="product-name-familypx;
+      letter">Planeta Cat Mix 25KG</td>
+              <t-spacing: 1px;: 'Interd>7
+      box', sans-serif;
+      font</td>
+              <td>25</td>
+              <t-size: 0-shadow: d>175</td>
+              .850 4px 12<td>0,175</td>
+              <td>17,50px rgba(156rem;
+      font-weight: 600, 35, 24, </td>
+            </tr>;
+      cursor: pointer;0.2);
+    }
+            <tr>
+              <td class="product-name">
+
+    .logo
+      transition: all 0.3Planeta Dog Filhote 25-badges;KG</td>
+              
+     span}
+    .tab-btn: {
+      color: var(--hover,prote .tab-btn.active {
+      background: var(--proteicaica-gol<td>1-orange);
+      color: var</td>
+              <td>d);
+    }
+
+    .header25</td>
+              <t(--white);
+      d>25-title</td>
+              <td>border {
+      font-size: 0,025-color: var(--proteica</td>
+              <td>142,50</td>
+            -orange);
+    }
+
+    </tr>
+          </tbody>/* ── BANNERpx;
+      color
+          <tfoot>
+             PR: var(--prote<tr>
+              <td>ica-brownOMO ── */
+    .prSUBTOTAL</td>
+              omo-banner {
+      background:);
+      font-weight: 600 linear-gradient(135deg, var;
+    }
+
+    .header-title(--proteica-gol strongd)<td>125 0%, #</td>
+              <td> {
+      displaye–</td>
+              <t: block;
+      font6d>3.125</td>-size: 18px;a
+              <td>3,125</td>
+              <td>312200,50</td>
+            </tr>
+          </tfoot> 100%);
+      padding: 12
+        </table>
+      </div>
+    </div>px 20
+      color: var(--proteicapx;
+      display-re
+
+    <!-- EDd);
+      margin-top: noneIV: 2;
+    px;
+    }
+
+    .ALDO -->
+    <div class="}
+    .promo-bannervendor-block vend-ediv.show {aldo" id="block-ediv display: block; }
+
+    .aldo" data-vendedor="header-metapromo-innerEDIVALDO COSTA {
+      font-size: 12 LIMA">
+      <div class {
+      max-width: px;
+      color: #1="vendor-header" onclick="toggle888;
+      text400Block('block-edivaldo')-alignpx;
+      margin: 0: right;
+      ">
+        <div>
+          line auto;
+      display-height: 1.7<div class="vendor-name">: flex;
+      align-items;
+    }
+
+    .header: center;
+      justify-content-meta strongEdivaldo Costa Lima</div: center {
+      color: var(-->
+          <div class="vendor;
+      gap: 16proteica-orange-code">Código: W|px;
+      flex-wrap:96);
+       · Alagoas</div wrap;
+    }
+
+    .font-size>
+        </div>
+        status: 13<div class="vendor-kppx;
+    }
+
+    /*-badge {
+      displayis">
+          <div class=" ── TABS: inline-flex ── */
+    .tabs;
+      align-items: center;
+      gap: 7px;
+      background: var-container {
+      max(--co-width: 1400vkpi">
+            <divagro-green);
+      color class="vkpi-label">px;
+      margin: 0: #Sacos</div>
+             auto;
+      padding: 0 28px;<div class="vkpi-val">109
+      </div>
+          </div>border
+          <div class="vkpi">
+            <div class="fff;
+      fontvkpi-label">KG-weight</div>
+            <div class: 700="vkpi-val">2;
+      font.625-size: 0.8</div>
+          </div>rem;
+      padding: 6-bottom: 2px 16px solid #
+          <div class="vkpx;
+      border-radius:epi">
+            <div class=" 508ddpx;
+      textvkpi-label">Tond5-transform: uppercase;
+      letter;
+      display: flex;
+      gap-spacing: 0.5eladas</div>
+            <div class="vkpi-val: 8px;
+    }
+    .">2,px;
+      overflowdot625</div>
+          </div-x: auto;
+    } { width: 9>
+          <div class="v
+
+    .tab-px; height: 9px;btn border {
+      padding: 16-radius: 50%; background:kpi">
+            <div class var(--proteica-gol="vkpi-label">px 24px;
+      borderd); animationComissão</div>
+            : none;
+      background: transparent<div class="vkpi-: pulse 1val gold">R$‌ 262;
+      color: var(--.,50</div>
+          text-dark);
+      font-4</div>
+          <div class="family: 'Inters infinite; }
+    @', sans-serif;
+      fontkeyframes pulse { 0%-size: 14px;toggle-icon">▾</div,>
+        </div>
+      
+      font</div>
+      <div class100%-weight: 600="vendor-body">
+        ;
+      cursor: pointer;{<table>
+          <thead>opacity
+      border-bottom: 3
+            <tr>
+              <th:1;transform>Produto</th>
+              :scale(1)}<th>Sacos</th >
+              <th>KGpx solid transparent/Saco</th>;
+      transition: all 0
+              <th>Total KG.3s ease;
+      white</th>
+              <th>-space: nowrap;
+    Toneladas</th>
+              }
+
+    .tab-btn:hover {
+      color50<th>Comissão (: var(--proteica-orange%{opacity:.);
+    R$)</th>
+            4}
+
+    .tab-btn.;transform:scale(1.4</tr>
+          </thead>active {
+      color: var()} }
+
+    .--proteica-orange
+          <tbody>
+            <trcountdown);
+      border-bottom--row>
+              <td class="product {color: var(--proteica--name">Planeta Dog C display: flex; alignorange);
+    }
+
+    /*-items: center; gap: arne AD 25KG</t8px; }
+    .c ── MAIN d>
+              <td>35d-label── */
+    main {
+       { font-size: 0.</td>
+              <td>max-width: 1400px825</td>
+              <trem; fontd>875</td>
+              <td>-weight: 700;
+      margin: 0 0,875</td>
+              ; color: var(--coauto;
+      padding: 36<td>87,50</tagro-green); }
+    px 28px;
+    d>
+            </tr>
+            }
+
+    .tab.cd-box-content {
+      display: none<tr>
+              <td class;
+    }
+
+    .tab {="product-name">Planeta Cat
+      background: var(--co-content.active {
+      display: block;
+       Mix 25KG</td>agro-green);
+      coloranimation: fadeIn 0.3
+              <td>60: #s ease-outfff;
+      border</td>
+              <td>;
+    }
+
+    @key-25</td>
+              <tframes fadeIn {
+      from {radius: 8px;
+      d>1. opacity: 0; transform: translate500</td>
+              <tY(10d>1px); }
+      to { opacitypadding: 5,: 1; transform: translateY50</td>
+              <tpx 11(0); }
+    }d>150,00</td>px;
+      font-size:
+
+    /* ── SEARCH 1 BA.
+            </tr>
+            <tr1rem;
+      font-weightR ── */
+    .search>
+              <td class="product: 800-bar {
+      backgroun-name">Planeta Dog Fil;
+      min-width: 46d: var(--white);
+      hote 25KG</tpx;
+      text-align:border-radius: 14d>
+              <td>4 center;
+      line</td>
+              <td>px;
+      padding: 20-height: 1.2px 2425</td>
+              <t;
+    }px;
+      boxd>100</td>
+              
+    .cd-box small<td>0,10-shadow: var(--shadow); { display
+      display: block; font</td>
+              <td>: flex;
+      gap: 10,00</td>
+            -size: 0.52rem; font14</tr>
+            px;
+      flex-weight: 500<tr>
+              <td class-wrap: wrap;
+      ="product-name">Planeta Dog; opacityalign-items: center;
+      : .margin Carne8; text-bottom: 36-transform: uppercase; } Adulto 15
+    .cd-seppx;
+      KG</td>
+              <td>10 { fontanimation-size: 1</td>
+              <td>: slideDown.3 0.515</td>
+              <trem; fonts ease-out;
+    }d>150-weight: 800
+
+    .search-bar label</td>
+              <td>; color: var(--co0,15 {
+      fontagro-green); }
+
+    -size: 13</td>
+              <td>.15,00</td>
+            px;
+      fontbanner-weight: 600</tr>
+          </tbody>-;
+      color: var(--ativa
+          <tfoot>
+             {<tr>
+              <td> background: linear-gradient(135degproteica-brown);
+      whiteSUBTOTAL</td>
+              , #<td>109</td>
+              <td>–</td>15-space: nowrap;
+    
+              <td>2.625803d 0%, #166}
+
+    .search-bar input,534 100%)</td>
+              <td>
+    .search-bar select !important; }
+    .banner2,625</td>
+               {
+      border-ativa .c<td>262,50</t: d-labeld>
+            </tr>
+          1.,</tfoot>
+        </table .banner-ativa .cd->
+      </div>
+    sep5px solid #</div>
+
+    <!-- JOSÉ { color: #e0bb ORLfANO7d0  -->
+    <div class="vendord4!important; }-block vend-orlcc
+    .banner-ativa .status;
+      border-radius: 8-badge { background: #fffpx;
+      padding: 10ano" id="block-orlanopx 14;" data-vendedor="JOSÉpx;
+      font-family ORLANO DA color SILVA">
+      <div class: #15803d;: 'Inter', sans-serif }
+    .banner-ativa;
+      font-size: 13 .dot { backgrounpx;
+      colord: #15803d; }="vendor-header" onclick="toggle
+
+    /* ── MAIN : var(--text-dark);Block('block-orlano')">
+        <div>
+          ── */
+    main
+      background: #<div class="vendor-name">José { Orlano daf Silva</div>
+          <div max class="vendor-code">Códigodf: W|57-width: 1400px;8 · Alagoas</div margin: 0 auto; paddingf5>
+        </div>
+        : 28<div class="vendor-kp;
+      outlinepx;: none;
+      transition: allis">
+          <div class=" }
+
+    /*vkpi">
+            <div 0.3s cubic ── TABS class="vkpi-label">-bezier(0.4, 0, 0.2,Sacos</div>
+             1);
+       CONTENT<div class="vkpi- ── */
+    .tabflexval">30:-content { display: none; }
+    .</div>
+          </div> 1;
+      tab-content.active { display:
+          <div class="vkmin-width: 160 block; }
+
+    /* ──pi">
+            <div class="px;
+    }
+
+    . SEARCHvkpi-label">KGsearch-bar input:focus, BA</div>
+            <div class
+    .search-bar select:focusR ── */
+    .search="vkpi-val">650 {
+      border-color: var-bar {
+      background: var</div>
+          </div>(--white);
+      border-(--proteica-orange);
+          <div class="vkradius: 14
+      box-shadow: 0 pi">
+            <div class="px;
+      padding: 200 0 3px rgba(vkpi-label">Tonpx 242eladas</div>
+            24<div class="vkpi-val, 119px;
+      box">0, 26-shadow: var(--shadow);,65
+      display</div>
+          </div>: flex;
+      gap
+          <div class="vk: 14pi">
+            <div class=", 0.1);
+    px;
+      flex}
+
+    .vkpi-label">Com-wrap: wrap;
+      btn-clearalign-items: center;
+      issão</div>
+             {
+      background: var(--<div class="vkpi-valproteica-remargind);
+      color: var(--white);
+      border: none;-bottom: 36
+      border gold">R$‌ 65-radius: 8px;px;
+    }
+    .
+      padding: 10search-bar label,00</div>
+          px 22 {</div>
+          <div class="px;
+      cursor
+      font: pointer;
+      font-sizetoggle-icon">▾</div>
+        </div>
+      : 13px;
+      font-weight: 600;
+      </div>
+      <div class="vendor-body">
+        transition: all 0.3s<table>
+          <thead>-size: 13 cubicpx;
+      font
+            <tr>
+              <th-bezier(0.4,-weight: 600>Produto</th>
+               0, 0.2,<th>Sacos</th 1);
+      >
+              <th>KGbox;
+      color: var(---shadow: 0 2px/Saco</th>proteica-brown);
+      white-space: nowrap;
+    
+              <th>Total KG 8}
+    .search-bar input,</th>
+              <th>px rgba(156, 35, .search-bar select {
+      Toneladas</th>
+              border 24, 0.15: 1<th>Comissão ();
+    }
+
+    .btn.5px solid #e0d4-clear:hover {
+      backgrouncc;
+      borderd: var(--proteica-brownR$)</th>
+            -radius: 8</tr>
+          </thead>);
+      transformpx;
+      padding: 10
+          <tbody>
+            <trpx 14: translateY(-2px);>
+              <td class="productpx;
+      font-family
+      box-shadow: 0 -name">Planeta Dog C: 'Inter', sans-serif4px 12px rgba(156arne AD 25KG</t;
+      font-size: , 35, 24, 13d>
+              <td>18px;
+      color</td>
+              <td>0.2525</td>
+              <t);
+    }
+
+    /*: var(--text-dark); ── Kd>450</td>
+              
+      background: #PI CARDS ── */
+    f.kpi-gri<td>0,45</td>dfd {
+      display: grid;
+              <td>458,00</td>
+            
+      grid-template-columns: repeatf5</tr>
+            <tr>(auto-fit, minmax(;
+      outline: none;
+      transition: all
+              <td class="product-name220">Planeta Cat Mix 25Kpx, 1fr));
+       0.3s;
+      gap: 20px;
+      margin-bottomG</td>
+              <tflexd>2: 40:</td>
+              <td>px;
+    }
+
+    . 1;
+      kpi-card {
+      backgrounmin-width: 16025</td>
+              <td: var(--white);
+      d>50</td>
+              px;
+    }
+    .<td>0,05border-radius: 14px;search-bar input:focus, .</td>
+              <td>
+      padding: 24search-bar select:focus {px;
+      box-shadow:
+      border-color: var(--proteica-orange);
+      box var(--shadow);
+      border--shadow: 0 0 5,00</td>
+            top</tr>
+            <tr>0 3px rgba(242
+              <td class="product-: 5, 119name">Planeta Dog Cpx solid var(--proteica-arne Adulto 15KG, 26</td>
+              <td>orange);
+      animation10, 0.1);
+    : fade</td>
+              <td>}
+    .btn15</td>
+              <tInd>150</td>
+              -clearUp 0.5s ease-<td>0,15</td>out;
+      
+              <td>15,00transition: all 0.3s cubic {
+      background: var(--prote-bezier(0.4,</td>
+            </tr>ica-red);
+      color:
+           0, 0.2, var(--white);
+      border</tbody>
+          <tfoot: none;
+      border 1);
+    }
+
+    >
+            <tr>
+              -radius: 8px;.kpi-card:hover {<td>SUBTOTAL</t
+      transform: translateY(-6d>
+              <td>30</td>
+              <td>–
+      padding: 10px);
+      box-shadow:</td>
+              <td>px 22 0 15650</td>
+              <tpx;
+      cursorpx 40: pointer;
+      font-sized>0,65</td>px rgba(156, 35,: 13px;
+      font
+              <td>65,00-weight: 600;
+       24, 0.15transition: all 0.3s</td>
+            </tr>);
+    }
+
+    .k;
+      box
+          </tfoot>
+        pi-card.-shadow: 0 2px</table>
+      </div>re 8px rgba(156, 
+    </div>
+
+    <!--d {
+      border35, 24, 0. EMAN-top-color: var(--15OEL -->proteica-red);
+    });
+    }
+    .btn
+    <div class="vendor-
+
+    .kpi-card.-clear:hover { background: varbrownblock vend-emanoel" i(--proteica-brown {
+      border-top-colord="block-emanoel" data-: var(--proteica-brown); transformvendedor="EMANOEL MAR: translateY(-2px); });
+    }
+
+    .kQUES Gpi-card.golOMES">
+      <div class="
+
+    /* ── Kd {
+      border-top-colorvendor-header" onclick="toggleBlockPI: var(--proteica-gol CARDS ── */
+    .d);
+    }
+
+    .kkpi-gripi-labeld {
+      display: grid; {
+      font-size: 
+      grid-template-columns: repeat('block-emanoel')">11(auto-fit, minmax(
+        <div>
+          <div class="vendor-name">Eman220oel Marques Gomespx;
+      font</div>
+          <div class="-weight: 700px, 1fr));
+      ;
+      textgap: 20px;
+      -transform: uppercase;
+      letter-spacing: 1px;
+      color: #999;
+      margin-bottom: margin-bottom10: 40vendor-code">Código: Wpx;
+    }
+
+    .|6px;
+    }
+    . · Alagoas</divkpi-card {
+      backgroun>
+        </div>
+        kpi-value {
+      fontd: var(--white);
+      <div class="vendor-kpborder-radius: 14-size: 32is">
+          <div class="px;
+      padding: 24vkpi">
+            <divpx;
+      font-weight:px;
+      box-shadow: class="vkpi-label"> 700;
+      color: var var(--shadow);
+      borderSacos</div>
+            -(--proteica-red);<div class="vkpi-topval">2
+      line: 5</div>
+          </div>-height: 1;
+          <div class="vkpx solid var(--proteica-pi">
+            <div class="
+    }
+
+    .kpivkpi-label">KGorange);
+      </div>
+            <div class-value.transition: all 0.3sorange;
+    }
+    .kpi-card:hover { {
+      color: var(--="vkpi-val">50proteica-orange);
+    } transform: translateY(-6</div>
+          </div>
+
+    .kpi-value.px); box-shadow: 0
+          <div class="vkbrown {
+      color: var(pi">
+            <div class=" 15vkpi-label">Tonpx 40eladas</div>
+            --proteica-brown);
+    <div class="vkpi-val}
+
+    .kpi-valuepx rgba(156, 35,">0,05.gold {
+      color: var</div>
+          </div> 24, 0.15(--proteica-gold);); }
+    .kpi-
+    }
+
+    .
+          <div class="vkcard.kpi-subre {pi">
+            <div class="d { border
+      font-size: 11vkpi-label">Com-toppx;
+      colorissão</div>
+            -color: var(--proteica: #a<div class="vkpi-val gold">R$‌ 5aa;
+      margin-top:-red); }
+    .k,00</div>
+           8pi-card.brown { border-top-color: varpx;
+    }
+
+    /*</div>
+          <div class="toggle-icon">▾</div ── SECTION(--proteica-brown); }>
+        </div>
+       TITLE
+    .kpi-card.</div>
+      <div classgold { border-top-color: ── */
+    .section-="vendor-body">
+         var(--proteica-gold);title {
+      font-family<table>
+          <thead> }: 'Playfair Display
+            <tr>
+              <th
+
+    .', serif;
+      font-size>Produto</th>
+              : 24<th>Sacos</thkpi-labelpx;
+      color>
+              <th>KG {
+      font-size: : var(--proteica-brown/Saco</th>);
+      margin-bottom: 1124px;
+      font
+              <th>Total KGpx;
+      padding-weight: 700</th>
+              <th>;
+      textToneladas</th>
+              -bottom: 12px;-transform: uppercase;
+      letter<th>Comissão (-spacing: 1R$)</th>
+            px;
+      color: #
+      border-bottom: 3px</tr>
+          </thead>999
+          <tbody>
+            <tr>
+              <td class="product;
+       solid var(--proteica-orange-name">Planeta Dog C);
+      margin-bottom: 10animationarne AD 25KG</tpx;
+    }
+    .: slideDown 0.5s ease-d>
+              <td>1kpi-value {
+      fontout;
+    }
+
+    /*</td>
+              <td>25-size: 32 ── VENDOR CARD</td>
+              <td> ── */
+    .vendor-25</td>
+              <tblockd>0,025 {
+      background: var(--</td>
+              <td>px;
+      font-weight:2,50</td>
+            white);
+      border-radius: 700;
+      color: var 14px;
+      box(--proteica-red);
+      line-shadow: var(--shadow);-height: 1;
+      margin
+    }
+    .kpi-bottom: 28-value.px;
+      overfloworange</tr>
+            <tr> { color: var(--proteica
+              <td class="product--orange); }
+    .kname">Planeta Dogpi-value.brown { color: Fil var(--proteica-brown);: hidden;
+      animationhote 25KG</t }
+    .kpi-value: fadeInUp 0.5d>
+              <td>1.gold { color: var(--</td>
+              <td>25s ease-out;
+      proteica-gold); }transition: all 0.3s</td>
+              <td>
+    .kpi-sub cubic-bezier(0.425</td>
+              <t, 0, 0.2 {d>0,025</td>, 1);
+    }
+              <td>2,50
+
+    .vendor-block.
+      font-size: 11</td>
+            </tr>
+          px;
+      colorhidden</tbody>
+          <tfoot {
+      display: none;: #a>
+            <tr>
+              
+    }
+
+    .vendor-headeraa;
+      margin-top<td>SUBTOTAL</t {
+      padding: 18: 8d>
+              <td>2px;
+    }
+
+    /*</td>
+              <td>– ── SECTION</td>
+              <td> TITLE50</td>
+              <tpx 24px;
+      displayd>0,05</td> ── */
+    .section-: flex;
+      align-items
+              <td>5,00: center;
+      justifytitle {
+      font-family-content: space-between;: '
+      cursor</td>
+            </tr>: pointer;
+      userPlayfair Display', serif;
+          </tfoot>
+        -select: none;
+      transition: filter
+      font-size: 24</table>
+      </div> 0.3s;
+    </div>
+
+    <!--px;
+      color RESUM: var(--proteica-brownO
+    }
+
+    .vendor-);
+      margin-bottom:  COM24ISSheader:hover {
+      filter:px;
+      padding brightness(0ÕES.96-bottom: 12px;);
+    }
+
+    .v -->
+    <div class="resumen
+      border-bottom: 3pxo-wrapd- solid var(--proteica-orange">
+      <div class="resumdjalo-header">);
+    }
+
+    /* ma── VENDOR📊  . CARDResumo devendor-header {
+      backgroun ── */
+    .vendor-d: linearblock-gradient(135deg, var( {
+      backgroun--proteica-orange), var(d: var(--white);
+      --proteica-reborder-radius: 14px;d));
+     
+      box<span>}
+
+    .vend-tam-shadow: var(--shadow);ires .vendor-header {
+      backgroun
+      margind: linear-gradient(135deg,-bottom: 28px;
+       var(--proteica-red), var(--proteica-brownoverflow));
+    }
+
+    .v: hidden;
+      Comissões</span>end-etransition: all 0.3s —;
+    }
+    .vendordiv Maio 2026al-block.</div>
+      <div styledo .vendor-header {
+      backgroun="paddinghiddend: linear-gradient(135deg,: 0 { display: none; } 24 #px 
+
+    .vendor-header24px;"> {
+      padding: 1800
+        <tablepx 796>
+          <thead>
+            <tr>
+              <th>24px;
+      display: flexVenBdedor</th>
+              <th;
+      align-items: center>Código;
+      justify</th>
+              <th>, #004Sacos</th>
+              -content: space-between;B<th>Total3 KG</th>
+              
+      cursor<th>Toneladas</th: pointer;
+      user>
+              <th>ComC-select: none;
+      transition);
+    }
+
+    .vissão (: filterend-orlR$)</th>
+             0.3s;
+    </tr>
+          </thead>ano}
+    .vendor-header:
+          <tbody>
+            <tr .vendor-header {
+      background: linear-gradient(135deg,hover { filter: brightness(0>
+              <td style #1.96="font565); }-weight: C0, #0D47A
+
+    .v6001);
+    }
+
+    .end-vdjalend-emanmaoel .vendor-header {
+       .background: linear-gradient(135deg;">vendor-header { backgrounD, #6jald: linearma AlexandreA-gradient(135deg, var dos Santos</td>
+              <t1B9A, #4A(--proteica-orange), vard>W|148C);
+    }
+
+    (--proteica-red)); }.vendor63-name
+    .vend-tam</td>
+              <td>ires {
+      font-size: 66 .vendor-header { background: linear16</td>
+              <td>-gradient(135deg, var(1.px;
+      font-weight:--proteica-re650d), var(--proteica-brown 700;
+      color: var(--</td>
+              <td>)); }
+    .vend-1ewhite);
+    ,div}
+
+    .vendor-code65</td>
+              <td>al {
+      font-size: 12do .vendor-header { background: linearpx;
+      color: rgba-gradient(135deg, #(255, 255, 25500, 0.8);
+      165796margin-top: 3,00</td>
+            px;
+    }
+
+    .</tr>
+            <tr>Bvendor-k
+              <td style="font-weight, #004: 600;">TamBires Wiv3yaneCp); }
+    .vend-is {
+      display: flex;
+      gap: 24orlano Vipx;
+      aligneira da-items: center;
+     .vendor-header { background: linear Silva</td>
+              <t}
+
+    .v-gradient(135deg, #1d>W|53k</td>
+              <td>pi {565125
+      text</td>
+              <td>C0, #0D47A-align: right;
+    }
+
+    .v1); }kpi-label
+    .vend-eman3 {
+      font-size: .125</td>
+              oel .vendor-header { background:10<td>3,125 linear-gradient(135deg, #px;
+      color: rgba</td>
+              <td>3126(255, 255, 255A,50</td>
+            , 0.75</tr>
+            <tr>1B9A, #4A);
+      text148C); }
+
+    .vendor
+              <td style="font-weight-transform: uppercase;
+      letter: 600;">E-name {-spacing: 0 font-size: 16div.7aldo Costapx; font-weight: 700px;
+      font Lima; color: var(--white-weight: 600;
+    </td>
+              <td>); }
+    .vendor-codeW|96}
+
+    .vkpi- { font-size: 12val</td>
+              <td>px; color: rgba109(255, 255, 255</td>
+              <td>, 0.8); margin2.625-top: 3 {
+      font-size: </td>
+              <td>18px;
+      font-weight2,625</td>
+              px; }
+
+    .: 700<td>262,50</t;
+      color: var(--vendor-kd>
+            </tr>
+            whitep);
+      <tr>
+              <td stylemarginis {="font-weight: 600;">-top: 4px; display: flexJosé
+    }
+
+    .vkpi-val.gol; gap: 24 Orld {
+      color: var(--px; alignanoproteica-gold);
+    }-items: center; }
+    
+
+    .toggle da.v-iconk {
+      font-size:  Silva</td>
+              <tpi {d>W|57 text22</td>
+              <td>30px;
+      color: rgba</td>
+              <td>(255, 255, 255-align: right, 0.8650; }
+    .vkpi);
+      margin</td>
+              <td>-label { font-size: -left100,65</td>
+              : 20px; color: rgba<td>65,00</tpx;
+      (255, 255, 255d>
+            </tr>
+            , 0.75transition); text<tr>
+              <td style-transform: uppercase; letter: transform="font-weight: 600;">-spacing: 0 0.3s;
+    .7px; font}
+
+    .vendorEmanoel Marques G-weight: 600; }-blockomes</td>
+              <td>W|6</td>.
+    .vkpi-val
+              <td>2</td>collapse
+              <td>50</td .d>
+              <td>0, { font-size: 1805</td>
+              <ttogglepx; font-weight: 700d>5,00</td>-icon {
+      transform: rotate; color: var(--white(-); margin
+            </tr>
+          </tbody-top90deg);
+    }
+
+    >
+          : 4px; }
+    /* ── VENDOR<tfoot>
+            <tr.vkpi-val.gol>
+              <td colspand { color: var(--proteica BODY="2-gold); } ── */
+    .vendor-">
+
+    .toggleTOTALbody {
+      padding: 0-icon G 24px  {ERAL</td>
+              <t24px;
+    }
+
+     fonttabled>332-size: 22 {
+      width: 100%;px; color</td>
+              <td>8
+      border-collapse: collapse;: rgba.075(255, 255, 255
+      font-size: 13, 0.8); marginpx;
+      margin-left</td>
+              <td>-top8,: 20075</td>
+              <td>807: 16px;
+    }px; transition,50</td>
+            
+
+    thea: transformd th 0.3s; } {
+      background: var(--
+    .vendor-blockproteica-brown);
+      color.</tr>
+          </tfoot>: var(--white);
+      
+        </table>
+      </div>
+    </div>collapsepadding: 12px 14
+
+  px;
+      text-align:d .</main left;
+      font-weight:>toggle-icon { transform: rotate(-
+
+</div 600;
+      font90deg); }
+
+    .-size: 11>
+
+<footerpx;
+      text>
+  <strong-transform: uppercase;
+      lettervendor-body>CO {-spacing: 0.7AGROpx;
+    }
+
+    thea padding: 0 24px d th:not24px; }
+
+    table</strong> ·(:first A {-child) {
+      textlagoas · Serg
+      width: 100%;-align: rightipe ·;
+    }
+
+    tbody tr
+      border-collapse: collapse; Bah {
+      fontia
+      border-bottom: 1<br/>-sizepx solid #
+  : 13Prepx;
+      margincosf-top: 16 valpx;
+    }
+    thea0eidosd th {
+      background: var(--proteica-brown);
+      color8 so: var(--white);
+      e0padding: 12px ;
+      transition: backgrounmente de14d  0.2s;
+    }px;
+      text-align:
+
+    tbody tr:hover { left;
+      font
+      background: #fdf-weight: 600;
+      font5-size: 1115ef/05 px;
+      a 16;
+    }
+
+    tbody ttext/05.d {
+      padding: 12px Su-transform: uppercase;
+      letter 14px;
+      colorje-spacing: 0.7ito a alter: var(--textacaopx;
+    }
+    thea-dark semd th:not av);
+    iso prev(:first}
+
+    tbody td:not(:io.
+</footer>-child) {
+
+<script>
+//first-child) {
+      text  text-align: right═══════════════════════════════-align: right;
+      ; }font-variant════════════
+
+    tbody tr {-
+//
+      border-bottom: 1  px solid #numeric: tabular-nums;DADOSf
+      0e PROMOCfont-weight: 500OES8;
+    }
+
+    . (eproductDe-name {
+      font-weight0 /: 600;
+    ;
+       Por}
+
+    ttransition: backgroun)d foot t
+// ═══════════════0.2════════════════════════════d {
+      padding: 14
+constpx 14px;
+      fonts;
+    }
+    tbody tr:hover { background: #f P-weight: 700df =;
+      font5 [-size: 13px;ef
+  {i
+      backgroun; }
+
+    tbody td:'d: #f0d {
+      padding: 12px023 14px;
+      colordf115: var(--text-dark);0e6
+    ',}
+    tbody td:not(:;
+      bordernome:'Semfirst-child) {-top: 2
+      text.px solid var(--proteica--align: right;
+       Caporange);
+      imfont-variantcolor: var(--prote B-ica-brown);
+    }numeric: tabular-nums;.
+
+    t Mass
+      foot td:not(:first-chilaifont-weight: 500d) {
+      text;
+    }
+
+    .-align: right;
+    }product
+
+    /*-name { font-weight Inc ── RESUMrust: 600; } O TABLE
+
+    t10 ── */
+    .resumofoot tkg Santad {
+      padding: 14-wrap', {
+      backgrounpx 14precd: var(--white);
+      border-radius: 14px;px;
+      font-weight:oD 700e;
+      :'
+      box-shadow: var(--shadow);
+      overflowfont: hidden;
+      marginR$‌ 194-size: 13px;-top,90',preco:'R$
+      backgroun: 40 169px;
+      d: #,90',catfanimation: fadeInUp 0.df05s ease-out;
+    }
+
+    .resumo-header:'age6;
+      border {
+      backgrounro'},-top: 2px solid var
+  {id:'0023114d: linear-gradient(135deg,',nome:'Sem. Cap(--proteica-orange); var(--proteica-re
+      im B. Md), var(--proteica-browncoloromb));
+      padding: var(--prote: 18ica-brown);
+    }acapx 24px;
+      color Incrust 10kg Santa',: var(--white);
+      
+    tfoot td:not(:firstprecoDe:'R$‌ 169font,90',preco:'R$-child) { text-align: 147-family right; }
+
+    /*: 'Playfair Display,90',cat:'agro'}, ── RESUM', serif;
+      font-size
+  {id:'0023245O TABLE: 20px;
+      font',nome:'Sem. Cap ── */
+    .resumo-weight: 700im-wrap Ar;
+     {
+      backgroun}
+
+    .resumo-headeruanad: var(--white);
+       span Incrust 10kg Santa Fe',precoDe:'R$ border-radius: 14px; {
+      color244
+      box-shadow: var(: var(--proteica-gol,90',preco:'R$--shadow);
+      overflow 211,90',cat:'agro'},: hidden;
+      margin-top: 40px;
+    }
+  {id:'0023113d);
+    }
+
+    .resum
+    .resumo-headero-wrap',nome:'Sem. Cap tableim B {
+      margin {
+      backgroun-top: 0. Decd: linear-gradient(135deg,;
+    umb var(--proteica-re}
+
+    .resumo-wrapd), var(--proteica-brownens Incrust 10kg Santa',));
+      padding theaprecoDe:'R$‌ 236: 18d th {
+      background: var,90',preco:'R$‌ 205(--proteica-brown);
+    ,90',cat:'agro'},
+  {id:'0021}
+
+    .resumo-wrappx 24px;
+      color635 t: varfoot t',nome:'S(--white);
+      fontemente-family: 'Playfd {
+      background: varair Display', serif;
+      font Mil(--proteica-reho Bd);
+      -size: 20px;
+      font-weight: 700;color: var(--white);RS 4
+    
+      }
+    .resumo-header103 spanborder { color 20: var(--proteica-gol-top: noned); }
+    .resumo-kg;
+      wrap Jfont-weight: 700 tableoia;
+    }
+
+    /* { ── FOOTER ── */
+    footer margin-top: 0 {
+      text; }
+    .resumo-wrap thead th { background: var(-align: center;
+      padding Sem--proteica-brown); }: 28entes',precoDe:'R$‌
+    .resumo-wrap t 169foot t,90',preco:'R$px;
+      font 144d { background: var(--proteica,90',cat:'agro'},-size: 12
+  {id:'0021895px;
+      color: #-re',nome:'Semente Milahod); coloraa;
+       Hi: var(--white); borderborderbrido 20-top: none-top: 1px solid #N; fontM07e-weight: 700; }1138
+
+    /* ── PR ROMO GRIDdd1 ── */
+    .promo Joia',d5-searchprecoDe:'R$‌ 289 {
+      position;
+      margin-top: ,90',preco:'R$‌48 249: relative;
+      marginpx;
+    }
+
+    footer,90',cat:'agro'},-bottom: 20 strong
+  {id:'0014px;
+    }
+    .768 {
+      color: var(--promo-search input {
+      proteica-orange',nome:'Suwidth);
+    }
+
+    /* : 100%;
+      padding:plement── ANIMATIONS 14o P ── */
+    @keyframespx ata slide20 NegDown {
+      0px ra 1% {
+        opacity: 014px 50kg C;
+        transform: translateY(-px;
+      borderalb10px);
+      }
+      : 2px solid #os',precoDe:'R$ d1d5100% {
+        opacity: 1;
+        transform: translateY12db;
+      border-radius:(0);
+      }
+     50,90',preco:'R$}
+
+    @keyframes fadeIn 9px;
+      font-familyUp {
+      0% {,90',cat:'medic: 
+        opacity: 0;
+        amentos'Inter', sans-serif;
+      font'},
+  {id:'0001transform: translateY(20px);-size: 1229
+      }
+      100% {',nome:'Placrem
+        opacity: 1;;
+      backgrounenc
+        transform: translateY(0);d: #al
+      }
+    }fff
+
+    /* ── RESPONSIVE ──;
+      color: var(-- */
+    @media (max- Octext-dark);
+      outlineitwidth: 768px) {: none;
+      transition: borderocina 200 .ml2s, C box-shadow .2s;
+      .headeralbos',precoDe:'R-inner
+      $‌ 17 {
+        flex-direction: column;
+        gap-,90',preco:'R$: 12px;
+        webkit-appearance: none;
+     13text-align: center;
+      }
+    .promo-search,90',cat:'medicamentos'},}
+
+      .vendor-k input:focus {
+  {id:'0001097 border-color: var(--copis {
+        gap',nome:'Phenag: 12opx;
+        roflex-wrapdral: wrap;
+      }
+
+       Me-green.vkpi-ti); box-shadow: 0 0 0 3px rgba(val {
+        font-size:0, 1475px;
+      }
+
+      .,60k,.lar12pi-value {
+        font-sinsize: 24ato); }
+    .promo-px;
+      }
+
+      tablesearch- {
+        font-size:  15icon { position: absolute; left12: 16px;
+      }
+
+      theamlpx; top: 50 UCd th,B%; transform: translateY(-50%LOG
+      tbody td,',precoDe:'R$ 
+      tfoot td {
+        17,90',preco:'R$); colorpadding: 8 13,90',cat:'medicpx 10: var(--coamentos'},
+  {id:'0agro-green); pointer001225px;
+      }
+
+      .-events: none; }
+
+    ',nome:'Hiposearch.promo-catsfen-bar {
+        flex {
+      display: flex; F-direction: column;
+      
+      gap: 10enb}
+
+      .search-bar inputpx;
+      overflowendazol,-x: auto;
+      padding 20
+      .search-bar select-gr {
+        width: 100%; Calbos',precoDebottom: 8px;
+      margin:'R$‌ 11
+      }
+
+      .tabs-bottom: 24,90',preco:'R$‌ 8-px;
+      ,90',cat:'medicamentos'},containerscroll
+  {id:'0013 {
+        paddingbar-width: none113: 0;
+      -webkit',nome:'Vitam 16-overflow-scrolling: touch;ina Apx;
+      }
+
+      .DEtab
+    }
+    .promo-cats- Oral::-webkit-scrollbar { display: none; }
+    .pr 1btnomo-catkg {
+        padding- Calbos',precoDe: 14btn:'R$‌ 18 {,90',preco:'R$px 16
+      display: inlinepx;
+        font 14,90',cat:'medicamentos'},-size: 12-flex;
+      align-itemspx;
+      
+  {id:'0015: center;
+      gap: }6
+    }
+  </style>125
+</head>
+<body>px;
+      padding: 9',nome:'So
+
+  rovpx 18<!--itapx;
+      border 500ml UC- HEADER -->
+  <header>radius: 50
+    <div class="header-B',precoDe:'R$‌ 24inner">
+      <divpx;
+      border,90',preco:'R$: 2px solid # class="logoe- 195e7eb;
+      backgroun,90',cat:'medicamentos'},aread: #
+  {id:'0018">
+        <div610fff;
+      color: # class="logo-6',nome:'Oribbadgegens">PR7280;
+      font-family ClassO: 'Inter', sans-serif AD<span>TE;
+      font-size: ICA Cao</span></div>
+        0 Fr.82<div>angorem;
+      font-weight: 600 
+          <div;
+      cursor: pointer;15 class="header
+      whitekg',precoDe:'R$-title"> 169
+            <strong,90',preco:'R$-space: nowrap;
+       146>Dashboartransition: all .,90',cat:'pet2s;
+      boxd de'},
+  {id:'0018-shadow: 0 2px Vendas</strong>
+            775 6',nome:'Origens Class ADpx rgba(0,0,0 Cao FrCO,.ango 2006AGkg',precoDe:'R$);
+      -webkit-tapRO-highlight-color: transparent; 204
+    }
+    .promo-,90',preco:'R$ Distribcat-btn:hover,uidora 179 .promo-cat-btn.
+          </div>
+        ,90',cat:'pet'},</div>
+      </div>active {
+  {id:'0017
+      background: var(--co
+      <div class="header-687agro-green);
+      colormeta',nome:'Planeta">
+        <strong: #fff;
+       Dog iborder Carne AD 25kg-color: var Proted="headerMonth(--coagro-green);">Abrilica
+      ',precoDe:'R$‌  2026box124</strong>-shadow: 0 4,90',preco:'R$px 14 105px rgba(0,75,60,.22<br>
+        ,90',cat:'pet'},);
+    }A
+  {id:'0018lag
+
+    .promo-grioas ·832d {
+      display: grid; Serg',nome:'S
+      grid-template-columns: repeatipe · Bah(auto-fillia, minmax(280abor<br>
+        ospx, 1fr));
+      Comso Carneissgap: 16 Caão:px;
+    es AD R}
+    @$‌ 100 15,media (max-width: 500kg',precoDe:'R$‌00  82px) {/,90',preco:'R$‌ 1 69 .,90',cat:'pet'},promo-grid { grid-template.-columns: 1fr 000
+  {id:'00182001fr; gap ton',nome:'Q: 10
+      </div>
+    px; } } Cl
+
+    .promo-car</div>
+  </header>d {
+      background: varor
+
+  <!-- TABS -->
+  <div class="tabs-container">(--white);
+      border- H
+    <buttoniperradius: var class="tab-btn active" onclick (--radius="switchAcao);
+      box 10Tab('abril-shadow: var(--shadow);kg',
+      overflow',precoDe:'R$  this: hidden;
+      display299)">: flex;
+      flex-direction,90',preco:'R$📅: column;
+      border 259 Abril : 1px solid rgba,90',cat:'casa2026</button>
+    (0'},
+  {id:'0000<button class="tab-btn" onclick,75701,60,.07="switchTab('maio', this)',nome:'HT);
+      H">📅transition: transform Cl Maio 2026</button .oro>
+  </div>
+
+  <!--25 A MAINditiv -->s, box-shadow .25sado 10;
+    }
+    .pr
+  <main>omo-card:hover { transform:  translateY(-4
+
+    <!-- empx); box-shadow: 0════ 1 ════════════════════════════════ 1210════px 36kg ABRIL px - Arch════════════════════════════════',precoDe:'R$‌ 8339px rgba(0,75,60════════ -->
+    <div,90',preco:'R$ id="abril" class="tab-,.2); }content active">
+
+      <!-- SEARCH
+
+    .promo-strip BAR -->
+      <div class { height="search-bar">
+        : 5 295<label,90',cat:'casa'},px; background: var(--co>
+  {id:'0019agro-green); }801',nome:'Ga
+    .catrr🔍 Filt-medicrar:afa Termica</label>
+        <input type="amentos . Usetext" classpromo-strip { backgroun P="searchd: #reta 1LVdc M2626; }
+    .catORendedor-pet" placeholder="Buscar vendedor',precoDe:'R$‌  .promo-strip { background:..."29 #4 on,90',preco:'R$akeyup148 24="filtc; }
+    .cat-,50rarAb',cat:'casa'},
+  {rilcasa()" .promo-strip { background:id:'0005 #001 />314C',nome:'P
+        71isc<select; }ina RE class="filter
+    .cat-mF-Paqu001inas002 1000 .promo-strip { background: #92lt400 Me; }
+
+    .promo-bodyOR',precoDe:'R$‌ 189,90',preco:'R$ { padding: 14 159px 14px 10,90',cat:'casa'},
+  {id:'0018px; flex370',nome:'Motoss:erra B 1; display: flex; flex-direction: columnM; gap 330: 8px; }
+    .promo Elite-badge { Br
+      display: inline-flex;anco',precoDe:'R$
+      align-items: center; 2
+      gap: 4px;.599,00
+      font-size: 0.67',preco:'R$‌ 2rem;
+      font-weight:.259 700,00',cat:'m;
+      textaquinas-transform: uppercase;
+      letter-spacing: 0.4'},
+  {id:'0018px;
+      padding: 3372',nome:'Motosserra Bpx 10M 270px;
+      border-radius: Elite Br 50anco',precoDe:'R$px;
+      background: # 1ro.949duto"f onchange="filtrarAbril(),00',preco:'R$ef">
+          <option value="">Todos 1.6909 os produtos</option>
+          ee,00',cat:'maquinas<option value=";
+      color: #bPlaneta'},
+  {id:'0000 Dog45946 Carne309;
+      ',nome:'Tr ADborder: 1px solid #f itu25crador MonoKG">Planeta Dog Carned34d;
+        AD 25KG</option>
+          <option value="Planeta2 CatHP Mixwidth  IP25: fit00KG">Planeta Cat Mix -content;
+    } 25KG</option>
+          
+    .promo-badge.active<option value="Planeta Dog60 Fil { background: #dcHzhfce7; color: #15ote 25KG">Planeta Dog Filhote 25K803d; border G</option>
+          <option value="Planeta Dog-color: #86220 Carne Adulefto 15V GTKG">Planeta Dog Cac; }
+
+    .promoarne Adulto 15KGI</option>
+        -code',precoDe:'R$ </select>
+         {1.799<button class="btn-clear font,00',preco:'R$" onclick="limparAbril()">-size: 0.7 1.559rem; color✕,00',cat:'maquinas Limpar Filtros: #9'},
+  {id:'0018</button>
+      </div>ca3af; }
+
+      <!-- KPI CARDS -->
+      <div602
+    .promo-name class="kpi-gri',nome:'Picd">
+        <div class="k { font-sizepi-card">
+          <divador class="kpi-label: 0 c">Total.88 de Sa/rem; font-weight: 600cos</div>
+          <div class Motor; color="kpi-value orange Mon">298: var</div>
+          (--text<div class="kpi-sub.-dark); line"> GPun-height: 1.4-idades distribu1; flexídas</div>
+        </div>
+        <div class="500:kpi-card reA 1; }d">
+          <div class="kpi-label">TotalBI
+
+    .promo-prices em { KG display </div>
+          <div class: flex; flex1,="kpi-value">5CV-direction: column; gap: 7',precoDe:'R$‌ 21.599,00',preco:'R$‌.245px; margin -top: 4kg</div>
+          <div 1.395px; }
+    .price class="kpi-sub">peso-de total</div>
+        </div>
+        <div class="k {pi-card brown,00',cat:'maquinas">
+          <div class="k'},
+];
+      fontpi-label">Total
+
+const em Ton CAeladas</div>
+          T = {<div class="kpi-value brown-size: 0.78
+  ag">7rem;
+      color: #9,ca3af;
+      text-decoration245 : lineton-through;
+      fontro:        </div>
+          <div class-weight: 500;
+    {="kpi-sub">volumelabel}
+    .price-de :'Agrodo perío- Sementeslabeldo</div>
+        </div>', icon { font-size: 0.:'🌾'},
+  medic
+        <div class="kpi68amentos:{-card gollabel:'Medicamentos',d">
+          <div class="krem; color: #9  ca3af; marginpi-label">Comicon:'💊'},
+  pet-right:         {label:'Pissão Total</div>
+          <div classET',           ="kpi-value gold">Ricon:'🐾$‌ 724: 4'},
+  casa:        {labelpx; }
+    .price-,50</div>
+          por:'Casa e-<div class="kpi-sub"> Jardim',row { displaya icon:'🏡'},
+  : flex; align-items: center distribumaquinas:    {label:'; gap: 8irpx; }
+    .price-Maquinas',      por-labelicon:' { font-size: 0.</div>
+        </div>⚙️'},
+};
+
+let72
+      </div>
+
+      <!-- DErem; color: var curTALHE PC(--coOR VENDat = 'allagro-green); font';
+let curSearch-weight: 700EDOR -->
+      <div class=" = '';; }
+    .price-porsection
+
+// ═══════════════════ {-title">
+      font-size: 1════════════════════════
+//.📦  TABS Detalhe por Ven
+// ═══════════════55dedor</div>rem;
+      font-weight:
+
+      <!--════════════════════════════ 800 D;
+      color: var(--JAL
+functionMAcoagro-green);
+      line-height: 1; ABRIL switch
+    }Tab(tab -->
+      <div class="vendor
+    .cat) {
+  document.queryS-petelectorAll('.-block .price-por { color vtab-en: #4a148c; }content').forEach(t
+    .cat-pet => t.classList.remove('active .price-por-d-'));
+  document.querySelectordjalma"label { color: #4a148 dataAll('.tab-btn-vendedor="c; }
+    .cat-').forEach(bcasaDJALMA => b.classList.remove('active .price-por { color: #'));
+  001C71; }
+    .document.getElementById(tab).classList.adcat-casa .price-por-d('active');
+  eventlabel { color: #001C71.target.classList.add('active; }
+    .cat-m');
+}
+
+// ═══aquinas .price-por { color════════════════════════════════════════
+//  CONTADOR 15: #92400e; }
+    .cat-maquinas ./price-por-label { color:05  #92400e; }
+
+    a.promo-footer { padding: 0 16/05
+// ═ 14══════════════════════════════px 14px; }════════════
+function update
+    .btnTimer() {
+  const now    = new Date();
+  const ano-wa    = now.getFullYear(); {
+      display: flex
+  const inicio;
+      align-items: center = new Date(ano, 4;
+      justify-content: center;
+      gap, 15, 0, 0, 0: 8px;
+      width: 100%;
+      padding: 11px;);
+      backgroun
+  const fim    = new Date(ano, 4, 16d: #, 23, 59, 2559);
+
+  const bannerD366  = document.getElementByI;
+      color: #d('promoBanner');
+  const stText  = document.getElementById('statusfff;
+      border: noneText');
+  const c;
+      border-radius: 10dRowpx;
+      font-family   = document.getElementById('cdRow: 'Inter', sans-serif;
+      font-size: ');
+  const cdLabel0.84rem;
+      font-weight: = document.getElementById('cdLabel'); 700;
+      cursor: pointer;
+
+  if (now >
+      text-decoration: none;
+      transition: backgroun fim) {
+    stText.textContent = 'd .2s,PROMOC transform .15AO ENCs;
+      -ERRADA';
+    cwebkit-tapdRow.style.display = '-highlight-color: transparent;none';
+    return
+    }
+    .btn-wa;
+  }
+
+  if:hover { background: #1da851 (now >=; transform: scale(0 inicio && now <= fim) {
+    st.98); }Text.textContent = '
+    .catPROMOCAO -mATIVAaquinas .btn-wa { backgroun AGd: #92ORA!400e; }
+    .cat';
+    cdLabel-maquinas .btn-wa:hover { background: #78.textContent = '350Encf; }
+
+    .emptyerra { em: text';
+    set-align: center; padding: CD60(fimpx 20 -px; color now);
+    return: #6;
+  }
+
+  cb7280; gridLabel.textContent = 'Comd-column: 1/-eca1; } em:';
+  stText.textContent = '
+    .empty pPROMOCAO  { fontEM-size: 1 BRremEVE';; font
+  -weight: 500setCD(inicio - now);; margin-top: 12
+}
+
+function setCD(diffpx; }
+
+    .promo) {
+  const -infod = { font Math-size: 0.82rem; color: #6b7.floor(diff / 280; margin-bottom: 1486400000);
+  const hpx; font = Math.floor((diff % -weight: 50086400000) / 3600; }000);
+  const m = Math
+
+    /* ── FOOTER.floor((diff % 3600000) / 60000); ──
+  const s = Math.floor(( */
+    footerdiff % 60000) / 1000);
+  document.getElementById('cdD {
+      text').innerHTML-align: center;
+      padding = : 28d + 'px;<small
+      font>-size: 12dias</small>';
+  document.getElementByIpx;
+      color: #ad('cdH').innerHTML = String(h).padStart(2,'aa0');
+      border + '-top: 1px solid #<small>hrse8</small>';
+  document.getElementById('cdM').innerHTML = String(ddm).padStart(2,'0d5;
+      ') + '<small>min</smallmargin-top: 48>';
+  document.getElementById('cdS').innerHTML = String(s).px;
+    }padStart(2,'0') +
+    footer strong '<small>seg { color</small>';
+}
+
+updateTimer();: var(--prote
+seticaInterval(updateTimer, 1000);
+
+// ═══════════-orange════════════════════════════════); }
+//  WH
+
+    @media (max-width: 768ATSpx) {
+      .headerAPP -- SEM CARACTinner { flex-direction: column; gapERES ESPECIAIS
+// ═: 12══════════════════════════════px; text════════════
+function wa-align: center; }
+      Msg.header-tabs(p { margin) {
+  const now-left = new Date();
+  const ano: 0; }
+      .vendor = now.getFullYear();-k
+  const pativa = now >=is { gap new Date(ano,4,15: 12px; flex-wrap: wrap; }
+      .v,k0,0,0) && nowpi-val <= new Date(ano,4,16,23,59,59); { font
+  const status-size: 14px; }
+      .kpi-value { font-size: 24px; }
+      table { font-size: 12px; }
+      thead th, tbody ALEXANDRE DOS td, SANTOS">
+        <div class = ativa ? 'PROMOC="vendor-header tAO ATIVA"foot t AGORA!' : ' onclick="togglePromocao vald { paddingBlockida de(: 8px  this)">
+          <div>
+            <div class="vendor-1015/05 a 16/name05!px; }
+      .';search">
+
+  const msg =Djalma Alexandre dos Santos</div
+    status-bar { flex +>
+            <div class="vendor '\n\-code-directionn' +
+    'Ol">: column; }heCódigo
+      .search-bar input, so: W que| .search-bar select con63 { width: 100%; } dicao espec·
+    ial da CO}
+  </style>AG
+</head>
+<body>RO n
+
+<!--este A AV produtolagoasISO INTERNO</div>
+          </div>!\
+          <div class="vendor-kn\n' +
+    p -->
+<div class="aviso.pis">
+            <div class-interno">
+  <span="vnome> + '\kpi">n'US +
+    'O
+              <div class="vkDe INTERNO</span>
+  Estepi-label">Sa:cos</div>
+              <div catal ' + p.precogo e class="vkpi-valoDe + '\n' +">60 de</div>
+            </div>
+    'Por uso
+            <div class="vkpi">
+              <div class=" exclusvkpi-label">KG</div>
+              <div class: ' + p.pr="vkpi-val">1.500ivo para</div>
+            </div> funcion
+            <div class="vkariospi">
+              <div class="vkpi-label">Toneco + '\n\eladas</div>
+               COn' +
+    'F<div class="vkpi-valaleAG">1 comRO. Os, precosigo ag50 podemora e</div>
+            </div> apr
+            <div class="vk muoveite estepi">
+              <div class="dar avkpi-label">Com precissão</div>
+               qualquer momento.inho<div class="vkpi-val espec
+   golial qued">R$‌ 150<span,00</div>
+            </div>
+             so><div class="toggle qu-icon">em▾PRO</div>
+          </div> tem e
+        </div>
+        IBIDO<div class="vendor-body">
+          <table COAGRO!\</span> compart>ilhar esten'
+            <thead>
+               site<tr>
+                <th> +
+    'AProduto</th>
+                <th com cl>Salagientes oucos</th>
+                <th>KG/ tercoas -Seiros.
+</div>
+
+<!--aco</th>
+                <th Serg>Total HEADER -->
+<header>ipe - KG</th>
+                <th
+  <div class="header-inner">
+    <div class=">Toneladas</th>
+                <th>Comisslogoão (R$)</th>
+              -</tr>
+            </thead> Bahia';
+
+  returnarea
+            <tbody>
+              <tr encodeURIComponent(msg);>
+                <td class">
+      <div="product
+}
+
+// ═══════════-name">Planeta Dog C class="logo-════════════════════════════════arne AD 25KG</t
+//  RENDERd>
+                <td> PROMOC40OESbadge</td>
+                <td>">PR25O</td>
+                <td><span>TE1.000</td>
+                <td>1,00ICA</td>
+                <td>100</span></div>
+      <div>
+// ═══════════════════════════════════════════
+function render,00</td>
+              
+        <div</tr>
+              <tr>() {
+  const gri class="header-title
+                <td class="product-named = document.getElementById('grid');">">Planeta Cat Mix 25K
+  const infoG</td>
+                <t
+          <strong = document.getElementById('resultsd>10Info');
+  const now>Dashboar</td>
+                <td>d &25  </td>
+                <td> Promoc250= new Date();
+  const anooes</td>
+                <td>0  = now.getFullYear();,25</strong>
+          
+  const </td>
+                <td>ativa = now >= new Date(ano25,00</td>
+              ,4,15,0,0</tr>
+              <tr>,0) && now <= new DateCOAGRO
+                <td class="product-(ano,4,16,23 Distribname">Planeta Dog Filh,59,59);
+
+  constote 25KG</td>uidora list
+                <td>10 = P</td>
+                <td>25</td>
+                <t.filter
+        </div>
+      d>250</td>
+                <td>0,25</td></div>
+    </div>(p => {
+                <td>25,00
+    <div class="header-
+    const</td>
+              </tr>
+            tabs">
+      <button class=" mc</tbody>
+            tab<tfoot>
+              <tr = cur>
+                <td>-btn active" onclick="switchSUBTTab('dashboard')">OTAL</td>
+                <td>60Cat === 'all' ||📊 Dashboar</td>
+                <td> p.cat–d</button>
+      <button class</td>
+                <td> === curCat;
+    const ms="tab-btn" onclick="switch = pTab('promoc.nome.toLowerCase().oes')">1.500</td>
+                <td>1,50</td>
+                <t🛍️ Promocoes</buttond>150,00</td>includes(curSearch)
+              </tr>
+            >
+     || p.i</tfoot>
+          </tabled.toLowerCase().includes(curSearch);>
+        </div>
+      </div>
+  </div></div>
+
+      <!-- TAM
+    return mc && ms;IRES
+</header>
+
+<!-- BANNER
+  });
+
+  info ABRIL.text PR -->
+      <div class="vendorContent = list-block vend-tamires".length ? data-vendedor="TAMIRES W listOMO -->
+<div class="prIVY.lengthANE + ' produto VIEIRA DA' SILVA">
+        <div class +="vendor-header" onclick="toggleBlock(this)">
+           (list.length > 1 <div>
+            <div class="omo-banner"vendor-name">Tamires? 's' : '') : ''; id="prom Wivyane Vieira daoBanner">
+  <div class Silva</div>
+            <div
+
+  if (!="promo-inner class="vendor-code">Códigolist">
+    <div class="status: W|53-badge" · Alagoas</div.length) {
+    gri i>
+          </div>
+          d="statusBadge">
+      d.innerHTML = '<div style<div class="vendor-kp<span class="dot"="text-align:is">
+            <div class=" ivkpi">
+              <divcenter;d="status class="vkpi-label">paddingSacos</div>
+              Dot"></span>
+      :60<div class="vkpi-<span ival">115px 20px;colord="statusText"></div>
+            </div>:#9PROMOC
+            <div class="vkAO pi">
+              <div class="cavkpi-label">KGATIVA</span>
+    </div3af;gri</div>
+              <div class="vkpi-val">2d-column>
+    <div class="countdown.875-</div>
+            </div>row
+            <div class="vk:1/-"pi">
+              <div class="1">vkpi-label">Toneladas</div>
+               id="c<pdRow">
+      <span class<div class="vkpi-val">2,875</div>
+            </div>>Nenhum produto encontra="cdo</p></div>';
+    return
+            <div class="vkd-label;
+  }
+
+  grid.pi">
+              <div class=""innerHTML = list id="cdLabel">vkpi-label">Com.map((issão</div>
+              Comp, i) => {<div class="vkpi-val
+    const cat = CAeca gold">R$‌ 287 em,50</div>
+            T[p.cat] || {:</div>
+            <div class="label:toggle-icon">▾</div</span>
+      <div>
+          </div>
+        p.cat};</div>
+        <div class class="cd-box="vendor-body">
+          
+    const delay<table>
+            <thead>" id="cdD = Math
+              <tr>
+                <th>Produto</th>
+                .min<th>Sacos</th>
+                <th>KG(i * 0/Saco</th>.04
+                <th>Total KG</th>
+                <th>, 0Toneladas</th>
+                <th>Comissão (.5R$)</th>
+              );"></tr>
+            </thead>0
+            <tbody>
+              <tr
+
+    return `>
+                <td class="product<small<div class="car-name">Planeta Dog C>diasarne AD 25KG</t</small></div>
+      d" style="animationd>
+                <td>107<span class="cd-sep</td>
+                <td>">-25</td>
+                <t:d>2.675delay:</span>
+      <div</td>
+                <td> class="cd-box" id="${delay}s">2,675cdH
+      <div class="card-</td>
+                <td>strip">00<small>hrs267">,50</td>
+              </small></div>
+      </tr>
+              <tr></div>
+      <div class="
+                <td class="product-name<span class="cd-sep">:">Planeta Cat Mix 25Kcard-body</span>
+      <div class="G</td>
+                <t">
+        <spancd-box" id="cdM class="card-badge">00<small>min</small">></div>
+      <span classd>5="cd-sep">:</span>Promoc</td>
+                <td>
+      <div class="cd-25</td>
+                <tao box" id="cdS">00d>125</td>
+                15<td>0,125<small>seg</small></div</td>
+                <td>-12,50</td>
+              </tr>
+              <tr>16>
+    </div>
+  
+                <td class="product-name">Planeta Dog Filh</div>
+</div>
+
+<!-- MAIN/ote 25KG</td> -->05</span>
+        <div class="card-code
+                <td>3
+<main></td>
+                <td>">25</td>
+                <t
+
+  <!-- d>75</td>
+                <td>0,075Co═════</td>
+                <td>════════════════d.7,50</td>
+               TA</tr>
+            </tbody>
+            <tfoot>
+              B:<tr>
+                <td> DASHBOARD ═════════════════SUBTOTAL</td>
+                 ${<td>115════ -->
+  <div ip.id}</div>
+        </td>
+                <td>d="dashboard" class="tab-content<div class="card-name–</td>
+                <t active">${p.nome}</div>d>2.875</td>
+        <div class="card-">
+                <td>2,875
+
+    <!-- SEARCHprices BAR -->
+    <div class">
+          <div class="price-de="search-bar">
+      <label">></td>
+                <td>287<span class="price,50</td>
+              </tr>
+            </tfoot>-de🔍 Filt
+          </table>
+        rar:-label</div>
+      </div>
+
+      <!-- EDIV</label>
+      <input type="ALDO ABRIL -->
+      <div">Detext" id="searchV class="vendor-block vend-</span>${p.precoDe}edivaldo" data-vendedor</div>
+          <div class="endedor="EDIVALDO COSTAprice-por LIMA">
+        <div class="vendor-header" onclick="toggle-Block(this)">
+          <div>
+            <div class="rowvendor-name">Edival" placeholder="Buscar vendedordo Costa Lima</div>
+            ">
+            <span..."<div class="vendor-code"> class="price-por-label"> oCódigo: W|96ninput="filt · Alagoas</divPor</span>
+            <spanrar>
+          </div>
+           class="price-por"(<div class="vendor-kp)"is">
+            <div class=">${p.preco}</span>vkpi">
+              <div />
+          </div>
+         class="vkpi-label">
+      </div>
+      Sacos</div>
+              <select<div class="vkpi- id="filter</div>
+      val">98</div>
+            </div><div class="card-footer">P
+            <div class="vk
+        ropi">
+              <div class="vkpi-label">KGduto"</div>
+              <div class="vkpi-val">2 onchange="filtrar()">
+        <option value="">Todos.360</div>
+            </div>
+            <div class="vk os produtos</option>
+        pi">
+              <div class="<option value="<a classvkpi-label">Toneladas</div>
+              ="btn-<div class="vkpi-valwaPlaneta">2," href="360 Doghttps</div>
+            </div>://wa
+            <div class="vk.me/?pi">
+              <div class="text=${waMsg(p)}"vkpi-label">Com target="_blank">
+          <svgissão</div>
+               C width="17arne<div class="vkpi-val AD gold">R$‌ 236" height="17" viewBox=",00</div>
+             </div>
+            <div class="0 0 24toggle-icon">▾</div25>
+          </div>
+         24" fill="currentK</div>
+        <div classColor">="vendor-body">
+          G">Planeta Dog Carne<table>
+            <thead><path d="M17 AD 25KG</option>
+              <tr>
+                <th.>Produto</th>
+                
+        <option value="Planeta<th>Sacos</th472>
+                <th>KG Cat/Saco</th> Mix 14
+                <th>Total KG </th>
+                <th>.382Toneladas</th>
+                c<th>Comissão (-.25R$)</th>
+              297KG">Planeta Cat Mix </tr>
+            </thead>-.14925KG</option>
+        
+            <tbody>
+              <tr>
+                <td class="product<option value="Planeta Dog--name">Planeta Dog C Filarne AD 25KG</t1.758d>
+                <td>30h-.867</td>
+                <td>ote 25KG">Planeta25</td>
+                <t-2.03d>750 Dog Filhote 25K-.967</td>
+                <td>0,750G</option>
+        <option</td>
+                <td>75 value="Planeta Dog,00</td>
+              -. Carne Adul</tr>
+              <tr>
+                <td class="product-name273">Planeta Cat Mix 25Kto 15-.099G</td>
+                <tKG">Planeta Dog C-.471d>55</td>
+                <td>arne Adulto 15KG25</td>
+                <t-.148-.67d>1.375</td></option>
+      .
+                <td>1,375</td>
+                <td>13715</select>
+      ,50</td>
+              </tr>
+              <tr><button class="btn-clear-.197
+                <td class="product-name" onclick="lim.297">Planeta Dog Filhotepar 25KG</td>-.767
+                <td>13()"></td>
+                <td>✕25</td>
+                <td>325</td>
+                 Limpar</button>
+    <td>0,325</td>.966
+                <td>32,50</div>
+
+    <!-- M-.</td>
+              </tr>94
+            </tbody>
+             1.164ES<tfoot>
+              <tr>-.
+                <td>SUBTOTAL SELECTOR</td>
+                <td>173 -->
+    <div class="search98</td>
+                <t.d>–</td>
+                -bar"199<td>2.450 style</td>
+                <td>-.3472,450</td>
+                ="margin.223<td>245,00</td>
+              -.644-bottom</tr>
+            </tfoot>
+          </table>
+        .075: 20</div>
+      </div>
+
+      <!-- JOSÉpx;">
+      <label>-.297 ORL📅 Sel-.ANOecione15 ABRIL -->
+      <div class="vendor-block vend-orl oano" data-vendedor=" M-JOSÉ ORLANO DA1.255 SILVA">
+        <div class-.463="vendor-header" onclick="toggle-2.39Block(this)">
+          <div>
+            <div class="-1.475vendor-name">José Orlano da Silva</div>
+            ês:</label>
+      <select-.883<div class="vendor-code"> id="mesSelector" onchange="-.788Código: W|57change · Alagoas</div-1Month(>
+          </div>
+          )"<div class="vendor-kp.48 style="flexis">
+            <div class=": 0-1.761vkpi">
+              <div 1 class="vkpi-label">-1Sacos</div>
+               auto;<div class="vkpi-.653 minval">20-2.059</div>
+            </div>-width: 140-.173
+            <div class="vkpi">
+              <div class="px;">
+        <option value="vkpi-label">KG</div>
+              <div classabril="vkpi-val">430">Abril</div>
+            </div>
+            <div class="vk pi">
+              <div class="-.2972026vkpi-label">Ton-.018</option>
+        <option valueeladas</div>
+              -.458<div class="vkpi-val.13="maio"">0-.606,.134 selected>Maio 202643-.133</div>
+            </div></option>
+      
+            <div class="vk.298pi">
+              <div class="</select>
+    </div>vkpi-label">Com-.347issão</div>
+              .446
+
+    <!-- <div class="vkpi-val gold">R$‌ 43-.52─,00</div>
+            .149</div>
+            <div class="──toggle-icon">▾</div-.174>
+          </div>
+         ABRIL</div>
+        <div class.198 ─── -->
+    <div="vendor-body">
+          -.298<table>
+            <thead> i
+              <tr>
+                <th>Produto</th>
+                .298d="mes<th>Sacos</th-.497-abril" class="mes-content.099"-.198 style="display.05: none;">
+      <div class>
+                <th>KG/Saco</th>-.371="k
+                <th>Total KG</th>
+                <th>-.pi-griToneladas</th>
+                d">
+        <div class="k025<th>Comissão (R$)</th>
+              -.52pi-car</tr>
+            </thead>
+            <tbody>
+              <tr-.075d">
+          <div class="k>
+                <td class="product-.149-name">Planeta Dog Carne AD 25KG</t-.669d>
+                <td>12-</td>
+                <td>pi-label25</td>
+                <t1.612">Totald>300</td>
+                -.<td>0,30 de</td>
+                <td> Sa91630cos</div>
+          <div,00</td>
+               class="kpi-value orange</tr>
+              <tr>">280-2.207
+                <td class="product-name</div>
+          -.242<div class="kpi-sub">Planeta Cat Mix 25K-.579G</td>
+                <t">un-.487d>4</td>
+                idades distribu<td>25</td>
+                -.<td>100</td>idas</div>
+        </div
+                <td>0,105</td>
+                <td>10>
+        <div class="k,00</td>
+              -.</tr>
+              <tr>pi-card re
+                <td class="product-named">
+          <div class="k">Planeta Dog C669arne Adulpi-label">Total-.51to 15 em-.173KG</td>
+                <td>4 K-.008</td>
+                <td>15</td>
+                <t-.371G</div>
+          <divd>60</td>
+                 class="kpi-value"><td>0,06</td>-.
+                <td>6,00601</td>
+              </tr>-.57.850
+            </tbody>
+            <tfoot >
+              <tr>
+                -.<td>SUBTOTAL</tkg</div>
+          <div01d>
+                <td>20 class="kpi-sub">peso</td>
+                <td>-.198–</td>
+                <t total</div>
+        </divd>460 </td>
+                <td>0,46</td>
+                0-.52>
+        <div class="k<td>46,00</tpi-card brownd>
+              </tr>
+            .074</tfoot>
+          </table">
+          <div class="k-.792>
+        </div>
+      pi-label">Total.372</div>
+
+      <!-- EMAN-.OEL ABRIL em Ton -->
+      <div class="vendoreladas</div>
+          272-block vend-emanoel"<div class="kpi-value brown data-vendedor="EMANOEL">6 MAR,QUES G850 OMES">
+        <div class="tonvendor-header" onclick="toggleBlock.297</div>
+          <div class-(this)">
+          <div="kpi-sub">volume1.04  >
+            <div class="vendor1.016do perio-name">Emanoel Mar-1.04 2.479 0 1ques Gomes</div>do</div>
+        </div>.462
+            <div class="vendor-code
+         1.065 2.875">Código: W|6 1<div class="kpi-car · Alagoas</div.213d gol 3.074>
+          </div>
+          d">
+          <div class="k.149<div class="vendor-kppi-label">.198is">
+            <div class="Com vkpi">
+              <diviss2 class="vkpi-label">.096ao TotalSacos</div>
+               </div>
+          <div class<div class="vkpi-3="kpi-value gold">Rval">5.2</div>
+            </div> 5$‌ 685.077
+            <div class="vk, 4.48700.709pi">
+              <div class="</div>
+          <div class.306vkpi-label">KG</div>
+              <div class="kpi-sub">a 1.262="vkpi-val">130 distribu</div>
+            </div>.489
+            <div class="vkir</div>
+        </div 1.694pi">
+              <div class=">
+      </div>vkpi-label">Ton.
+
+      <div class="section625eladas</div>
+              -title">.712<div class="vkpi-val📦.">0,13</div> De227
+            </div>
+            <div 1.36talhe por class="vkpi">
+               Ven.195<div class="vkpi-dedor - 1.871label">Comissão</div Abril 2026</div>.118
+      <p>
+              <div class="v.571kpi-val gold">R$ style-.="text 13,00</div>085-align: center; color 1.758
+            </div>
+            <div: #999 class="toggle-icon">▾-.719; margin</div>
+          </div> 2.006-1.413:.248 40
+        </div>
+        px 0;-.694<div class="vendor-body"> font-size: 14.248
+          <table>
+            <thea-1.289px;">d>
+              <tr>
+                
+        .173-1.413📊<th>Produto</th>-.074
+                <th>Sacos Dados</th>
+                <th>-.124 de AbrilKG/Saco</th>
+                <th>Total K emG</th>
+                <th desenvolvimento.>Toneladas</th> Cl
+                <th>Comissão (R$)</th>ique em "Maio
+              </tr>
+            </thea -.272d>
+            <tbody>
+              -.1982026" para ver dados<tr>
+                <td class-.57 compl-.347="product-name">Planeta Dogmetos.
+      </p> Carne AD 25KG-
+    </div>
+
+    <!-- 5</td>
+                <td>.4213 7─── MAIO ─── -->.403</td>
+                <td>
+    <div id="mes-h-.maio" class="mes-content">25</td>
+                <t004d>75</td>
+                a
+      <div class="kpi9<td>0,075-grid">
+        <div class.87</td>
+                <td> 9.87 0 0="kpi-card">
+           17<div class="kpi-label-,50</td>
+              ">Total de Sacos</div</tr>
+              <tr>5>
+          <div class="k.031pi-value orange">332-</div>
+          <div class1="kpi-sub">unidades.378
+                <td class="product-name distribuidas</div>
+        ">Planeta Dogl</div>
+        <div class="-.361kpi-card red">
+          -. Fil<div class="kpi-label214hote 25KG</t">Total em KG</div>d>
+                <td>2</td>
+                <td>
+          <div class="kpi-25</td>
+                <td>50</td>
+                3-value">8<td>0,050.741</td>
+                <td>..075 kg</div>
+          9825,00</td>
+              <div class="kpi-sub">.peso total</div>
+        </tr>
+            998</div>
+        <div class="</tbody>
+            <tfoot-kpi-card brown">
+          >
+              <tr>
+                <td>SUBTOTAL</t3.648d>
+                <td>5</td>
+                <td>-.–</td>
+                <t<div class="kpi-label235">Total em Toneladasd>125-.374</div>
+          <div class="</td>
+                <td>kpi-value brown">8,0,125</td>
+                a9.86075 ton</div>
+          <td>12,50</t 9.86 0 0<div class="kpi-sub 1-1d>
+              </tr>
+            ">volume do periodo</div></tfoot>
+          </table.51
+        </div>
+        <div-5 class="kpi-card gold">.26
+          <div class="kpi>
+        </div>
+      -label">Comissao Total</div>
+
+      <!-- RESUMcO.</div>
+          <div class ABRIL -->
+      <div class="resum="kpi-value gold">Ro-wrap001-$‌ 807">
+        <div class="resum5o-header">,50</div>
+          <div class="kpi-sub">📊 .45Resumo dea distribuir</div>
+         </div>
+      </div> 4.436<span>
+
+      <div class="section--9.884Comtitle">📦 Detal 9.888issõeshe por Vendedor - Maio</span>-9.884  2026</div> —
+
+      <!-- Abril 2026</div>
+        <div style D="paddingJAL2: 0MA -->.64 24
+      <div class="vendor 0 5.122 px -block1.03 v 6.98824px;">en
+          <table>
+            <thead>
+              d- 2.898<tr>
+                <th>adjalma"Ven9.825 i 9.825 0 0dedor</th>
+                <th 1 2>Códigod="block.893 </th>
+                <th>6-djalma"Sacos</th>
+                .994 data<th>Totalc-.-vendedor="003 5DJALMA KG</th>
+                .45-4.437 ALEXANDRE<th>Toneladas</th 9.884 DOS>
+                <th>Com-9.885 SANTOS">
+        <div class 9.884missão (R$)</th>="vendor-header
+              </tr>
+            "8</thead>
+            <tbody>.413 onclick-="toggle
+              <tr>
+                <tBlock('blockd style18-djalma')">
+          .297="font-weight: <div>A11
+            <div class="vendor-name">.815Djalma Alexandre dos Santos</div 11.815 0 0>
+            <div class="vendor 0600 12;">-codeD.jal">ma Alexandre05 dosCodigo Santos</td>
+                <t 0d>W|: W63</td>
+                <td>|C60635.495  0 .</td>
+                <td>·1.50016</td>
+                <td> A1 5.335lag.157, 11.892oas50</td>
+                <td>150</div>
+          </div>c
+          <div class="vendor-k0,00</td>
+               2p</tr>
+              <tr>.096is">
+            <div class="v
+                <td style="font-weight.547: 600;">Tamires 4.142kpi"> 1.588
+              <div class="vk 5.945 Wpi-label">ivLySaane.cos</div>
+              <div057 class="vkpi-val 24 Vi">66eira dal Silva</td>
+                <t6</div>
+            d>W|53.305</div>
+            <div class="vkpi">
+              </td>
+                <td>115<div class="vkpi-label">KG</div>
+              </td>
+                <td><div class="vkpi--12.875val">1.654a11.882</td>
+                <td> 11.882 0 0.650 0 5</div>
+            </div>2,875.683
+            <div class="vk</td>
+                <td> 1.448pi">
+              <div class="287hvkpi-label">Ton,50</td>
+              .005</tr>
+              <tr>eladas</div>
+              c<div class="vkpi-val
+                <td style="font-weight6">1,: 600;">.554E65 0 11.89div</div>
+            </div>-
+            <div class="vk5.335aldo Costapi">
+              <div class=" Lima 11.893vkpi-label">Com</td>
+                <td>-11.893issao</div>
+              W|96a11.821<div class="vkpi-val</td>
+                <td> gol 11.821 0 098 0-d">R$‌ 165</td>
+                <td>3,002.48.450-</div>
+            </div>8
+            </td>
+                <td>2,450.413<div class="toggle</td>
+                <td>-iconz245,00</td>
+              "/></svg>
+          "></tr>
+              <tr>Compart▾
+                <td style="font-ilhar</div>
+          </div>weight: 600;">José no
+        </div>
+         Orl WhatsApp
+        </a><div class="vendor-bodyano
+      </div>
+    ">
+          <table</div>`;
+  }).join(' da> Silva</td>
+                <t
+            <thead>
+              ');d>W|57<tr>
+                <th>
+}
+
+function</td>
+                <td>Produto</th>
+                <th filter20C>Sa</td>
+                <td>at(btncos</th>
+                <th460) {
+  >KG/document.querS</td>
+                <td>0,46</td>
+                aco</th>
+                <thySelectorAll('.cat<td>46,00</t-btn>Totald>
+              </tr>
+              ').forEach(b K<tr>
+                <td style => b.classList.remove('active'));
+  btn.classList.ad="font-weight: 600;">G</th>
+                <thd('active');
+  curCat>Toneladas</th>Emanoel Marques G = btn.dataset.cat;
+                <th>Comissomes</td>
+                <t
+  render();
+}ao (d>W|6</td>
+
+document.getElementByIR$)</th>
+              
+                <td>5</td>d('search</tr>
+            </thead>
+                <td>125Input').addEventListener('input', function
+            <tbody>
+              </td>
+                <td>() {
+  curSearch = this<tr>
+                <td class0,125</td>
+                .value.="product<td>12,50</t-name">Planeta Dog CtoLowerCase().d>
+              </tr>
+            arne AD 25KG</ttrim();
+  render();
+});</tbody>
+            <tfoot
+
+renderd>
+                <td>>
+              <tr>
+                ();
+
+// ═══════════<td colspan44════════════════════════════════="2">TOTAL
+//  DASHBOARD G</td>
+                <td>ERAL</td>
+                <t PROTE25ICAd>298
+// ═══════════════</td>
+                <td>1</td>
+                <td>7════════════════════════════.100.410
+function toggle</td>
+                <td></td>
+                <td>Block1,7(i,10d) {
+  410</td>
+                <t</td>
+                <td>document.getElementById>741110d(id).classList,00</td>
+              .toggle('collapse</tr>
+              <tr>d');
+}
+
+function
+                <td class="product-name filt,00</td>
+              ">Planeta Cat Mix 25K</tr>
+            </tfoot>rar
+          </table>
+          <div style="marginG</td>
+                <tDd>11ash</td>
+                <td>() {
+  const term25</td>
+                <tpx; font-size: 11px; color: #999Vd>275;en textd = document.getElementById('search</td>
+                <td>0-align: right;">
+            ,275V⚙</td>
+                <td>endedor️ Com').value.27toLowerCase().issão,50</td>
+              trim();
+  const termProd = document.getElementById('filter: R$‌ 100</tr>
+              <tr>Pro,00 /
+                <td class="product-nameduto').value.to ">Planeta Dog Filhote1UpperCase();
+  const blocks. = document.querySelectorAll('.000 ton 25KG</td>vendor
+                <td>11</td>eladas (-block');
+
+  blocks.forEach
+                <td>25</td>
+                <td>275</td>
+                <td>0,275</td>
+                (block => {
+    const nome = block.datasetprop<td>27,50</td>.venorcional aodedor
+              </tr>
+             volume.</tbody>
+            )
+          </div>
+        </div>
+      </div>toLowerCase();
+    const match
+
+    <tfoot>
+              <tr</div>V>
+                <td>end = nome.includes(termV
+
+    <!--end);
+    letSUBT  matchProd = true;
+
+    ════OTAL</td>
+                <t════════════════════════════════if (termProd) {════
+      const rows = block.querySelectorAll('tbodyd>66</td>
+                <td>– tr');
+      let</td>
+                <td> foun1 ════.650</td>
+                d = false;
+      rows.forEach════════════════════════════════<td>1════ -->(row => {
+        const pro
+    <div i,65</td>
+                <td = row.querySelectord>165,00</td>('.
+              </tr>
+            product-name')d="maio</tfoot>
+          </table" class>
+        </div>
+      ="tab?.textContent.to-</div>
+
+      <!-- TAMUpperCase()content">
+
+      <!-- SEARCH BAR -->
+      <div classIRES || '';
+        if (prod.="search-bar">
+         -->
+      <div class="vendor<labelincludes(termProd)) found = true;
+      });
+      >match🔍 FiltProd = found;
+    }
+
+    block.classListrar:.toggle('hidden</label>
+        <input type="', !(matchVend && matchProtext" classd));
   });
 }
 
-function limparDashboard() {
-  document.getElementById('searchVendedor').value = '';
-  document.getElementById('filterProduto').value = '';
-  filtrarDashboard();
+function="search limVparDash() {
+  document.getElementById('searchVendedor').endedorvalue = '';
+  document.getElementById('filterProduto').value =" placeholder="Buscar vendedor '';
+  filt..." onkeyup="filtrarMrarDash();
 }
-</script>
+</scriptaio()">
 
 </body>
-</html>
+</html> />
